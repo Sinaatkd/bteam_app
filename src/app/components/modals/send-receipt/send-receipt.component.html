@@ -1,0 +1,76 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-segment [value]="segmentValue" color="primary" mode="md" (ionChange)="segmentChanged($event)">
+            <ion-segment-button value="info">
+                <ion-label>اطلاعات</ion-label>
+            </ion-segment-button>
+
+            <ion-segment-button value="send-receipt">
+                <ion-label>ارسال فیش</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid *ngIf="segmentValue === 'send-receipt'">
+        <ion-row>
+            <ion-col size="12">
+                <ion-text *ngIf="!isSelectedReceiptImage" class="ion-text-center" color="danger">
+                    <h4>تصویر فیشی وارد نشده است</h4>
+                </ion-text>
+                <!-- <ion-thumbnail > -->
+                <ion-img *ngIf="isSelectedReceiptImage" class="fullscreen" [src]="selectedReceiptImage"></ion-img>
+                <!-- </ion-thumbnail> -->
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="segmentValue === 'info'">
+        <ion-row>
+            <ion-col size="12">
+                <ion-item disabled mode="md">
+                    <ion-label position="floating">نام آیتم</ion-label>
+                    <ion-input [value]="transaction.special_item"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12">
+                <ion-item disabled mode="md">
+                    <ion-label position="floating">قیمت</ion-label>
+                    <ion-input [value]="transaction.amount"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12">
+                <ion-item disabled mode="md">
+                    <ion-label position="floating">مدت زمان اشتراک</ion-label>
+                    <ion-input [value]="transaction.validity_rate"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+
+<ion-footer>
+    <ion-grid *ngIf="segmentValue === 'send-receipt'">
+        <ion-row>
+            <ion-col size="6">
+                <ion-button expand="block" (click)="f.click()">{{ isSelectedReceiptImage? 'ویرایش فیش واریزی' : 'افزودن فیش واریزی'}}
+                </ion-button>
+                <input type="file" class="ion-hide" #f accept="image/*" (change)="imageChanged($event)" />
+            </ion-col>
+            <ion-col size="6">
+                <ion-button [disabled]="!isSelectedReceiptImage" (click)="onSubmitPayment()" expand="block">
+                    ارسال
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="segmentValue === 'info'">
+        <ion-row>
+            <ion-col size="12">
+                <ion-button expand="block" color="danger" (click)="onCancel()">لغو خرید اشتراک</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

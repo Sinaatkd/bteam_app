@@ -1,0 +1,40 @@
+<ion-card class="ion-no-padding ion-no-margin">
+  <ion-grid>
+    <ion-row class="padding-start-and-end">
+      <ion-col size="12" class="ion-margin-top">
+        <ion-item fill="outline" class="ion-text-center ">
+          <ion-label position="floating"> شماره کارت </ion-label>
+          <ion-input class="none-padding-input" readonly [value]="cardCode"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item fill="outline" class="ion-text-center">
+          <ion-input class="none-padding-input" placeholder="شماره کارت بانکی"
+            (ionChange)="enterBankCodeInputChanged($event)" type="number" [maxlength]="16"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item fill="outline" class="ion-text-center">
+          <ion-label class="center" position="floating">پذیره: </ion-label>
+          <ion-input class="none-padding-input" readonly [value]="user.user.full_name"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item fill="outline" class="ion-text-center">
+          <ion-input class="none-padding-input" (ionChange)="setAmount($event)" [value]="amount" placeholder='مبلغ مورد نظر برای برداشت'></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="danger" *ngIf="walletAmount < 10000" class="text-small-size">موجودی شما قابل برداشت نیست</ion-label>
+          <ion-label *ngIf="walletAmount >= 10000" class="text-small-size">موجودی قابل برداشت شما: <b style="color: var(--ion-color-success);">{{walletAmount | number }}</b> تومان 
+            <span (click)="setAmount()" style="background: var(--ion-color-medium); color: var(--ion-color-dark); padding: 0 5px; border-radius: 2px;">انتخاب</span>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button [disabled]="walletAmount < 10000? true : false" (click)="onCashWithdrawalClick()" expand="block" mode="ios">
+          برداشت وجه
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

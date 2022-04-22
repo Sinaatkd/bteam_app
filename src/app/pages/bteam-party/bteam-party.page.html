@@ -1,0 +1,291 @@
+<ion-header class="ion-no-border" *ngIf="!isLoading">
+    <ion-card mode="ios">
+        <ion-card-header>
+            <ion-grid class="ion-no-padding">
+                <ion-row class="ion-no-padding">
+                    <ion-col size="6" class="ion-text-start ion-no-padding">
+                        <ion-card-subtitle>موجودی :</ion-card-subtitle>
+                    </ion-col>
+                    <ion-col size="6" class="ion-text-end ion-no-padding">
+                        <ion-card-subtitle>{{ gifts.wallet_amount | number}} تومان</ion-card-subtitle>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-no-padding ion-margin-top">
+                    <ion-col size="6" class="ion-text-start ion-no-padding">
+                        <ion-card-subtitle>کد اختصاصی شما :</ion-card-subtitle>
+                    </ion-col>
+                    <ion-col size="6" class="ion-text-end ion-no-padding">
+                        <ion-card-subtitle>{{ gifts.user_code }}</ion-card-subtitle>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-header>
+    </ion-card>
+</ion-header>
+
+<ion-content *ngIf="!isLoading">
+    <ion-slides #slides mode="ios" [options]="sliderOptions" class="ion-margin-top"
+        (ionSlideDidChange)="onSliderChanged($event)">
+        <ion-slide>
+            <ion-card class="ion-no-margin mask-image" color="danger"
+                [ngClass]="{'deactive-slider': selectedGiftCard.index!==0}">
+                <div>
+                    <div class="right">
+                        <ion-thumbnail class="margin-end">
+                            <img src="../../../../../assets/pages/tabs/account/btem-party/Layer 3.png" />
+                        </ion-thumbnail>
+                    </div>
+                    <div>
+                        <ion-thumbnail class="margin">
+                            <img src="../../../../../assets/pages/tabs/account/btem-party/icon.png" />
+                        </ion-thumbnail>
+                    </div>
+                </div>
+                <ion-card-header class="card-card-header-margin">
+                    <ion-card-title>
+                        <ion-grid>
+                            <ion-row *ngIf="gifts.red_b.code">
+                                <ion-col size="2">
+                                    <ion-card-title>{{ gifts.red_b.code.slice(10, 12)}}</ion-card-title>
+                                </ion-col>
+                                <ion-col size="3">
+                                    <ion-card-title>{{ gifts.red_b.code.slice(7, 10)}}</ion-card-title>
+                                </ion-col>
+                                <ion-col size="4">
+                                    <ion-card-title>{{ gifts.red_b.code.slice(3, 7)}}</ion-card-title>
+                                </ion-col>
+                                <ion-col size="3">
+                                    <ion-card-title>{{ gifts.red_b.code.slice(0, 3)}}</ion-card-title>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row *ngIf="!gifts.red_b.code">
+                                <ion-col size="12">
+                                    <ion-card-title class="font-size-small">شما کارت ندارید</ion-card-title>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-title>
+
+                </ion-card-header>
+                <ion-card-content class="ion-no-padding">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="4">
+                                <p>دریافت شده : {{ gifts.red_b.all_card_count }} کارت</p>
+                            </ion-col>
+                            <ion-col size="4">
+                                <p>فعال : {{ gifts.red_b.active_count }} کارت</p>
+                            </ion-col>
+                            <ion-col size="4">
+                                <p>استفاده شده : {{ gifts.red_b.deactive_count }} کارت</p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
+        </ion-slide>
+
+        <ion-slide>
+            <ion-card class="ion-no-margin mask-image" color="secondary"
+                [ngClass]="{'deactive-slider': selectedGiftCard.index!==1}">
+                <div>
+                    <div class="right">
+                        <ion-thumbnail class="margin-end">
+                            <img src="../../../../../assets/pages/tabs/account/btem-party/Layer 3.png" />
+                        </ion-thumbnail>
+                    </div>
+                    <div>
+                        <ion-thumbnail class="margin">
+                            <img src="../../../../../assets/pages/tabs/account/btem-party/icon.png" />
+                        </ion-thumbnail>
+                    </div>
+                </div>
+                <ion-card-header class="card-card-header-margin">
+                    <ion-card-title>
+                        <ion-grid>
+                            <ion-row *ngIf="gifts.blue_b.code">
+                                <ion-col size="2">
+                                    <ion-card-title>{{ gifts.blue_b.code.slice(10, 12)}}</ion-card-title>
+                                </ion-col>
+                                <ion-col size="3">
+                                    <ion-card-title>{{ gifts.blue_b.code.slice(7, 10)}}</ion-card-title>
+                                </ion-col>
+                                <ion-col size="4">
+                                    <ion-card-title>{{ gifts.blue_b.code.slice(3, 7)}}</ion-card-title>
+                                </ion-col>
+                                <ion-col size="3">
+                                    <ion-card-title>{{ gifts.blue_b.code.slice(0, 3)}}</ion-card-title>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row *ngIf="!gifts.blue_b.code">
+                                <ion-col size="12">
+                                    <ion-card-title class="font-size-small">شما کارت ندارید</ion-card-title>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-title>
+
+                </ion-card-header>
+                <ion-card-content class="ion-no-padding">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="4">
+                                <p>دریافت شده : {{ gifts.blue_b.all_card_count}} کارت</p>
+                            </ion-col>
+                            <ion-col size="4">
+                                <p>فعال : {{ gifts.blue_b.active_count}} کارت</p>
+                            </ion-col>
+                            <ion-col size="4">
+                                <p>استفاده شده : {{ gifts.blue_b.deactive_count }} کارت</p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
+        </ion-slide>
+
+        <ion-slide>
+            <ion-card class="ion-no-margin mask-image" color="dark"
+                [ngClass]="{'deactive-slider': selectedGiftCard.index!==2}">
+                <div>
+                    <div class="right">
+                        <ion-thumbnail class="margin-end">
+                            <img src="../../../../../assets/pages/tabs/account/btem-party/Layer 3.png" />
+                        </ion-thumbnail>
+                    </div>
+                    <div>
+                        <ion-thumbnail class="margin">
+                            <img src="../../../../../assets/pages/tabs/account/btem-party/icon.png" />
+                        </ion-thumbnail>
+                    </div>
+                </div>
+                <ion-card-header class="card-card-header-margin">
+                    <ion-card-title>
+                        <ion-grid>
+                            <ion-row *ngIf="gifts.black_b.code">
+                                <ion-col size="2">
+                                    <ion-card-title>{{ gifts.black_b.code.slice(10, 12)}}</ion-card-title>
+                                </ion-col>
+                                <ion-col size="3">
+                                    <ion-card-title>{{ gifts.black_b.code.slice(7, 10)}}</ion-card-title>
+                                </ion-col>
+                                <ion-col size="4">
+                                    <ion-card-title>{{ gifts.black_b.code.slice(3, 7)}}</ion-card-title>
+                                </ion-col>
+                                <ion-col size="3">
+                                    <ion-card-title>{{ gifts.black_b.code.slice(0, 3)}}</ion-card-title>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row *ngIf="!gifts.black_b.code">
+                                <ion-col size="12">
+                                    <ion-card-title class="font-size-small">شما کارت ندارید</ion-card-title>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-title>
+
+                </ion-card-header>
+                <ion-card-content class="ion-no-padding">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="4">
+                                <p>دریافت شده : {{ gifts.black_b.all_card_count }} کارت</p>
+                            </ion-col>
+                            <ion-col size="4">
+                                <p>فعال : {{ gifts.black_b.active_count }} کارت</p>
+                            </ion-col>
+                            <ion-col size="4">
+                                <p>استفاده شده : {{ gifts.black_b.deactive_count }} کارت</p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
+        </ion-slide>
+    </ion-slides>
+</ion-content>
+
+<ion-content *ngIf="isLoading">
+    <app-loadnig></app-loadnig>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-card *ngIf="!isshowCashWithdrawalComponent && !isUseCardClicked && !isLoading && !isShowResult" class="ion-no-padding ion-no-margin">
+            <ion-grid>
+                <ion-row class="padding-start-and-end">
+                    <ion-col size="12" class="ion-margin-top">
+                        <ion-item fill="outline" class="ion-text-center font-size-medium">
+                            <ion-label position="floating"> شماره کارت </ion-label>
+                            <ion-input class="none-padding-input" readonly [value]="cardCode"></ion-input>
+                        </ion-item>
+
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-item fill="outline" class="ion-text-center">
+                            <ion-label position="floating">تعداد معرفی شده</ion-label>
+                            <ion-input class="none-padding-input" readonly value="{{ gifts.invated_count }} نفر">
+                            </ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-item fill="outline" class="ion-text-center">
+                            <ion-label position="floating">تعداد فروش</ion-label>
+                            <ion-input class="none-padding-input" readonly value="{{ gifts.buy_with_user_code }} عدد">
+                            </ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size="12">
+                        <ion-button color="success" (click)="showCashWithdrawalComponent()"
+                            [disabled]="cashWithdrawalDisabled" expand="block" mode="ios">
+                            برداشت نقدی از کارت
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="12">
+                        <ion-button [routerLink]="['user-manual']" fill="outline" expand="block" mode="ios">
+                            راهنما و آموزش استفاده
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-button size="medium" [routerLink]="['/tabs', 'account', 'gifts']" fill="outline"
+                            expand="block" mode="ios">
+                            جایزه های دریافتی
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-button (click)="copyUserCode()" fill="outline" expand="block" mode="ios">
+                            کپی کردن کد اختصاصی
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="9">
+                        <ion-button *ngIf="!useGiftButtonDisabled" (click)="useGiftCard()" expand="block" mode="ios">
+                            استفاده از کارت
+                        </ion-button>
+                        <ion-button disabled *ngIf="useGiftButtonDisabled" expand="block" mode="ios">
+                            این کارت برای شما فعال نشده
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="3">
+                        <ion-button [routerLink]="['/tabs', 'account']" color="danger" expand="block" mode="ios">
+                            خروج
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+        <app-use-red-card
+            *ngIf="!isshowCashWithdrawalComponent && !isLoading && !isShowResult && isUseCardClicked && selectedGiftCard.title === 'red-b'"
+            [cardCode]="cardCode" (getGiftResponseEmitter)="getGiftResponseEmitter($event)">
+        </app-use-red-card>
+        <app-use-blue-card
+            *ngIf="!isshowCashWithdrawalComponent && !isLoading && !isShowResult && isUseCardClicked && selectedGiftCard.title === 'blue-b'"
+            [cardCode]="cardCode" (getGiftResponseEmitter)="getGiftResponseEmitter($event)">
+        </app-use-blue-card>
+        <app-use-black-card
+            *ngIf="!isshowCashWithdrawalComponent && !isLoading && !isShowResult && isUseCardClicked && selectedGiftCard.title === 'black-b'"
+            [cardCode]="cardCode" (getGiftResponseEmitter)="getGiftResponseEmitter($event)">
+        </app-use-black-card>
+        <app-show-result [giftResultInfo]="giftResultInfo" *ngIf="!isLoading && isShowResult"></app-show-result>
+        <app-cash-withdrawal *ngIf="isshowCashWithdrawalComponent" [cardCode]="cardCode" [walletAmount]="gifts.wallet_amount"></app-cash-withdrawal>
+    </ion-toolbar>
+</ion-footer>

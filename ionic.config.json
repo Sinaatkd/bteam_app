@@ -1,0 +1,7 @@
+{
+  "name": "bteam-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

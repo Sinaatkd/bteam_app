@@ -1,0 +1,25 @@
+ion-footer {
+    --background: var(--ion-background-color);
+}
+ion-content {
+    --background: var(--ion-background-color);
+}
+
+ion-item {
+    color: var(--ion-color-primary);
+}
+
+ion-list {
+    padding: 5px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.description {
+    font-size: 10px;
+    color: var(--ion-color-medium);
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}

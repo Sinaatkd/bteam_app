@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button (click)="changeSelectedButonValue('active')" [color]="selectedBtn === 'active'? 'light' : 'dark'"
+            [fill]="selectedBtn === 'active'? 'solid' : 'outline'" expand="block">
+            فعال
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button (click)="changeSelectedButonValue('efficiency')"
+            [color]="selectedBtn === 'efficiency'? 'light' : 'dark'"
+            [fill]="selectedBtn === 'efficiency'? 'solid' : 'outline'" expand="block">
+            بازدهی
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!isLoading">
+  <div class="ion-text-center" *ngIf="signals === []">
+    <br>
+    <ion-spinner name="lines"></ion-spinner>
+  </div>
+
+  <div *ngIf="selectedBtn === 'active'">
+    <div *ngFor="let signal of signals">
+      <app-spot-signal *ngIf="signal.type === 'spot'" [signal]='signal'></app-spot-signal>
+      <app-futures-signal *ngIf="signal.type === 'futures'" [signal]='signal'></app-futures-signal>
+    </div>
+  </div>
+
+  <div *ngIf="selectedBtn === 'efficiency'">
+    <div *ngFor="let signal of signals">
+      <app-efficiency [signal]='signal'></app-efficiency>
+    </div>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="isLoading">
+  <app-loadnig></app-loadnig>
+</ion-content>

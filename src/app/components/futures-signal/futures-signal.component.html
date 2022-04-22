@@ -1,0 +1,101 @@
+<ion-card *ngIf="signal.is_active" mode='ios' color="futures-card-color">
+  <ion-card-header>
+    <div class="right-position">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3" class="ion-no-padding">
+            <ion-thumbnail class="center">
+              <img src="../../../assets/pages/tabs/signals/binance-logo.png" />
+            </ion-thumbnail>
+          </ion-col>
+          <ion-col size="9" class="ion-no-padding">
+            <p class="inline bold">{{ signal.coin_symbol | uppercase }}</p>
+            <p class="inline small">/USDT</p>
+            <p class="small">سیگنال فیوچرز</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="left-position">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" class="left-position">
+            <ion-badge color="futures-card-color" mode="ios">{{ signal.type_of_investment }}</ion-badge>
+          </ion-col>
+          <ion-col size="6" (click)="openSignalNewsModal()">
+            <ion-icon class="size-large left-position futures" name="notifications"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-text-center" size="6">
+          <p class="small">اهرم = {{ signal.leverage }}x</p>
+        </ion-col>
+        <ion-col class="ion-text-center" size="6">
+          <p class="small">درصد حجم ورود: {{signal.amount}}%</p>
+        </ion-col>
+        <ion-col class="ion-text-center ion-margin-top" size="12">
+          <ion-text *ngIf="currentPrice !== 0" color="dark">قیمت لحظه ای: {{ currentPrice | number }}</ion-text>
+          <ion-text *ngIf="currentPrice === 0" color="dark">درحال اتصال</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+  <ion-accordion-group>
+    <ion-accordion value="colors">
+      <ion-item color="futures-card-color" slot="header">
+        <ion-label>تارگت ها</ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <br>
+        <div class="stepper-wrapper">
+          <div class="stepper-item"
+            [ngClass]="{'danger-disabled': signal.type_of_investment === 'LONG'? currentPrice >= signal.stop_loss : currentPrice <= signal.stop_loss, 'danger': signal.type_of_investment === 'LONG'? currentPrice <= signal.stop_loss : currentPrice >= signal.stop_loss}">
+            <div class="step-counter" id="stop-loss">
+              <ion-icon slot="start" name="close-outline"></ion-icon>
+            </div>
+            <div class="step-name">حد ضرر</div>
+            <div class="step-name">
+              {{ signal.stop_loss }} USDT
+            </div>
+          </div>
+          <div class="stepper-item" [ngClass]="{'completed': signal.is_touched_entry}">
+            <div class="step-counter" id="entry">
+              <ion-icon slot="start" name="time-outline" *ngIf="!signal.is_touched_entry"></ion-icon>
+              <ion-icon slot="start" name="checkmark-outline" *ngIf="signal.is_touched_entry"></ion-icon>
+            </div>
+            <div class="step-name">قیمت ورود</div>
+            <div class="step-name">
+              {{ signal.entry }} USDT
+            </div>
+          </div>
+          <div class="stepper-item" *ngFor="let target of signal.targets" [ngClass]="{'completed': target.is_touched}">
+            <div class="step-counter" [id]="target.id">
+              <ion-icon slot="start" name="time-outline" *ngIf="!target.is_touched"></ion-icon>
+              <ion-icon slot="start" name="checkmark-outline" *ngIf="target.is_touched"></ion-icon>
+            </div>
+            <ion-popover [trigger]="target.id" [arrow]='false' [dismissOnSelect]="true">
+              <ng-template>
+                <ion-content>
+                  <ion-list>
+                    <ion-item lines='none' [button]="true" [detail]="false">
+                      <ion-label>{{ target.amount }} USDT</ion-label>
+                    </ion-item>
+                  </ion-list>
+                </ion-content>
+              </ng-template>
+            </ion-popover>
+            <div class="step-name">{{ target.title }}</div>
+            <div class="step-name">
+              {{ target.amount }} USDT
+            </div>
+          </div>
+        </div>
+      </ion-list>
+    </ion-accordion>
+  </ion-accordion-group>
+</ion-card>

@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-margin" *ngIf="!isLoading">
+    <app-news-component *ngFor="let item of news" [clickable]='true' [news]='item'></app-news-component>
+  </div>
+  <app-loadnig *ngIf="isLoading"></app-loadnig>
+</ion-content>

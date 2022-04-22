@@ -1,0 +1,44 @@
+<ion-card *ngIf="!signal.is_active" mode='ios' color="dark">
+  <ion-card-header>
+    <div class="right-position">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3" class="ion-no-padding">
+            <ion-thumbnail class="center">
+              <img src="../../../assets/pages/tabs/signals/binance-logo.png" />
+            </ion-thumbnail>
+          </ion-col>
+          <ion-col size="9" class="ion-no-padding">
+            <p class="inline bold">{{ signal.coin_symbol | uppercase }}</p>
+            <p class="inline small">/USDT</p>
+            <p class="small">سیگنال اسپات</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="left-position">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" class="left-position">
+            <ion-badge color="primary" mode="ios">{{ signal.type_of_investment }}</ion-badge>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-text-center" size="6">
+          <p class="small">تارگت های تاچ شده: {{ targetTouchedCount }}</p>
+        </ion-col>
+        <ion-col class="ion-text-center" size="6">
+          <p class="small">میزان سود: {{signal.profit_of_signal_amount}}%</p>
+        </ion-col>
+        <ion-col class="ion-text-center ion-margin-bottom ion-margin-top" size="12">
+          <ion-text color="primary">{{signal.status}}</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

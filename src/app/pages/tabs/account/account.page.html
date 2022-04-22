@@ -1,0 +1,70 @@
+<ion-content *ngIf="user">
+    <ion-grid>
+        <ion-row>
+            <ion-col size="8" class="ion-margin-top padding-r">
+                <ion-text>
+                    <h3>{{ user.full_name }}</h3>
+                </ion-text>
+                <ion-text class="text-small" color="medium">{{ user.phone_number }}</ion-text>
+                <br>
+                <ion-text *ngIf="userTransaction && userTransaction.is_send_receipt" class="text-small" color="primary">وضعیت اشتراک: {{ userTransaction.transaction_status }}</ion-text>
+                <ion-text *ngIf="userTransaction && !userTransaction.is_send_receipt" class="text-small" color="primary">وضعیت اشتراک: منتظر فیش واریزی</ion-text>
+                <ion-text *ngIf="!userTransaction" class="text-small" color="primary">وضعیت اشتراک: لطفا اشتراک تهیه نمیابید</ion-text>
+            </ion-col>
+            <ion-col size="4" class="ion-margin-top ion-padding-end">
+                <div class="circle-outline">
+                    <ion-label color="primary">{{userTransaction && userTransaction.is_confirmation === false? '0' : numberOfDaysRemaining}} روز</ion-label>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col size="11" offset="0.5">
+                <ion-item [routerLink]="['account-settings']" detail>
+                    <ion-icon slot="start" name="person-outline"></ion-icon>
+                    <ion-label>تنظیمات حساب کاربری</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col size="11" offset="0.5">
+                <ion-item [routerLink]="['gifts']" detail>
+                    <ion-icon slot="start" name="gift-outline"></ion-icon>
+                    <ion-label>جوایز</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col size="11" offset="0.5">
+                <ion-item [routerLink]="['/bteam-party']" detail>
+                    <ion-icon slot="start" name="disc-outline"></ion-icon>
+                    <ion-label>بی‌تیم پارتی</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col size="11" offset="0.5" *ngIf="userTransaction && !userTransaction.is_send_receipt">
+                <ion-item (click)="openSendReceiptModal()" detail>
+                    <ion-label>ارسال فیش</ion-label>
+                    <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                    <ion-badge color="danger" mode="ios">‌</ion-badge>
+                </ion-item>
+            </ion-col>
+            <ion-col size="11" offset="0.5">
+                <ion-item [routerLink]='["/", "tabs", "account", "messages"]' detail>
+                    <ion-badge slot="end" *ngIf="unreadMessages > 0">{{ unreadMessages }} پیام جدید</ion-badge>
+                    <ion-icon slot="start" name="mail-outline"></ion-icon>
+                    <ion-label>پیام های دریافتی</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col size="11" offset="0.5">
+                <ion-item [routerLink]="['/chat']" detail>
+                    <ion-icon slot="start" name="call-outline"></ion-icon>
+                    <ion-label>گفتگو با پشتیبانی</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col size="11" offset="0.5">
+                <ion-item detail color="danger" (click)="onLogoutUser()">
+                    <ion-icon slot="start" name="log-out-outline"></ion-icon>
+                    <ion-label>خروج</ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

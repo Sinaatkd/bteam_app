@@ -1,0 +1,34 @@
+<ion-card class="ion-no-padding ion-no-margin">
+  <div class="ion-text-center ion-margin-top">
+    <img width="80px" height="80px" src="/assets/pages/tabs/account/btem-party/success.png" alt="">
+  </div>
+  <ion-card-header class="ion-text-center">
+    <ion-card-title *ngIf="giftResultInfo.gift_item !== 'receive_cash'">جایزه با موفقیت دریافت شد</ion-card-title>
+    <ion-card-title *ngIf="giftResultInfo.gift_item === 'receive_cash'">حساب شما با موفقیت شارژ شد</ion-card-title>
+    <ion-button class="ion-margin-top" (click)="copyCode()">
+      {{ giftResultInfo.gift_detail }}
+    </ion-button>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-label>نحوه استفاده از جایزه</ion-label>
+    <ul *ngIf="giftResultInfo.gift_item === 'free-transaction'">
+      <li>جایزه به صورت خودکار فعال شده است</li>
+    </ul>
+
+    <ul *ngIf="giftResultInfo.gift_item === 'discount'">
+      <li>کد را کپی کنید</li>
+      <li>در بخش خرید اشتراک داخل کد تخفیف وارد کنید</li>
+      <li>توجه داشته باشید کد یکبار مصرف است</li>
+    </ul>
+
+    <ul *ngIf="giftResultInfo.gift_item === 'cash'">
+      <li>کارت "بلک بی" را انتخاب کنید</li>
+      <li>گزینه برداشت وجه را لمس کنید</li>
+      <li>اطلاعات بانکی خود را وارد کنید</li>
+    </ul>
+
+    <ion-button color="danger" (click)="moveToAccountPage()" class="ion-margin-top" expand="block">
+      خروج
+    </ion-button>
+  </ion-card-content>
+</ion-card>

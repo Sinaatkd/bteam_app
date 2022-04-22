@@ -1,0 +1,105 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>حساب کاربری</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/account"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveInfo()">
+        <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="user && userForm">
+  <form [formGroup]="userForm">
+    <ion-item-divider>
+      <ion-label color="primary">اطلاعات</ion-label>
+    </ion-item-divider>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">نام و نام خانوادگی</ion-label>
+            <ion-input type="text" formControlName="fullName"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item disabled>
+            <ion-label position="floating">شماره تلفن</ion-label>
+            <ion-input type="text" formControlName="phoneNumber"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item disabled>
+            <ion-label position="floating">کد ملی</ion-label>
+            <ion-input type="text" formControlName="nationalCode"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">شهر</ion-label>
+            <ion-input type="text" formControlName="fromCity"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item-divider>
+      <ion-label color="primary">گزینه های بیشتر</ion-label>
+    </ion-item-divider>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>میزان آشنایی با ارزهای دیجیتال</ion-label>
+            <ion-select formControlName="familiarityWithDigitalCurrencies" interface="popover" [multiple]="false"
+              placeholder="انتخاب">
+              <ion-select-option value="good">خوب</ion-select-option>
+              <ion-select-option value="medium">متوسط</ion-select-option>
+              <ion-select-option value="bad">بد</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>میزان سرمایه</ion-label>
+            <ion-select formControlName="amountOfCapital" interface="popover" [multiple]="false" placeholder="انتخاب">
+              <ion-select-option value="lessThan5Mil">کمتر از 10 میلیون</ion-select-option>
+              <ion-select-option value="Between10MilAnd50Mil">بین 10 تا 50 میلیون</ion-select-option>
+              <ion-select-option value="moreThan50Mil">بیشتر از 50 میلیون</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>نحوه آشنایی با ما</ion-label>
+            <ion-select formControlName="getToKnowUs" interface="popover" [multiple]="false" placeholder="انتخاب">
+              <ion-select-option value="telegram">تلگرام</ion-select-option>
+              <ion-select-option value="instagram">اینستاگرام</ion-select-option>
+              <ion-select-option value="site">سایت</ion-select-option>
+              <ion-select-option value="friends">دوستان</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item-divider>
+      <ion-label color="primary">اعلان ها</ion-label>
+    </ion-item-divider>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>دریافت اعلان های سیگنال</ion-label>
+            <ion-checkbox mode='ios' formControlName="isReceiveSignalNotifications" slot="end"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>دریافت اعلان های اخبار</ion-label>
+            <ion-checkbox mode='ios' formControlName="isReceiveNewsNotifications" slot="end"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

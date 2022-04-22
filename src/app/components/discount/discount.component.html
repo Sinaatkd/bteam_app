@@ -1,0 +1,21 @@
+<ion-grid *ngIf="!isLoading">
+    <ion-row>
+        <ion-col *ngFor="let code of codes" size="12">
+            <ion-card>
+                <ion-card-header>
+                    <ion-card-subtitle>{{ code.percentage }} درصد تخفیف خرید اشتراک رویال</ion-card-subtitle>
+                </ion-card-header>
+            </ion-card>
+            <div class="code">
+                <ion-label color="dark"> {{code.code}}</ion-label>
+            </div>
+            <div class="bee">
+                <ion-thumbnail>
+                    <img src="../../../assets/pages/tabs/account/btem-party/bee.png" alt="">
+                </ion-thumbnail>
+            </div>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
+<app-loadnig *ngIf="isLoading"></app-loadnig>

@@ -1,0 +1,23 @@
+ion-tab-bar {
+    padding-bottom: 15px;
+    --background: none;
+    --border: none
+}
+
+ion-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.left-position {
+    position: absolute;
+    left: 65px;
+}
+.right-position {
+    position: absolute;
+    right: 65px;
+}
+ion-thumbnail {
+    width: 36px;
+    height: 36px;
+}

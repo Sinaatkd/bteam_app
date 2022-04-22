@@ -1,0 +1,21 @@
+ion-content {    
+    background-repeat: no-repeat;
+    background-size: auto;
+    --background: var(--ion-color-light) url('../../../../assets/pages/login-or-register/main.gif') no-repeat center center / cover;
+}
+
+.bottom-position {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+
+.btn-outline {
+    --border-radius: 10px;
+    padding: 10px;
+
+}
+
+ion-button {
+    width: 100%;
+}

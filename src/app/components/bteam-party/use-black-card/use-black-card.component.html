@@ -1,0 +1,60 @@
+<ion-card class="ion-no-padding ion-no-margin">
+  <ion-grid>
+    <ion-row class="padding-start-and-end">
+      <ion-col size="12" class="ion-margin-top">
+        <ion-item fill="outline" class="ion-text-center ">
+          <ion-label position="floating"> شماره کارت </ion-label>
+          <ion-input class="none-padding-input" readonly [value]="cardCode"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>لطفا جایزه‌ی خود را انتخاب کنید</ion-label>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item class="item-with-border" [color]="selectedGift === 'free-transaction'? 'dark' : ''"
+          (click)="chooseGift('free-transaction')" lines='none'>
+          <ion-thumbnail slot="start">
+            <img src="../../../../assets/pages/tabs/account/btem-party/blue-start.png" />
+          </ion-thumbnail>
+          <ion-label>1 ماه اشتراک رایگان رویال</ion-label>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item class="item-with-border" [color]="selectedGift === 'cash'? 'dark' : ''"
+          (click)="chooseGift('cash')" lines='none'>
+          <ion-thumbnail slot="start">
+            <img src="../../../../assets/pages/tabs/account/btem-party/blue-start.png" />
+          </ion-thumbnail>
+          <ion-label>دریافت اعتبار نقدی</ion-label>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" class="ion-margin-top">
+        <ion-item fill="outline" class="ion-text-center ">
+          <ion-label position="floating"> مشخصات شما </ion-label>
+          <ion-input class="none-padding-input" readonly [(ngModel)]="userPhonenumberAndFullname"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item fill="outline" class="ion-text-center small-text-font-size">
+          <ion-label>صحت اطلاعت وارد شده را تایید می‌کنم</ion-label>
+          <ion-toggle (ionChange)="changeConfirmInfo($event)"></ion-toggle>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="9">
+        <ion-button (click)="onContinueButtonClicked()" color="primary" expand="block" mode="ios">
+          تایید و ادامه
+        </ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button (click)="exitFromPage()" color="danger" expand="block" mode="ios">
+          خروج
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

@@ -1,0 +1,20 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/tabs/account"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment class="ion-no-margin" mode="md" [value]="segmentValue" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="gifts">
+          <ion-label>جایزه ها</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="discounts">
+          <ion-label>تخفیف ها</ion-label>
+      </ion-segment-button>
+  </ion-segment>
+  <app-gift *ngIf="segmentValue==='gifts' "></app-gift>
+  <app-discount *ngIf="segmentValue==='discounts' "></app-discount>
+</ion-content>

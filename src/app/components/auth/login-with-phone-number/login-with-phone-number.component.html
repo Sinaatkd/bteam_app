@@ -1,0 +1,47 @@
+<ion-grid fixed>
+  <form [formGroup]="loginForm">
+    <ion-row>
+      <ion-col size="10" offset="1" class="ion-margin-top">
+        <ion-input formControlName="phoneNumber" [maxlength]="11" type="text"
+          placeholder="شماره همراه خود را وارد کنید"></ion-input>
+      </ion-col>
+      <ion-col size="10" offset="1">
+        <div *ngIf="loginForm.controls.phoneNumber.touched">
+          <ion-text color="danger" *ngIf="loginForm.controls.phoneNumber.errors?.required">این فیلد لازم است.</ion-text>
+          <br *ngIf="loginForm.controls.phoneNumber.errors?.required">
+          <ion-text color="danger" *ngIf="loginForm.controls.phoneNumber.value?.length !== 11">شماره تلفن باید 11
+            کاراکتر باشد.</ion-text>
+          <br *ngIf="loginForm.controls.phoneNumber.value?.length !== 11">
+          <ion-text color="danger" *ngIf="loginForm.controls.phoneNumber.errors?.pattern">این فیلد باید عدد باشد.
+          </ion-text>
+        </div>
+      </ion-col>
+      <ion-col size="5" offset="1">
+        <ion-input [maxlength]='4' formControlName="verificationCode" placeholder="کد ارسال شده">
+        </ion-input>
+      </ion-col>
+      <ion-col size="5" class="ion-no-margin">
+        <ion-button *ngIf="untilExpirationVerificationCode === ''" (click)="sendVerification()" [disabled]="loginForm.controls.phoneNumber.value?.length !== 11"
+          mode="ios" expand="block">
+          دریافت کد
+        </ion-button>
+        <ion-button *ngIf="untilExpirationVerificationCode !== ''" [disabled]="loginForm.controls.phoneNumber.value?.length !== 11"
+          mode="ios" expand="block">
+          {{untilExpirationVerificationCode}}
+        </ion-button>
+      </ion-col>
+      <ion-col size="10" offset="1" class="ion-no-margin">
+        <ion-button (click)="onLoginUser()"
+          [disabled]="loginForm.invalid || loginForm.controls.verificationCode.value?.length !== 4 || loginForm.controls.phoneNumber.value?.length !== 11"
+          mode="ios" expand="block">
+          ورود به حساب کاربری
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" class="ion-margin-top">
+        <ion-text (click)="moveToRegisterPage()">
+          ساخت حساب کاربری
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-grid>
