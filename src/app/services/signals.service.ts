@@ -48,4 +48,8 @@ export class SignalsService {
   getSignalsGeneralStats() {
     return this.http.get(`${BASE_API_URL}signals/general-stats/`)
   }
+
+  getEfficiencyStats(range) {
+    return this.http.get(`${BASE_API_URL}signals/efficiency/`, {params: {range}})
+  }
 }

@@ -10,6 +10,7 @@ export class SignalsPage implements OnInit {
 
   isLoading = true;
   signals = []
+  deactiveSignals: any = []
   selectedBtn: 'active' | 'efficiency' = 'active';
 
   constructor(
@@ -19,6 +20,9 @@ export class SignalsPage implements OnInit {
   ngOnInit() { }
 
   ionViewDidEnter() {
+    this.signalService.getEfficiencyStats('daily').subscribe(res => {
+      this.deactiveSignals = res;
+    });
     this.signalService.getAllFuturesSignals().subscribe(res => {
       if (res.length > 0) {
         for (let signal of res) {
@@ -42,5 +46,11 @@ export class SignalsPage implements OnInit {
 
   changeSelectedButonValue(value: 'active' | 'efficiency') {
     this.selectedBtn = value;
+  }
+
+  segmentChanged(event) {
+    this.signalService.getEfficiencyStats(event.detail.value).subscribe(res => {
+      this.deactiveSignals = res;
+    });    
   }
 }

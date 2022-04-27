@@ -36,8 +36,84 @@
     </div>
   </div>
 
+  <div *ngIf="selectedBtn === 'efficiency'" class="ion-padding">
+    <ion-grid class="ion-margin-bottom">
+      <ion-row>
+        <ion-col size="2">
+          <ion-text color="success">
+            <h1>%{{deactiveSignals.profit_value | number}}</h1>
+          </ion-text>
+        </ion-col>
+        <ion-col size="10">
+          <ion-label>سود تا به این لحظه</ion-label>
+          <br>
+          <ion-label class="text-small" color="medium">خوشحالیم که کنار شماییم</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-segment mode="ios" value="daily" color="primary" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="daily">
+        <ion-label>روزانه</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="weekly">
+        <ion-label>هفتگی</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="monthly">
+        <ion-label>ماهانه</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-grid class="ion-margin-top">
+      <ion-row>
+        <ion-col size="6">
+          <div class="card">
+            <div class="ion-padding">
+              <ion-text> {{deactiveSignals.closed_with_profit_count }} پیشنهاد خرید </ion-text>
+              <br>
+              <ion-text class="text-small" color="success">با سود بسته شده</ion-text>
+              <br>
+            </div>
+            <ion-img [src]="'../../../assets/pages/signal/moj-success.png'"></ion-img>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="card">
+            <div class="ion-padding">
+              <ion-text> {{deactiveSignals.closed_at_loss_count }} پیشنهاد خرید </ion-text>
+              <br>
+              <ion-text class="text-small" color="danger">با رعایت حد ضرر بسته شد</ion-text>
+              <br>
+            </div>
+            <ion-img [src]="'../../../assets/pages/signal/moj-danger.png'"></ion-img>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="card">
+            <div class="ion-padding">
+              <ion-text> {{deactiveSignals.risk_free_count }} پیشنهاد خرید </ion-text>
+              <br>
+              <ion-text class="text-small" color="success">با اعلام ریسک فری بسته شد</ion-text>
+              <br>
+            </div>
+            <ion-img [src]="'../../../assets/pages/signal/moj-success.png'"></ion-img>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="card">
+            <div class="ion-padding">
+              <ion-text> {{deactiveSignals.voided_count }} پیشنهاد خرید </ion-text>
+              <br>
+              <ion-text class="text-small" color="danger">باطل شد</ion-text>
+              <br>
+            </div>
+            <ion-img [src]="'../../../assets/pages/signal/moj-danger.png'"></ion-img>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
   <div *ngIf="selectedBtn === 'efficiency'">
-    <div *ngFor="let signal of signals">
+    <div *ngFor="let signal of deactiveSignals.signals">
       <app-efficiency [signal]='signal'></app-efficiency>
     </div>
   </div>

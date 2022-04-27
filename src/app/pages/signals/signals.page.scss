@@ -144,3 +144,12 @@ p {
   .stepper-item:last-child::after {
     content: none;
   }
+
+  .text-small {
+    font-size: 10px;
+  }
+
+  .card {
+    border-radius: 10px;
+    background-color: var(--ion-card-background);
+  }
