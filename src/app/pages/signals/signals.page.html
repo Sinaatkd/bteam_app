@@ -92,10 +92,10 @@
             <div class="ion-padding">
               <ion-text> {{deactiveSignals.risk_free_count }} پیشنهاد خرید </ion-text>
               <br>
-              <ion-text class="text-small" color="success">با اعلام ریسک فری بسته شد</ion-text>
+              <ion-text class="text-small" color="warning" >با اعلام ریسک فری بسته شد</ion-text>
               <br>
             </div>
-            <ion-img [src]="'../../../assets/pages/signal/moj-success.png'"></ion-img>
+            <ion-img [src]="'../../../assets/pages/signal/moj-risk-free.png'"></ion-img>
           </div>
         </ion-col>
         <ion-col size="6">
@@ -103,10 +103,10 @@
             <div class="ion-padding">
               <ion-text> {{deactiveSignals.voided_count }} پیشنهاد خرید </ion-text>
               <br>
-              <ion-text class="text-small" color="danger">باطل شد</ion-text>
+              <ion-text class="text-small" color="tertiary">باطل شد</ion-text>
               <br>
             </div>
-            <ion-img [src]="'../../../assets/pages/signal/moj-danger.png'"></ion-img>
+            <ion-img [src]="'../../../assets/pages/signal/moj-voided.png'"></ion-img>
           </div>
         </ion-col>
       </ion-row>
