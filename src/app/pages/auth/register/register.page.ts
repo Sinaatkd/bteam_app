@@ -29,6 +29,7 @@ export class RegisterPage implements OnInit {
       nationalCode: new FormControl(null, { validators: [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]+$')], updateOn: "change" }),
       fromCity: new FormControl(null, { validators: [Validators.required], updateOn: "change" }),
       password: new FormControl(null, { validators: [Validators.required], updateOn: "change" }),
+      isForeigner: new FormControl(false, { updateOn: "change" }),
       invaterIdentifierCode: new FormControl(null, { updateOn: "change" }),
     });
   }
@@ -41,13 +42,14 @@ export class RegisterPage implements OnInit {
     const phoneNumber = data.phoneNumber.value;
     const fromCity = data.fromCity.value;
     const nationalCode = data.nationalCode.value
+    const isForeigner = data.isForeigner.value
     const invaterIdentifierCode = data.invaterIdentifierCode.value
     let device_uuid = '';
     Device.getId().then(uuid => {
       device_uuid = uuid.uuid.toString();
       Device.getInfo().then(info => {
         const device = new DeviceModel(device_uuid, info.platform, info.model, info.operatingSystem, info.osVersion)
-        const registerDTO = new RegisterDTO(password, fullName, phoneNumber, nationalCode, fromCity, device, invaterIdentifierCode);
+        const registerDTO = new RegisterDTO(password, fullName, phoneNumber, nationalCode, fromCity, device, invaterIdentifierCode, isForeigner);
         this.registerService.registerUser(registerDTO).subscribe(res => {
           this.dismisLoading();
           this.navCtrl.navigateBack('/login');
@@ -78,5 +80,15 @@ export class RegisterPage implements OnInit {
     setTimeout(() => {
       this.loadingCtrl.dismiss().then().then();
     }, 200);
+  }
+
+  isForeignerChanged(event) {
+    if (event.detail.checked) {
+      this.registerForm.get('phoneNumber').clearValidators();
+      this.registerForm.get('phoneNumber').addValidators(Validators.pattern('^[0-9]+$'));
+    } else {
+      this.registerForm.get('phoneNumber').clearValidators();
+      this.registerForm.get('phoneNumber').addValidators([Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('^[0-9]+$')]);
+    }
   }
 }

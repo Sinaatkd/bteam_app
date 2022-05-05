@@ -69,6 +69,12 @@
             <ion-input formControlName="invaterIdentifierCode" placeholder="کد معرف ( اختیاری )" type="number"></ion-input>
           </ion-item>
         </ion-col>
+        <ion-col size="10" offset="1" class="ion-margin-top">
+          <ion-item lines="none" class="ion-text-start">
+            <ion-label>اتباع خارجی</ion-label>
+            <ion-checkbox slot="start" formControlName="isForeigner" (ionChange)="isForeignerChanged($event)"></ion-checkbox>
+          </ion-item>
+        </ion-col>
         <ion-col size="8" offset="2" class="ion-margin-top">
           <ion-button [disabled]="registerForm.invalid" mode="ios" (click)="onCreateAccount()" expand="block"
             fill="outline">
