@@ -66,7 +66,7 @@
       </ion-col>
       <ion-col size="6" class="ion-text-center">
         <ion-text color="primary">
-          میانگین سود: <ion-text color="success">%{{ generalStats.profit_of_signal_amount | number }}</ion-text>
+          میانگین سود ماهانه: <ion-text color="success">%{{ generalStats.profit_of_signal_amount | number }}</ion-text>
         </ion-text>
       </ion-col>
       <ion-col size="6" class="ion-margin-top ion-text-center">
@@ -75,9 +75,19 @@
           </ion-text>
         </ion-text>
       </ion-col>
+      <ion-col size="6" class="ion-text-center ion-margin-top">
+        <ion-text color="primary">
+          میانگین سود هفتگی: <ion-text color="success">%{{ generalStats.profit_of_signal_amount_weekly | number }}</ion-text>
+        </ion-text>
+      </ion-col>
       <ion-col size="6" class="ion-margin-top ion-text-center">
         <ion-text color="primary">
           بسته شده: <ion-text color="light">{{ generalStats.deactive_signal_count }} سیگنال</ion-text>
+        </ion-text>
+      </ion-col>
+      <ion-col size="6" class="ion-text-center ion-margin-top">
+        <ion-text color="primary">
+          میانگین روزانه: <ion-text color="success">%{{ generalStats.profit_of_signal_amount_daily | number }}</ion-text>
         </ion-text>
       </ion-col>
     </ion-row>
