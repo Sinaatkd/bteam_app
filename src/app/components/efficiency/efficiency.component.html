@@ -11,7 +11,8 @@
           <ion-col size="9" class="ion-no-padding">
             <p class="inline bold">{{ signal.coin_symbol | uppercase }}</p>
             <p class="inline small">/USDT</p>
-            <p class="small">سیگنال اسپات</p>
+            <p class="small" *ngIf="!signal.leverage">سیگنال اسپات</p>
+            <p class="small" *ngIf="signal.leverage">سیگنال فیوچرز</p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -33,7 +34,7 @@
           <p class="small">تارگت های تاچ شده: {{ targetTouchedCount }}</p>
         </ion-col>
         <ion-col class="ion-text-center" size="6">
-          <p class="small">میزان سود: {{signal.profit_of_signal_amount}}%</p>
+          <p class="small">میزان سود: {{signal.profit_of_signal_amount | number: '1.0-1'}}%</p>
         </ion-col>
         <ion-col class="ion-text-center ion-margin-bottom ion-margin-top" size="12">
           <ion-text color="primary">{{signal.status}}</ion-text>
