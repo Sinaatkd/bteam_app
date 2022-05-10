@@ -29,7 +29,7 @@
   <app-news-component *ngFor="let item of news" [news]='item' [clickable]='true'></app-news-component>
   <div class="ion-margin">
     <a [href]="banner.link" target="_blank">
-      <ion-img [src]='"https://bteamapp.iran.liara.run"+banner.img'></ion-img>
+      <ion-img [src]='BASE_URL+banner.img'></ion-img>
     </a>
   </div>
 

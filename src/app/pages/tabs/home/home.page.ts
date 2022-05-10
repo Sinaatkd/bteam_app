@@ -1,3 +1,4 @@
+import { BASE_URL } from './../../../utilities/variables';
 import { FearAndGreedComponent } from './../../../components/modals/fear-and-greed/fear-and-greed.component';
 import { ModalController, NavController } from '@ionic/angular';
 import { BannerService } from './../../../services/banner.service';
@@ -17,6 +18,7 @@ import { Keyboard } from '@capacitor/keyboard';
 export class HomePage implements OnInit {
 
   isLoading = true;
+  BASE_URL = BASE_URL;
   news: NewsModel[] = [];
   specialAccountItems: SpecialAccountModel[] = [];
   generalStats;
