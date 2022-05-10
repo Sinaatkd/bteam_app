@@ -7,6 +7,13 @@
 
   <ion-grid>
     <ion-row>
+      <ion-col size="12" class="padding-10-px">
+        <div>
+          <a [href]="banners[0].link" target="_blank">
+            <ion-img [src]='BASE_URL+banners[0].img'></ion-img>
+          </a>
+        </div>
+      </ion-col>
       <ion-col size="6" class="padding-10-px">
         <ion-button mode='ios' style="width: 100%;" (click)="openFearAndGreedModal()" fill="outline" color="light">
           <ion-icon slot="start" name="speedometer-outline" color="primary"></ion-icon>
@@ -28,8 +35,8 @@
   </ion-list-header>
   <app-news-component *ngFor="let item of news" [news]='item' [clickable]='true'></app-news-component>
   <div class="ion-margin">
-    <a [href]="banner.link" target="_blank">
-      <ion-img [src]='BASE_URL+banner.img'></ion-img>
+    <a [href]="banners[1].link" target="_blank">
+      <ion-img [src]='BASE_URL+banners[1].img'></ion-img>
     </a>
   </div>
 
@@ -43,12 +50,20 @@
           <ion-button (click)="onSearchCoinForShowChart()" fill="clear">
             <ion-icon name="search"></ion-icon>
           </ion-button>
-          <ion-input [(ngModel)]="coinSymbol" (keyup.enter)="onSearchCoinForShowChart()" maxlength="5" placeholder="نماد ارز مورد نظر"></ion-input>
+          <ion-input [(ngModel)]="coinSymbol" (keyup.enter)="onSearchCoinForShowChart()" maxlength="5"
+            placeholder="نماد ارز مورد نظر"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="5">
         <div class="padding-end">
           <img src="../../../../assets/pages/tabs/home/line-chart.png" alt="">
+        </div>
+      </ion-col>
+      <ion-col size="12" class="padding-10-px">
+        <div>
+          <a [href]="banners[2].link" target="_blank">
+            <ion-img [src]='BASE_URL+banners[2].img'></ion-img>
+          </a>
         </div>
       </ion-col>
     </ion-row>
@@ -77,7 +92,8 @@
       </ion-col>
       <ion-col size="6" class="ion-text-center ion-margin-top">
         <ion-text color="primary">
-          میانگین سود هفتگی: <ion-text color="success">%{{ generalStats.profit_of_signal_amount_weekly | number }}</ion-text>
+          میانگین سود هفتگی: <ion-text color="success">%{{ generalStats.profit_of_signal_amount_weekly | number }}
+          </ion-text>
         </ion-text>
       </ion-col>
       <ion-col size="6" class="ion-margin-top ion-text-center">
@@ -87,7 +103,8 @@
       </ion-col>
       <ion-col size="6" class="ion-text-center ion-margin-top">
         <ion-text color="primary">
-          میانگین روزانه: <ion-text color="success">%{{ generalStats.profit_of_signal_amount_daily | number }}</ion-text>
+          میانگین روزانه: <ion-text color="success">%{{ generalStats.profit_of_signal_amount_daily | number }}
+          </ion-text>
         </ion-text>
       </ion-col>
     </ion-row>

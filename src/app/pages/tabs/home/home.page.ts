@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
   news: NewsModel[] = [];
   specialAccountItems: SpecialAccountModel[] = [];
   generalStats;
-  banner
+  banners
   coinSymbol = ''
 
   slideOpts = {
@@ -43,8 +43,8 @@ export class HomePage implements OnInit {
   ionViewDidEnter() {
     if (this.isLoading) {
       this.newsService.threeLastNewsConnection();
-      this.bannerService.getBanner().subscribe(banner => {
-        this.banner = banner;
+      this.bannerService.getBanners().subscribe(banners => {
+        this.banners = banners;
         this.newsService.getThreeLastNews().subscribe(news => {
           this.news = news;
           this.specialAccountService.getAllSpecialAccountItems().subscribe(items => {

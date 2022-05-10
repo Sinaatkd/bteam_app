@@ -11,7 +11,7 @@ export class BannerService {
     private http: HttpClient
   ) { }
 
-  getBanner() {
-  return this.http.get<{img: string, link: string}>(`${BASE_API_URL}banner`)
+  getBanners() {
+  return this.http.get<{img: string, link: string}[]>(`${BASE_API_URL}banners`)
   }
 }
