@@ -14,7 +14,7 @@ import { SignalsService } from 'src/app/services/signals.service';
 export class FuturesSignalComponent implements OnInit, OnDestroy {
 
   @Input('signal') signal: SignalFuturesModel;
-  currentPrice = 0
+  currentPrice = 0;
   isClsoedConnection = false;
 
   constructor(

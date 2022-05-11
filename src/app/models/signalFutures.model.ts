@@ -12,6 +12,7 @@ export class SignalFuturesModel {
         public is_touched_entry: boolean,
         public is_active: boolean,
         public status: string,
-        public profit_of_signal_amount?: number        
+        public profit_of_signal_amount?: number,
+        public alarms?: {id: number, title: string}[],
     ) { }
 }
