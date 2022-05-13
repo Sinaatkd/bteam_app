@@ -59,11 +59,10 @@ export class SpotSignalComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getPricePrevTragetTouched() {
     const prevTarget = this.signal.targets.filter(target => target.is_touched);
-    console.log(this.cardTitles);
-    const cardTitles = [...this.cardTitles];
-    const riskFreeIndex = this.cardTitles.map(text => text.includes('ریسک فری')).findIndex(i => i === true);
-    cardTitles[riskFreeIndex] = `ریسک فری! حدضرر را ${prevTarget[prevTarget.length - 1].title} تنطیم کنید`
-    this.cardTitles = cardTitles;
+    const alarms = [...this.signal.alarms];
+    const riskFreeIndex = alarms.map(alarm => alarm.title.includes('ریسک فری')).findIndex(i => i === true);
+    alarms[riskFreeIndex] = {id: Math.random(), title: `ریسک فری! حدضرر را ${prevTarget[prevTarget.length - 1].title} تنطیم کنید`}
+    this.signal.alarms = alarms;
     return prevTarget[prevTarget.length - 1].amount
   }
 
@@ -102,7 +101,10 @@ export class SpotSignalComponent implements OnInit, AfterViewInit, OnDestroy {
     for (let target of this.signal.targets.filter(target => !target.is_touched)) {
       if (target.amount < this.currentPrice) {
         if (this.isFirstTarget(target.id)) {
+          this.signal.alarms.push({ id: Math.random(), title: 'ریسک فری! حدضرر را نقطه ورود تنطیم کنید' });
           this.signal.stop_loss = this.signal.entry;
+        } else {
+          this.signal.stop_loss = this.getPricePrevTragetTouched();
         }
         target.is_touched = true;
         this.signalsService.touchTarget(target.id, this.signal.id, 'spot').subscribe();
