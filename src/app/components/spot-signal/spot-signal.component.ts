@@ -1,3 +1,5 @@
+import { UserService } from './../../services/user.service';
+import { UserModel } from 'src/app/models/user.model';
 import axios from 'axios';
 import { SignalNewsComponent } from './../signal-news/signal-news.component';
 import { ModalController } from '@ionic/angular';
@@ -19,12 +21,31 @@ export class SpotSignalComponent implements OnInit, AfterViewInit, OnDestroy {
   cardTitle: any = 'درحال اتصال';
   cardTitles = [];
   currentIndex = -1;
+  user: UserModel;
   animateClassName = 'animate__fadeIn';
 
   constructor(
     private signalsService: SignalsService,
     private modalCtrl: ModalController,
-  ) { }
+    private userService: UserService
+  ) {
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
+    });
+    window.setInterval(f => {
+      this.animateClassName = '';
+      setTimeout(() => {
+        this.currentIndex = this.currentIndex + 1;
+        if (this.cardTitles[this.currentIndex] === -1 || this.cardTitles[this.currentIndex] === undefined) {
+          this.cardTitle = this.cardTitles[0]
+          this.currentIndex = 0;
+        } else {
+          this.cardTitle = this.cardTitles[this.currentIndex]
+        }
+        this.animateClassName = 'animate__fadeIn';
+      }, 100);
+    }, 3000);
+  }
 
 
   ngOnDestroy(): void {
@@ -61,7 +82,7 @@ export class SpotSignalComponent implements OnInit, AfterViewInit, OnDestroy {
     const prevTarget = this.signal.targets.filter(target => target.is_touched);
     const alarms = [...this.signal.alarms];
     const riskFreeIndex = alarms.map(alarm => alarm.title.includes('ریسک فری')).findIndex(i => i === true);
-    alarms[riskFreeIndex] = {id: Math.random(), title: `ریسک فری! حدضرر را ${prevTarget[prevTarget.length - 1].title} تنطیم کنید`}
+    alarms[riskFreeIndex] = { id: Math.random(), title: `ریسک فری! حدضرر را ${prevTarget[prevTarget.length - 1].title} تنطیم کنید` }
     this.signal.alarms = alarms;
     return prevTarget[prevTarget.length - 1].amount
   }
@@ -79,9 +100,14 @@ export class SpotSignalComponent implements OnInit, AfterViewInit, OnDestroy {
     this.modalCtrl.create({
       component: SignalNewsComponent,
       componentProps: {
-        news: this.signal.signal_news
+        news: this.signal.signal_news,
+        signalId: this.signal.id,
+        kind: 'spot',
       }
-    }).then(modalEl => modalEl.present());
+    }).then(modalEl => {
+      modalEl.present();
+      this.seenAllSignalNews();
+    });
   }
 
   checkTargets() {
@@ -118,4 +144,22 @@ export class SpotSignalComponent implements OnInit, AfterViewInit, OnDestroy {
       this.signalsService.deactiveSpotSignal(this.signal.id, this.signal.status).subscribe();
     }
   }
+
+
+
+  hasUnreadSignalNews() {
+    for (let news of this.signal.signal_news) {
+      if (news.seen_by.indexOf(this.user.user.id) === -1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  seenAllSignalNews() {
+    for (let news of this.signal.signal_news) {
+      news.seen_by.push(this.user.user.id);
+    }
+  }
+
 }

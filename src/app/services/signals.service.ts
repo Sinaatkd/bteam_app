@@ -50,6 +50,10 @@ export class SignalsService {
   }
 
   getEfficiencyStats(range) {
-    return this.http.get(`${BASE_API_URL}signals/efficiency/`, {params: {range}})
+    return this.http.get(`${BASE_API_URL}signals/efficiency/`, { params: { range } })
+  }
+
+  sennAllSignalMessage(signalId, kind: 'futures' | 'spot') {
+    return this.http.get(`${BASE_API_URL}signals/news/`, { params: { signal_id: signalId, kind } })
   }
 }

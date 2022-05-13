@@ -2,7 +2,7 @@ export class SignalSpotModel {
     constructor(
         public id: number,
         public targets: {id: number, title: string, amount: number, is_touched: boolean}[],
-        public signal_news: {id: number, content: string}[],
+        public signal_news: {id: number, content: string, seen_by: any}[],
         public coin_symbol: string,
         public proposed_capital: number,
         public r_and_r: number,

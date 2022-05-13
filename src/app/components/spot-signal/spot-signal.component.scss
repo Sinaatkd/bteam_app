@@ -15,6 +15,7 @@ ion-button {
     width: 50%;
     display: inline-block;
     left: 4px;
+    color: var(--ion-color-primary);
 }
 
 ion-card-header {
@@ -165,3 +166,20 @@ p {
   .stepper-item:last-child::after {
     content: none;
   }
+
+  
+ion-icon.animated {
+    animation-name: spot-signal-news-animation;
+    animation-duration: 0.6s;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes spot-signal-news-animation {
+  from {
+    color: var(--ion-color-primary);
+  }
+  to {
+    color: var(--ion-color-danger);
+  }
+}

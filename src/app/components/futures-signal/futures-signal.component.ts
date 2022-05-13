@@ -1,5 +1,6 @@
+import { UserService } from './../../services/user.service';
 import axios from 'axios';
-import { BASE_SOCKET_API_URL } from './../../utilities/variables';
+import { UserModel } from 'src/app/models/user.model';
 import { ModalController } from '@ionic/angular';
 import { SignalNewsComponent } from './../signal-news/signal-news.component';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
@@ -20,11 +21,16 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
   cardTitles = [];
   currentIndex = -1;
   animateClassName = 'animate__fadeIn';
+  user: UserModel;
 
   constructor(
     private signalsService: SignalsService,
     private modalCtrl: ModalController,
+    private userService: UserService,
   ) {
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
+    });
     window.setInterval(f => {
       this.animateClassName = '';
       setTimeout(() => {
@@ -68,9 +74,14 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
     this.modalCtrl.create({
       component: SignalNewsComponent,
       componentProps: {
-        news: this.signal.signal_news
+        news: this.signal.signal_news,
+        signalId: this.signal.id,
+        kind: 'futures',
       }
-    }).then(modalEl => modalEl.present());
+    }).then(modalEl => {
+      modalEl.present();
+      this.seenAllSignalNews();
+    });
   }
 
   isFirstTarget(id: number) {
@@ -82,7 +93,7 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
     const prevTarget = this.signal.targets.filter(target => target.is_touched);
     const alarms = [...this.signal.alarms];
     const riskFreeIndex = alarms.map(alarm => alarm.title.includes('ریسک فری')).findIndex(i => i === true);
-    alarms[riskFreeIndex] = {id: Math.random(), title: `ریسک فری! حدضرر را ${prevTarget[prevTarget.length - 1].title} تنطیم کنید`}
+    alarms[riskFreeIndex] = { id: Math.random(), title: `ریسک فری! حدضرر را ${prevTarget[prevTarget.length - 1].title} تنطیم کنید` }
     this.signal.alarms = alarms;
     return prevTarget[prevTarget.length - 1].amount
   }
@@ -121,7 +132,7 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
         if (this.isFirstTarget(target.id)) {
           this.signal.stop_loss = this.signal.entry;
           this.signal.alarms.push({ id: Math.random(), title: 'ریسک فری! حدضرر را نقطه ورود تنطیم کنید' });
-        }  else {
+        } else {
           this.signal.stop_loss = this.getPricePrevTragetTouched();
         }
         target.is_touched = true;
@@ -173,4 +184,21 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
       this.signalsService.deactiveFuturesSignal(this.signal.id, this.signal.status).subscribe();
     }
   }
+
+
+  hasUnreadSignalNews() {
+    for (let news of this.signal.signal_news) {
+      if (news.seen_by.indexOf(this.user.user.id) === -1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  seenAllSignalNews() {
+    for (let news of this.signal.signal_news) {
+      news.seen_by.push(this.user.user.id);
+    }
+  }
+
 }

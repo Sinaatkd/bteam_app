@@ -23,7 +23,7 @@
             <ion-badge color="futures-card-color" mode="ios">{{ signal.type_of_investment }}</ion-badge>
           </ion-col>
           <ion-col size="6" (click)="openSignalNewsModal()">
-            <ion-icon class="size-large left-position futures" name="notifications"></ion-icon>
+            <ion-icon class="size-large left-position futures" [ngClass]="{'animated': hasUnreadSignalNews()}" name="notifications"></ion-icon>
           </ion-col>
         </ion-row>
       </ion-grid>
