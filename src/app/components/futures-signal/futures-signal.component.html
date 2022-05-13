@@ -39,8 +39,8 @@
           <p class="small">درصد حجم ورود: {{signal.amount}}%</p>
         </ion-col>
         <ion-col class="ion-text-center ion-margin-top" size="12">
-          <ion-text *ngIf="currentPrice !== 0" color="dark">قیمت لحظه ای: {{ currentPrice | number }}</ion-text>
-          <ion-text *ngIf="currentPrice === 0" color="dark">درحال اتصال</ion-text>
+          <ion-text [class]="'animate__animated ' + animateClassName" *ngIf="currentPrice !== 0 && currentIndex === 0" color="dark">قیمت لحظه ای: {{ currentPrice | number }}</ion-text>
+          <ion-text [class]="'animate__animated card-titles ' + animateClassName" *ngIf="currentIndex !== 0">{{ cardTitle }}</ion-text>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -48,7 +48,7 @@
   <ion-accordion-group>
     <ion-accordion value="colors">
       <ion-item color="futures-card-color" slot="header">
-        <ion-label>تارگت ها</ion-label>
+        <ion-label>وضعیت</ion-label>
       </ion-item>
       <ion-list slot="content">
         <br>

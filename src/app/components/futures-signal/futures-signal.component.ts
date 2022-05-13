@@ -16,11 +16,29 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
   @Input('signal') signal: SignalFuturesModel;
   currentPrice = 0;
   isClsoedConnection = false;
+  cardTitle: any = 'درحال اتصال';
+  cardTitles = [];
+  currentIndex = -1;
+  animateClassName = 'animate__fadeIn';
 
   constructor(
     private signalsService: SignalsService,
     private modalCtrl: ModalController,
-  ) { }
+  ) {
+    window.setInterval(f => {
+      this.animateClassName = '';
+      setTimeout(() => {
+        this.currentIndex = this.currentIndex + 1;
+        if (this.cardTitles[this.currentIndex] === -1 || this.cardTitles[this.currentIndex] === undefined) {
+          this.cardTitle = this.cardTitles[0]
+          this.currentIndex = 0;
+        } else {
+          this.cardTitle = this.cardTitles[this.currentIndex]
+        }
+        this.animateClassName = 'animate__fadeIn';
+      }, 100);
+    }, 3000);
+  }
 
   ngOnInit() { }
 
@@ -28,6 +46,7 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
     if (this.signal.is_active && !this.isClsoedConnection) {
       axios.get(`https://bteam-binance-extractor.iran.liara.run/price/${this.signal.coin_symbol}`).then(res => {
         this.currentPrice = res.data.price;
+        this.cardTitles = [this.currentPrice, ...this.signal.alarms.map(alarm => alarm.title)];
         if (this.signal.type_of_investment === 'LONG') this.checkLong();
         else this.checkShort()
         this.ngAfterViewInit();
@@ -54,21 +73,43 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
     }).then(modalEl => modalEl.present());
   }
 
-  isFullTargetsShort() {
+  isFirstTarget(id: number) {
+    const firstTarget = this.signal.targets[0];
+    return firstTarget.id == id;
+  }
+
+  getPricePrevTragetTouched() {
+    const prevTarget = this.signal.targets.filter(target => target.is_touched);
+    console.log(this.cardTitles);
+    const cardTitles = [...this.cardTitles];
+    cardTitles[1] = `ریسک فری! حدضرر را ${prevTarget[prevTarget.length - 1].title} تنطیم کنید`
+    this.cardTitles = cardTitles;
+    return prevTarget[prevTarget.length - 1].amount
+  }
+
+  isFullTarget() {
     return this.signal.targets[this.signal.targets.length - 1].is_touched
   }
 
-  isFullTargetsLong() {
-    return this.signal.targets[this.signal.targets.length - 1].is_touched;
+  isTargetTouched() {
+    return this.signal.targets.filter(target => target.is_touched).length > 0;
+  }
+
+  lastTargetTouched() {
+    const lastTarget = this.signal.targets.filter(target => target.is_touched);
+    return lastTarget[lastTarget.length - 1].title
   }
 
   checkLong() {
     if (this.currentPrice < this.signal.stop_loss) {
       if (this.signal.is_touched_entry) {
         this.isClsoedConnection = true;
-        this.signal.status = 'حد ضرر فعال شد';
+        if (this.isTargetTouched()) {
+          this.signal.status = `${this.lastTargetTouched()} تاچ شد و ریسک فری`;
+        } else {
+          this.signal.status = 'حد ضرر فعال شد';
+        }
         this.signal.is_active = false;
-        this.isClsoedConnection = true;
         this.signalsService.deactiveFuturesSignal(this.signal.id, this.signal.status).subscribe();
       }
     } else if (this.currentPrice > this.signal.entry && !this.signal.is_touched_entry) {
@@ -77,11 +118,14 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
     }
     for (let target of this.signal.targets.filter(target => !target.is_touched)) {
       if (target.amount < this.currentPrice) {
+        if (this.isFirstTarget(target.id)) {
+          this.signal.stop_loss = this.signal.entry;
+        }
         target.is_touched = true;
         this.signalsService.touchTarget(target.id, this.signal.id, 'futures').subscribe();
       }
     }
-    if (this.isFullTargetsLong()) {
+    if (this.isFullTarget()) {
       this.signal.is_active = false;
       this.isClsoedConnection = true;
       this.signal.status = 'فول تارگت';
@@ -94,9 +138,12 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
     if (this.currentPrice > this.signal.stop_loss) {
       if (this.signal.is_touched_entry) {
         this.isClsoedConnection = true;
-        this.signal.status = 'حد ضرر فعال شد';
+        if (this.isTargetTouched()) {
+          this.signal.status = `${this.lastTargetTouched()} تاچ شد و ریسک فری`;
+        } else {
+          this.signal.status = 'حد ضرر فعال شد';
+        }
         this.signal.is_active = false;
-        this.isClsoedConnection = true;
         this.signalsService.deactiveFuturesSignal(this.signal.id, this.signal.status).subscribe();
       }
     } else if (this.currentPrice < this.signal.entry && !this.signal.is_touched_entry) {
@@ -105,11 +152,14 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
     }
     for (let target of this.signal.targets.filter(target => !target.is_touched)) {
       if (target.amount > this.currentPrice) {
+        if (this.isFirstTarget(target.id)) {
+          this.signal.stop_loss = this.signal.entry;
+        }
         target.is_touched = true;
         this.signalsService.touchTarget(target.id, this.signal.id, 'futures').subscribe();
       }
     }
-    if (this.isFullTargetsShort()) {
+    if (this.isFullTarget()) {
       this.signal.is_active = false;
       this.isClsoedConnection = true;
       this.signal.status = 'فول تارگت';

@@ -13,5 +13,6 @@ export class SignalSpotModel {
         public status: string,
         public is_active: boolean,
         public profit_of_signal_amount?: number,      
+        public alarms?: {id: number, title: string}[]
     ) { }
 }
