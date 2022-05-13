@@ -61,7 +61,8 @@ export class SpotSignalComponent implements OnInit, AfterViewInit, OnDestroy {
     const prevTarget = this.signal.targets.filter(target => target.is_touched);
     console.log(this.cardTitles);
     const cardTitles = [...this.cardTitles];
-    cardTitles[1] = `ریسک فری! حدضرر را ${prevTarget[prevTarget.length - 1].title} تنطیم کنید`
+    const riskFreeIndex = this.cardTitles.map(text => text.includes('ریسک فری')).findIndex(i => i === true);
+    cardTitles[riskFreeIndex] = `ریسک فری! حدضرر را ${prevTarget[prevTarget.length - 1].title} تنطیم کنید`
     this.cardTitles = cardTitles;
     return prevTarget[prevTarget.length - 1].amount
   }
