@@ -169,9 +169,7 @@ ion-icon.futures {
   color: var(--ion-color-primary);
 }
 ion-icon.animated {
-  animation-name: futures-signal-news-animation;
-  animation-duration: 0.6s;
-  animation-iteration-count: infinite;
+  animation: futures-signal-news-animation 0.6s infinite;
 }
 
 .step-name {
