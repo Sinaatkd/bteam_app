@@ -1,9 +1,82 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>copy-trade</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-slides [options]="slideOpts">
+    <!-- Start Step 1 -->
+    <ion-slide>
+      <ion-grid class="ion-text-center">
+        <ion-row>
+          <ion-col size="12" class="center-content top-position">
+            <ion-img class="robot-img" src="/assets/pages/tabs/copy-trade/robot.png"></ion-img>
+          </ion-col>
+          <ion-col size="12" class="center-content ion-margin-top bottom-position-30">
+            <ion-text [color]="'primary'" class="text-size-big">به پنل کپی ترید خوش آمدید</ion-text>
+            <br>
+            <ion-text class="text-size-small">تو کار خودتو بکن، سودتو بسپار به ما</ion-text>
+          </ion-col>
+          <ion-col size="12" class="bottom-position-5 ion-padding-horizontal">
+            <ion-button expand="block" (click)="moveToNextSlide()" [mode]="'ios'">فعال سازی حساب و احراز هویت
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <!-- End Step 1 -->
+    <!-- Start Step 2-->
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" class="top-position-5">
+            <ion-list class="ion-no-padding">
+              <ion-list-header class="text-size-big">
+                مراحل احراز هویت
+              </ion-list-header>
 
+              <ion-item lines="none" class="padding-5 steps-item ion-margin-top ion-margin-horizontal">
+                <ion-thumbnail slot="start">
+                  <img src="/assets/pages/tabs/copy-trade/information.png"/>
+                </ion-thumbnail>
+                <ion-label>
+                  <h4 class="text-size-big-18 color-primary">مشخصات شما</h4>
+                  <h6 class="text-size-small-10 color-medium">مشخصات خود را تایید و بررسی می کنید</h6>
+                </ion-label>
+              </ion-item>
+
+              <ion-item lines="none" class="padding-5 steps-item ion-margin-top ion-margin-horizontal">
+                <ion-thumbnail slot="start">
+                  <img src="/assets/pages/tabs/copy-trade/IDCard.png"/>
+                </ion-thumbnail>
+                <ion-label>
+                  <h4 class="text-size-big-18 color-primary">مدارک شناسایی</h4>
+                  <h6 class="text-size-small-10 color-medium">اسکن مدارک شناسایی (کارت ملی یا شناسنامه)</h6>
+                </ion-label>
+              </ion-item>
+
+              <ion-item lines="none" class="padding-5 steps-item ion-margin-top ion-margin-horizontal">
+                <ion-thumbnail slot="start">
+                  <img src="/assets/pages/tabs/copy-trade/auth.png"/>
+                </ion-thumbnail>
+                <ion-label>
+                  <h4 class="text-size-big-18 color-primary">شناسایی هویت</h4>
+                  <h6 class="text-size-small-10 color-medium">اپلود عکس سلفی به همراه تعهد نامه و کارت ملی</h6>
+                </ion-label>
+              </ion-item>
+
+            </ion-list>
+          </ion-col>
+          <ion-col size="12" class="bottom-position-5 ion-padding-horizontal">
+            <ion-item lines="none">
+              <ion-label class="text-size-small"><a href="http://localhost" target="_blank">شرایط و قوانین</a> را خواندم
+                و قبول می کنم
+              </ion-label>
+              <ion-toggle mode="ios" slot="end"></ion-toggle>
+            </ion-item>
+            <br>
+            <ion-button expand="block" (click)="moveToNextSlide()" [mode]="'ios'">ادامه
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <!-- End Step 2 -->
+  </ion-slides>
 </ion-content>
+
