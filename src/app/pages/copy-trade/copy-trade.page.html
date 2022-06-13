@@ -32,7 +32,7 @@
 
               <ion-item lines="none" class="padding-5 steps-item ion-margin-top ion-margin-horizontal">
                 <ion-thumbnail slot="start">
-                  <img src="/assets/pages/tabs/copy-trade/information.png"/>
+                  <img src="/assets/pages/tabs/copy-trade/information.png" />
                 </ion-thumbnail>
                 <ion-label>
                   <h4 class="text-size-big-18 color-primary">مشخصات شما</h4>
@@ -42,7 +42,7 @@
 
               <ion-item lines="none" class="padding-5 steps-item ion-margin-top ion-margin-horizontal">
                 <ion-thumbnail slot="start">
-                  <img src="/assets/pages/tabs/copy-trade/IDCard.png"/>
+                  <img src="/assets/pages/tabs/copy-trade/IDCard.png" />
                 </ion-thumbnail>
                 <ion-label>
                   <h4 class="text-size-big-18 color-primary">مدارک شناسایی</h4>
@@ -52,7 +52,7 @@
 
               <ion-item lines="none" class="padding-5 steps-item ion-margin-top ion-margin-horizontal">
                 <ion-thumbnail slot="start">
-                  <img src="/assets/pages/tabs/copy-trade/auth.png"/>
+                  <img src="/assets/pages/tabs/copy-trade/auth.png" />
                 </ion-thumbnail>
                 <ion-label>
                   <h4 class="text-size-big-18 color-primary">شناسایی هویت</h4>
@@ -67,16 +67,67 @@
               <ion-label class="text-size-small"><a href="http://localhost" target="_blank">شرایط و قوانین</a> را خواندم
                 و قبول می کنم
               </ion-label>
-              <ion-toggle mode="ios" slot="end"></ion-toggle>
+              <ion-toggle mode="ios" slot="end" (ionChange)="acceptRules($event)"></ion-toggle>
             </ion-item>
             <br>
-            <ion-button expand="block" (click)="moveToNextSlide()" [mode]="'ios'">ادامه
+            <ion-button expand="block" [disabled]="!isAcceptRules" (click)="moveToNextSlide()" [mode]="'ios'">ادامه
             </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-slide>
     <!-- End Step 2 -->
+    <!-- Start Step 3 -->
+    <ion-slide *ngIf="user && userInformationForm">
+      <ion-grid class="top-position">
+        <form [formGroup]="user && userInformationForm">
+          <ion-row class="ion-margin-top">
+            <ion-col size="12">
+              <ion-text class="text-bold">
+                تایید اطلاعات حساب
+              </ion-text>
+            </ion-col>
+            <ion-col size="10" offset="1" class="ion-margin-top">
+              <ion-item>
+                <ion-input readonly formControlName="full_name" color="medium" placeholder="نام و نام خانوادگی"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="10" offset="1">
+              <ion-item>
+                <ion-input readonly formControlName="phone_number" color="medium" placeholder="شماره همراه"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="10" offset="1">
+              <ion-item>
+                <ion-input  formControlName="national_code" placeholder="کد ملی"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="10" offset="1" class="ion-no-padding">
+              <ion-item class="ion-no-padding">
+                <ng-persian-datepicker class="ion-no-padding" [dateInitValue]="false" style="width: 100%;" [timeShowSecond]="false" [timeEnable]="false" [timeMeridian]="false" [dateFormat]="'jYYYY-jMM-jDD'">
+                  <input type="text" formControlName="date_of_birth" placeholder="تاریخ تولد" (ionChange)="changeDateOfBirth($event)" class="datePicker" />
+                </ng-persian-datepicker>
+              </ion-item>
+            </ion-col>
+            <ion-col size="10" offset="1">
+              <ion-item>
+              <ion-input formControlName="father_name" placeholder="نام پدر"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="10" offset="1">
+              <ion-item>
+                <ion-input formControlName="place_of_issue" placeholder="محل صدور"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-grid>
+      <div *ngIf="user && userInformationForm">
+        <ion-button class="bottom-position-5 ion-padding-horizontal" (click)="saveData()" mode="ios" expand="block">
+          اطلاعات درج شده را تایید می‌کنم
+        </ion-button>
+      </div>
+    </ion-slide>
+    <!-- End Step 3 -->
   </ion-slides>
 </ion-content>
-

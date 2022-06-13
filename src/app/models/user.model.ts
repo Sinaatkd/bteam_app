@@ -17,6 +17,9 @@ export class UserModel {
             get_to_know_us: string,
             is_receive_signal_notifications: boolean,
             is_receive_news_notifications: boolean,
+            date_of_birth?: Date,
+            father_name?: string,
+            place_of_issue?: string,
         },
         public transaction: TransactionDTO,
         public unread_messages?: number

@@ -98,3 +98,32 @@ ion-thumbnail {
 .padding-5 {
   padding: 10px;
 }
+
+ion-item {
+  --background: none;
+  --border-color: var(--ion-color-primary);
+  text-align: center;
+  font-size: 15px;
+}
+
+ion-input {
+  font-size: 12px;
+}
+
+.datePicker {
+  text-align: center;
+  width: 100%;
+  border: none;
+  background-color: none;
+  background: none;
+  outline:none
+}
+
+ion-item {
+  .item-native {
+    padding: 0 !important;
+  }
+  .item-inner {
+    padding: 0 !important;
+  }
+}

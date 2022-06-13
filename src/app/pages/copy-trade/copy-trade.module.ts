@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
 import { CopyTradePageRoutingModule } from './copy-trade-routing.module';
 
 import { CopyTradePage } from './copy-trade.page';
@@ -13,6 +13,8 @@ import { CopyTradePage } from './copy-trade.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    NgPersianDatepickerModule,
+    ReactiveFormsModule,
     CopyTradePageRoutingModule
   ],
   declarations: [CopyTradePage]
