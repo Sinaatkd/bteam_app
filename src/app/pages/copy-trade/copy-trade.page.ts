@@ -2,7 +2,7 @@ import { FormControl, FormControlName, FormGroup, Validators } from '@angular/fo
 import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/user.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-copy-trade',
@@ -24,7 +24,8 @@ export class CopyTradePage implements OnInit {
   };
 
   constructor(
-    public userService: UserService
+    public userService: UserService,
+    public loadingCtrl: LoadingController,
   ) {
   }
 
@@ -61,11 +62,11 @@ export class CopyTradePage implements OnInit {
 
   changeDateOfBirth(event) {
     const currentLength = event.detail.value.length
-    
+
     if (currentLength > this.previusLnegthDateOfBirthInput) {
       console.log(this.previusLnegthDateOfBirthInput == 1 || this.previusLnegthDateOfBirthInput == 4);
       console.log(currentLength, this.previusLnegthDateOfBirthInput);
-      
+
       if (this.previusLnegthDateOfBirthInput == 1 || this.previusLnegthDateOfBirthInput == 4) {
         this.userInformationForm.controls.date_of_birth.setValue(event.detail.value + '/')
       }
@@ -79,13 +80,20 @@ export class CopyTradePage implements OnInit {
   }
 
   saveData() {
-    const inputs = this.userInformationForm.controls;
-    this.user.user.date_of_birth = inputs.date_of_birth.value;
-    this.user.user.father_name = inputs.father_name.value;
-    this.user.user.place_of_issue = inputs.place_of_issue.value;
-    this.userService.editUserInfo(this.user).subscribe(res => {
-      this.moveToNextSlide();
+    this.loadingCtrl.create({
+      message: 'لطفا صبر کنید',
+      mode: 'ios',
+    }).then(loadingEl => {
+      loadingEl.present()
+      const inputs = this.userInformationForm.controls;
+      this.user.user.date_of_birth = inputs.date_of_birth.value;
+      this.user.user.father_name = inputs.father_name.value;
+      this.user.user.place_of_issue = inputs.place_of_issue.value;
+      this.userService.editUserInfo(this.user).subscribe(res => {
+        loadingEl.dismiss();
+        this.moveToNextSlide();
+      })
     })
   }
-  
+
 }
