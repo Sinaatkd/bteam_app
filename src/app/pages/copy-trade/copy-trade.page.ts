@@ -19,7 +19,7 @@ export class CopyTradePage implements OnInit {
   previusValueDateOfBirthInput = 0;
 
   slideOpts = {
-    initialSlide: 0,
+    initialSlide: 3,
     speed: 400
   };
 

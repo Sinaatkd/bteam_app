@@ -89,7 +89,8 @@
             </ion-col>
             <ion-col size="10" offset="1" class="ion-margin-top">
               <ion-item>
-                <ion-input readonly formControlName="full_name" color="medium" placeholder="نام و نام خانوادگی"></ion-input>
+                <ion-input readonly formControlName="full_name" color="medium" placeholder="نام و نام خانوادگی">
+                </ion-input>
               </ion-item>
             </ion-col>
             <ion-col size="10" offset="1">
@@ -99,19 +100,21 @@
             </ion-col>
             <ion-col size="10" offset="1">
               <ion-item>
-                <ion-input  formControlName="national_code" placeholder="کد ملی"></ion-input>
+                <ion-input formControlName="national_code" placeholder="کد ملی"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col size="10" offset="1" class="ion-no-padding">
               <ion-item class="ion-no-padding">
-                <ng-persian-datepicker class="ion-no-padding" [dateInitValue]="false" style="width: 100%;" [timeShowSecond]="false" [timeEnable]="false" [timeMeridian]="false" [dateFormat]="'jYYYY-jMM-jDD'">
-                  <input type="text" formControlName="date_of_birth" placeholder="تاریخ تولد" (ionChange)="changeDateOfBirth($event)" class="datePicker" />
+                <ng-persian-datepicker class="ion-no-padding" [dateInitValue]="false" style="width: 100%;"
+                  [timeShowSecond]="false" [timeEnable]="false" [timeMeridian]="false" [dateFormat]="'jYYYY-jMM-jDD'">
+                  <input type="text" formControlName="date_of_birth" placeholder="تاریخ تولد"
+                    (ionChange)="changeDateOfBirth($event)" class="datePicker" />
                 </ng-persian-datepicker>
               </ion-item>
             </ion-col>
             <ion-col size="10" offset="1">
               <ion-item>
-              <ion-input formControlName="father_name" placeholder="نام پدر"></ion-input>
+                <ion-input formControlName="father_name" placeholder="نام پدر"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col size="10" offset="1">
@@ -129,5 +132,41 @@
       </div>
     </ion-slide>
     <!-- End Step 3 -->
+    <!-- Start Step 4 -->
+    <ion-slide>
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col size="12">
+            <img src="/assets/pages/tabs/copy-trade/IDCardWithHand.png" class="side-left">
+          </ion-col>
+          <ion-col size="12">
+            <ion-list>
+              <ion-item lines="none" class="ion-text-start">
+                <ion-icon name="checkmark-circle" slot="start" class="ion-no-margin" color="success"></ion-icon>
+                <ion-label class="text-size-small-12">فقط کارت ملی، گذرنامه، شناسنامه مورد قبول می باشد</ion-label>
+              </ion-item>
+              <ion-item lines="none" class="ion-text-start">
+                <ion-icon name="checkmark-circle" slot="start" class="ion-no-margin" color="success"></ion-icon>
+                <ion-label class="text-size-small-12">عکس باید کامل خوانا و واضح باشد</ion-label>
+              </ion-item>
+              <ion-item lines="none" class="ion-text-start">
+                <ion-icon name="checkmark-circle" slot="start" class="ion-no-margin" color="success"></ion-icon>
+                <ion-label class="text-size-small-12">کارت شناسایی باید متعلق به صاحب حساب باشد</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+
+          <ion-col size="12" class="ion-padding">
+            <ion-button (click)="onClick()" color="medium" class="big-height" expand="block" mode="ios">
+              آپلود
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button class="bottom-position-5 ion-padding-horizontal" (click)="saveData()" mode="ios" expand="block">
+        ادامه
+      </ion-button>
+    </ion-slide>
+    <!-- End Step 4 -->
   </ion-slides>
 </ion-content>
