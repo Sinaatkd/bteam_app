@@ -20,6 +20,8 @@ export class UserModel {
             date_of_birth?: Date,
             father_name?: string,
             place_of_issue?: string,
+            id_card?: File,
+            face?: File
         },
         public transaction: TransactionDTO,
         public unread_messages?: number

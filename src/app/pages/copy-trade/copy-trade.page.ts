@@ -1,8 +1,9 @@
-import { FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/user.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, LoadingController } from '@ionic/angular';
+import { BASE_URL } from 'src/app/utilities/variables';
 
 @Component({
   selector: 'app-copy-trade',
@@ -17,9 +18,12 @@ export class CopyTradePage implements OnInit {
   isAcceptRules = false;
   previusLnegthDateOfBirthInput = 0;
   previusValueDateOfBirthInput = 0;
+  selectedIDCardPicture = null;
+  selectedFacePicture = null;
+  BASE_URL = BASE_URL;
 
   slideOpts = {
-    initialSlide: 3,
+    initialSlide: 5,
     speed: 400
   };
 
@@ -34,17 +38,31 @@ export class CopyTradePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.userService.getUser().subscribe(user => {
-      this.user = user;
-      this.userInformationForm = new FormGroup({
-        full_name: new FormControl(this.user.user.full_name, { validators: [Validators.required] }),
-        phone_number: new FormControl(this.user.user.phone_number, { validators: [Validators.required] }),
-        national_code: new FormControl(this.user.user.national_code, { validators: [Validators.required] }),
-        date_of_birth: new FormControl(this.user.user.date_of_birth, { validators: [Validators.required] }),
-        father_name: new FormControl(this.user.user.father_name, { validators: [Validators.required] }),
-        place_of_issue: new FormControl(this.user.user.place_of_issue, { validators: [Validators.required] }),
+    this.loadingCtrl.create({
+      message: 'لطفا صبر کنید',
+      mode: 'ios',
+    }).then(loadingEl => {
+      loadingEl.present()
+      this.userService.getUser().subscribe(user => {
+        this.user = user;
+        if (user.user.id_card && user.user.face) {
+          // this.slides.slideTo(5).then(() => {
+          // });
+        }
+        if (user.user.id_card){
+          this.selectedIDCardPicture = BASE_URL + user.user.id_card;
+        }
+        this.userInformationForm = new FormGroup({
+          full_name: new FormControl(this.user.user.full_name, { validators: [Validators.required] }),
+          phone_number: new FormControl(this.user.user.phone_number, { validators: [Validators.required] }),
+          national_code: new FormControl(this.user.user.national_code, { validators: [Validators.required] }),
+          date_of_birth: new FormControl(this.user.user.date_of_birth, { validators: [Validators.required] }),
+          father_name: new FormControl(this.user.user.father_name, { validators: [Validators.required] }),
+          place_of_issue: new FormControl(this.user.user.place_of_issue, { validators: [Validators.required] }),
+        });
       });
-    });
+      loadingEl.dismiss();
+    })
   }
 
   ngOnInit() { }
@@ -89,11 +107,49 @@ export class CopyTradePage implements OnInit {
       this.user.user.date_of_birth = inputs.date_of_birth.value;
       this.user.user.father_name = inputs.father_name.value;
       this.user.user.place_of_issue = inputs.place_of_issue.value;
+      this.user.user.id_card = this.selectedIDCardPicture
+      console.log(this.selectedIDCardPicture);
+      this.user.user.face = this.selectedFacePicture
       this.userService.editUserInfo(this.user).subscribe(res => {
         loadingEl.dismiss();
         this.moveToNextSlide();
+      }, err => {
+        loadingEl.dismiss();
+        console.log(err);
       })
     })
+  }
+
+  IDCardPictureChanged(event) {
+    const file = event.target.files[0];
+    this.getBase64IDCardPicture(file);
+  }
+
+  getBase64IDCardPicture(file) {
+    let me = this;
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.selectedIDCardPicture = reader.result;
+    };
+    reader.onerror = function (error) {
+    };
+  }
+  getBase64Face(file) {
+    let me = this;
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.selectedFacePicture = reader.result;
+      me.saveData()
+    };
+    reader.onerror = function (error) {
+    };
+  }
+
+  facePictureChanged(event) {
+    const file = event.target.files[0];
+    this.getBase64Face(file);
   }
 
 }
