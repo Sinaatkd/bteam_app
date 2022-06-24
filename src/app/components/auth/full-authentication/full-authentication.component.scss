@@ -1,0 +1,165 @@
+ion-item {
+    --background: var(--ion-background-color);
+  }
+  
+  ion-list {
+    background-color: var(--ion-background-color);
+  }
+  
+  ion-list-header {
+    --background: var(--ion-background-color);
+  }
+  
+  ion-slides {
+    height: 100% !important;
+  }
+  
+  .center-content {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .robot-img {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .top-position {
+    position: absolute;
+    top: 10%;
+  }
+  
+  .bottom-position-30 {
+    display: block;
+    position: absolute;
+    bottom: 30%;
+  }
+  
+  .bottom-position-5 {
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+  }
+  
+  .top-position-5 {
+    position: absolute;
+    top: 5%;
+    left: 0;
+    right: 0;
+  }
+  
+  .text-size-big {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .text-size-big-18 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .text-size-small {
+    font-size: 15px;
+  }
+  
+  .text-size-small-12 {
+    font-size: 12px;
+  }
+  
+  .color-primary {
+    color: var(--ion-color-primary);
+  
+  }
+  
+  .color-medium {
+    color: var(--ion-color-medium);
+  }
+  
+  .text-size-small-10 {
+    font-size: 10px;
+  }
+  
+  .steps-item {
+    --border-width: 2px;
+    --border-radius: 10px;
+    --border-color: var(--ion-color-primary);
+  }
+  
+  ion-thumbnail {
+    padding: 5px;
+    width: 70px;
+    height: 70px;
+  
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  
+  
+  .padding-5 {
+    padding: 10px;
+  }
+  
+  ion-item {
+    --background: none;
+    --border-color: var(--ion-color-primary);
+    text-align: center;
+    font-size: 15px;
+  }
+  
+  ion-input {
+    font-size: 12px;
+  }
+  
+  .datePicker {
+    text-align: center;
+    width: 100%;
+    border: none;
+    background-color: none;
+    background: none;
+    outline:none
+  }
+  
+  ion-item {
+    .item-native {
+      padding: 0 !important;
+    }
+    .item-inner {
+      padding: 0 !important;
+    }
+  }
+  
+  .side-left {
+    width: 80%;
+    // height: 50px;
+    float: left;
+    padding: 0 20px 20px 0;
+  }
+  
+  ion-icon {
+    margin-left: 10px;
+  }
+  
+  
+  .big-height {
+    height: 140px;
+  }
+  
+  .full-width {
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .size-70 {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  
+  .border {
+    border-radius: 10px;
+    border: solid 1px var(--ion-color-primary);
+    padding: 10px;
+  }

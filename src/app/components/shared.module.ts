@@ -26,6 +26,8 @@ import { SendReceiptComponent } from './modals/send-receipt/send-receipt.compone
 import { GiftComponent } from './gift/gift.component';
 import { DiscountComponent } from './discount/discount.component';
 import { RoyalButtonComponent } from './modals/royal-button/royal-button.component';
+import { FullAuthenticationComponent } from './auth/full-authentication/full-authentication.component';
+import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
 
 @NgModule({
     imports: [
@@ -34,6 +36,7 @@ import { RoyalButtonComponent } from './modals/royal-button/royal-button.compone
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
+        NgPersianDatepickerModule,
     ],
     declarations: [
         LoginWithPasswordComponent,
@@ -57,6 +60,7 @@ import { RoyalButtonComponent } from './modals/royal-button/royal-button.compone
         UseBlackCardComponent,
         ShowResultComponent,
         CashWithdrawalComponent,
+        FullAuthenticationComponent
     ],
     exports: [
         LoginWithPasswordComponent,
@@ -79,6 +83,7 @@ import { RoyalButtonComponent } from './modals/royal-button/royal-button.compone
         UseBlueCardComponent,
         UseBlackCardComponent,
         ShowResultComponent,
+        FullAuthenticationComponent
     ],
     providers: [
         LoginService,

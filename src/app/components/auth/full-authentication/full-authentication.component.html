@@ -1,0 +1,242 @@
+<ion-slides #slides [options]="slideOpts" *ngIf="user && userInformationForm">
+  <!-- Start Step 1 -->
+  <ion-slide>
+    <ion-grid class="ion-text-center">
+      <ion-row>
+        <ion-col size="12" class="center-content top-position">
+          <ion-img class="robot-img" src="/assets/pages/tabs/copy-trade/robot.png"></ion-img>
+        </ion-col>
+        <ion-col size="12" class="center-content ion-margin-top bottom-position-30">
+          <ion-text [color]="'primary'" class="text-size-big">به پنل کپی ترید خوش آمدید</ion-text>
+          <br>
+          <ion-text class="text-size-small">تو کار خودتو بکن، سودتو بسپار به ما</ion-text>
+        </ion-col>
+        <ion-col size="12" class="bottom-position-5 ion-padding-horizontal">
+          <ion-button expand="block" (click)="moveToNextSlide()" [mode]="'ios'">فعال سازی حساب و احراز هویت
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-slide>
+  <!-- End Step 1 -->
+  <!-- Start Step 2-->
+  <ion-slide>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" class="top-position-5">
+          <ion-list class="ion-no-padding">
+            <ion-list-header class="text-size-big">
+              مراحل احراز هویت
+            </ion-list-header>
+
+            <ion-item lines="none" class="padding-5 steps-item ion-margin-top ion-margin-horizontal">
+              <ion-thumbnail slot="start">
+                <img src="/assets/pages/tabs/copy-trade/information.png" />
+              </ion-thumbnail>
+              <ion-label>
+                <h4 class="text-size-big-18 color-primary">مشخصات شما</h4>
+                <h6 class="text-size-small-10 color-medium">مشخصات خود را تایید و بررسی می کنید</h6>
+              </ion-label>
+            </ion-item>
+
+            <ion-item lines="none" class="padding-5 steps-item ion-margin-top ion-margin-horizontal">
+              <ion-thumbnail slot="start">
+                <img src="/assets/pages/tabs/copy-trade/IDCard.png" />
+              </ion-thumbnail>
+              <ion-label>
+                <h4 class="text-size-big-18 color-primary">مدارک شناسایی</h4>
+                <h6 class="text-size-small-10 color-medium">اسکن مدارک شناسایی (کارت ملی یا شناسنامه)</h6>
+              </ion-label>
+            </ion-item>
+
+            <ion-item lines="none" class="padding-5 steps-item ion-margin-top ion-margin-horizontal">
+              <ion-thumbnail slot="start">
+                <img src="/assets/pages/tabs/copy-trade/auth.png" />
+              </ion-thumbnail>
+              <ion-label>
+                <h4 class="text-size-big-18 color-primary">شناسایی هویت</h4>
+                <h6 class="text-size-small-10 color-medium">اپلود عکس سلفی به همراه تعهد نامه و کارت ملی</h6>
+              </ion-label>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+        <ion-col size="12" class="bottom-position-5 ion-padding-horizontal">
+          <ion-item lines="none">
+            <ion-label class="text-size-small"><a href="http://localhost" target="_blank">شرایط و قوانین</a> را خواندم
+              و قبول می کنم
+            </ion-label>
+            <ion-toggle mode="ios" slot="end" (ionChange)="acceptRules($event)"></ion-toggle>
+          </ion-item>
+          <br>
+          <ion-button expand="block" [disabled]="!isAcceptRules" (click)="moveToNextSlide()" [mode]="'ios'">ادامه
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-slide>
+  <!-- End Step 2 -->
+  <!-- Start Step 3 -->
+  <ion-slide>
+    <ion-grid class="top-position">
+      <form [formGroup]="user && userInformationForm">
+        <ion-row class="ion-margin-top">
+          <ion-col size="12">
+            <ion-text class="text-bold">
+              تایید اطلاعات حساب
+            </ion-text>
+          </ion-col>
+          <ion-col size="10" offset="1" class="ion-margin-top">
+            <ion-item>
+              <ion-input readonly formControlName="full_name" color="medium" placeholder="نام و نام خانوادگی">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="10" offset="1">
+            <ion-item>
+              <ion-input readonly formControlName="phone_number" color="medium" placeholder="شماره همراه"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="10" offset="1">
+            <ion-item>
+              <ion-input formControlName="national_code" placeholder="کد ملی"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="10" offset="1" class="ion-no-padding">
+            <ion-item class="ion-no-padding">
+              <ng-persian-datepicker class="ion-no-padding" [dateInitValue]="false" style="width: 100%;"
+                [timeShowSecond]="false" [timeEnable]="false" [timeMeridian]="false" [dateFormat]="'jYYYY-jMM-jDD'">
+                <input type="text" formControlName="date_of_birth" placeholder="تاریخ تولد" class="datePicker" />
+              </ng-persian-datepicker>
+            </ion-item>
+          </ion-col>
+          <ion-col size="10" offset="1">
+            <ion-item>
+              <ion-input formControlName="father_name" placeholder="نام پدر"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="10" offset="1">
+            <ion-item>
+              <ion-input formControlName="place_of_issue" placeholder="محل صدور"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-grid>
+    <div *ngIf="user && userInformationForm">
+      <ion-button class="bottom-position-5 ion-padding-horizontal" [disabled]="userInformationForm.invalid"
+        (click)="moveToNextSlide()" mode="ios" expand="block">
+        اطلاعات درج شده را تایید می‌کنم
+      </ion-button>
+    </div>
+  </ion-slide>
+  <!-- End Step 3 -->
+  <!-- Start Step 4 -->
+  <ion-slide>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12">
+          <img src="/assets/pages/tabs/copy-trade/IDCardWithHand.png" class="side-left">
+        </ion-col>
+        <ion-col size="12">
+          <ion-list>
+            <ion-item lines="none" class="ion-text-start">
+              <ion-icon name="checkmark-circle" slot="start" class="ion-no-margin" color="success"></ion-icon>
+              <ion-label class="text-size-small-12">فقط کارت ملی، گذرنامه، شناسنامه مورد قبول می باشد</ion-label>
+            </ion-item>
+            <ion-item lines="none" class="ion-text-start">
+              <ion-icon name="checkmark-circle" slot="start" class="ion-no-margin" color="success"></ion-icon>
+              <ion-label class="text-size-small-12">عکس باید کامل خوانا و واضح باشد</ion-label>
+            </ion-item>
+            <ion-item lines="none" class="ion-text-start">
+              <ion-icon name="checkmark-circle" slot="start" class="ion-no-margin" color="success"></ion-icon>
+              <ion-label class="text-size-small-12">کارت شناسایی باید متعلق به صاحب حساب باشد</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+
+        <ion-col size="12" class="ion-padding">
+          <input type="file" #IDCard class="ion-hide" (change)="IDCardPictureChanged($event)"
+            accept="image/png, image/jpg">
+          <ion-img *ngIf="selectedIDCardPicture" [src]="selectedIDCardPicture" class="big-height full-width"
+            (click)="IDCard.click()"></ion-img>
+          <ion-button *ngIf="!selectedIDCardPicture" (click)="IDCard.click()" color="medium" class="big-height"
+            expand="block" mode="ios">
+            آپلود
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button class="bottom-position-5 ion-padding-horizontal" (click)="moveToNextSlide()"
+      [disabled]="!selectedIDCardPicture" mode="ios" expand="block">
+      ادامه
+    </ion-button>
+  </ion-slide>
+  <!-- End Step 4 -->
+  <!-- Start Step 5 -->
+  <ion-slide>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12">
+          <img src="/assets/pages/tabs/copy-trade/face.png" class="size-70">
+        </ion-col>
+        <br>
+        <ion-col size="12">
+          <ion-text color="primary">
+            لطفا یک مدرک هویتی عکس دار معتبر را در کنار چهره خود قرار داده و به همراه تعهدنامه زیر تصویری تهیه نمایید
+            و ارسال کنید
+          </ion-text>
+        </ion-col>
+        <ion-col size="12">
+          <ion-list>
+            <ion-item lines="none" class="ion-text-start">
+              <ion-icon name="checkmark-circle" slot="start" class="ion-no-margin" color="success"></ion-icon>
+              <ion-label class="text-size-small-12">متن تهعد نامه و مدرک هویتی باید واضح باشد</ion-label>
+            </ion-item>
+            <ion-item lines="none" class="ion-text-start">
+              <ion-icon name="checkmark-circle" slot="start" class="ion-no-margin" color="success"></ion-icon>
+              <ion-label class="text-size-small-12">رعایت حجاب اسلامی برای بانوان محترم الزامی است</ion-label>
+            </ion-item>
+            <ion-item lines="none" class="ion-text-start">
+              <ion-icon name="checkmark-circle" slot="start" class="ion-no-margin" color="success"></ion-icon>
+              <ion-label class="text-size-small-12">تعهدنامه حتما باید دست نویس با خط خودتان باشد</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+
+        <ion-col size="12" class="ion-padding">
+          <ion-item lines="none" class="border">
+            <ion-text>اینجانب ( نام و نام خانوادگی شما مطابق با کارت ملی‌‌‌ ) به کد ملی ...... تعهد می دهم که قوانین
+              استفاده از سامانه کپی ترید آکادمی بی تیم ( شرکت آینده سازان بیتا‌)‌را کامل مطالعه نموده و آن را کاملا می
+              پذیرم و همچنین در صورت تخلف مسئولیت هرگونه پیشامدی را به عهده خواهم گرفت. جهت احراز هویت در اپلیکیشن بی
+              تیم</ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <input type="file" #face class="ion-hide" (change)="facePictureChanged($event)" accept="image/png, image/jpg">
+    <ion-button class="bottom-position-5 ion-padding-horizontal" (click)="face.click()" mode="ios" expand="block">
+      آپلود و ذخیره اطلاعات
+    </ion-button>
+  </ion-slide>
+  <!-- End Step 5 -->
+
+  <!-- Start Step 6 -->
+  <ion-slide>
+    <ion-grid class="center-content ion-text-center">
+      <ion-row>
+        <ion-col size="12" class="center-content">
+          <ion-img class="robot-img" src="/assets/pages/tabs/copy-trade/wait.png"></ion-img>
+        </ion-col>
+        <ion-col size="12" class="ion-margin-top">
+          <ion-text [color]="'primary'" class="text-size-big">در انتظار تایید هویت</ion-text>
+          <br>
+          <ion-text class="text-size-small">لطفا منتظر تایید هویت خود توسط کارشناسان بمانید</ion-text>
+          <br>
+          <ion-text class="text-size-small">به زودی وضعیت آن را به اطلاع شما میرسانیم</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-slide>
+  <!-- End Step 6 -->
+</ion-slides>
