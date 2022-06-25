@@ -1,0 +1,26 @@
+ion-toolbar {
+    --background: var(--ion-background-color);
+}
+
+.text-small-size {
+    font-size: 13px;
+}
+
+.text-medium-size {
+    font-size: 17px;
+}
+
+
+
+.center-item-input {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.toolbar-padding {
+    padding: 0 16px 16px 16px;
+}

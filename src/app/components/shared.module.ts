@@ -28,6 +28,7 @@ import { DiscountComponent } from './discount/discount.component';
 import { RoyalButtonComponent } from './modals/royal-button/royal-button.component';
 import { FullAuthenticationComponent } from './auth/full-authentication/full-authentication.component';
 import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
+import { CopyTradeApiComponent } from './copy-trade-api/copy-trade-api.component';
 
 @NgModule({
     imports: [
@@ -60,7 +61,8 @@ import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
         UseBlackCardComponent,
         ShowResultComponent,
         CashWithdrawalComponent,
-        FullAuthenticationComponent
+        FullAuthenticationComponent,
+        CopyTradeApiComponent
     ],
     exports: [
         LoginWithPasswordComponent,
@@ -83,7 +85,8 @@ import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
         UseBlueCardComponent,
         UseBlackCardComponent,
         ShowResultComponent,
-        FullAuthenticationComponent
+        FullAuthenticationComponent,
+        CopyTradeApiComponent
     ],
     providers: [
         LoginService,

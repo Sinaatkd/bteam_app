@@ -1,3 +1,141 @@
+<ion-header *ngIf="user && user.user.is_full_authentication">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <app-full-authentication></app-full-authentication>
+  <app-full-authentication *ngIf="user && !user.user.is_full_authentication"></app-full-authentication>
+
+  <ion-grid *ngIf="user && user.user.is_full_authentication">
+    <ion-row>
+      <ion-col size="10" offset="1">
+        <ion-text color="primary">
+          <h1><b>سبد های فعال </b></h1>
+        </ion-text>
+      </ion-col>
+      <ion-col size="12">
+        <ion-slides mode="ios" [pager]="false" [options]="slideOpts" autoplay="2000" [scrollbar]="null">
+          <ion-slide *ngFor="let basket of baskets">
+            <ion-card mode="ios">
+              <ion-card-header>
+                <ion-card-subtitle>02:02 تا شروع دوره باقی مانده است</ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="4">
+                      <ion-item mode="md" fill="outline" class="text-small-size">
+                        <ion-label position="floating">بودجه مورد نیاز</ion-label>
+                        <ion-input class="none-padding-input text-medium-size center-item-input" readonly
+                          color="primary" [value]="basket.initial_balance+'$'">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size="4">
+                      <ion-item mode="md" fill="outline" class="text-small-size">
+                        <ion-label position="floating">ریسک سبد</ion-label>
+                        <ion-input class="none-padding-input text-medium-size center-item-input" color="primary"
+                          readonly [value]="basket.basket_risk">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size="4">
+                      <ion-item mode="md" fill="outline" class="text-small-size">
+                        <ion-label position="floating">صرافی</ion-label>
+                        <ion-input class="none-padding-input text-medium-size center-item-input" color="primary"
+                          readonly [value]="basket.exchange">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-item mode="md" fill="outline" class="text-small-size">
+                        <ion-label position="floating">حداکثر سود</ion-label>
+                        <ion-input class="none-padding-input text-medium-size center-item-input" color="success"
+                          readonly [value]="basket.maximum_profit+'%'">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-item mode="md" fill="outline" class="text-small-size">
+                        <ion-label position="floating">حداکثر ضرر</ion-label>
+                        <ion-input class="none-padding-input text-medium-size center-item-input" color="danger" readonly
+                          [value]="basket.maximum_loss+'%'">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-item mode="md" fill="outline" class="text-small-size">
+                        <ion-label position="floating">زمان بندی تقریبی</ion-label>
+                        <ion-input class="none-padding-input text-medium-size center-item-input" color="primary"
+                          readonly [value]="basket.estimated_time+' روز'">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-item mode="md" fill="outline" class="text-small-size">
+                        <ion-label position="floating">استیج تسویه</ion-label>
+                        <ion-input class="none-padding-input text-medium-size center-item-input" color="primary"
+                          readonly value="{{ basket.stages[0].amount}}$   |   {{basket.settlement_percentage}}%">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-col size="12" class="ion-margin-top">
+                      <hr style="height:0.5px;border-width:0;color:white;background-color:white"
+                        class="ion-margin-horizontal">
+                    </ion-col>
+
+                    <ion-col size="6">
+                      <ion-item mode="md" class="ion-text-center">
+                        <ion-label>تریدر: <ion-text color="primary">{{ basket.trader_name}}</ion-text>
+                        </ion-label>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-col size="6">
+                      <ion-item mode="md" class="ion-text-center">
+                        <ion-label>WIN RATE: <ion-text color="primary">{{ basket.win_rate}}%</ion-text>
+                        </ion-label>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-col size="12">
+                      <ion-button (click)="onClick()" expand="block">
+                        عضویت
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<ion-footer *ngIf="user && user.user.is_full_authentication">
+  <hr style="height:0.5px;border-width:0;color:white;background-color:white" class="ion-margin-horizontal">
+  <ion-toolbar class="ion-padding toolbar-padding">
+    <ion-title *ngIf="!isCheckUserAPIsLoading" class="text-medium-size" [color]="isUserKucoinAPIsActive? 'success' : 'danger'">API شما متصل {{isUserKucoinAPIsActive? 'می': 'نمی'}} باشد</ion-title>
+    <ion-buttons slot="end" *ngIf="!isCheckUserAPIsLoading" >
+      <ion-button (click)="enterAPIKeys()">
+        تنظیمات
+      </ion-button>
+    </ion-buttons>
+    <ion-grid *ngIf="isCheckUserAPIsLoading">
+      <ion-row>
+        <ion-col size="9">
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="3">
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

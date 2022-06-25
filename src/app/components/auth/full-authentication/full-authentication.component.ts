@@ -58,8 +58,8 @@ export class FullAuthenticationComponent implements AfterViewInit {
               this.slides.slideTo(value + 1).then();
               this.slides.lockSwipes(true).then();
             })
-            loadingEl.dismiss();
           }
+          loadingEl.dismiss();
         }, 1000);
       });
     })

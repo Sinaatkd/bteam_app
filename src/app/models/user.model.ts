@@ -21,7 +21,8 @@ export class UserModel {
             father_name?: string,
             place_of_issue?: string,
             id_card?: File,
-            face?: File
+            face?: File,
+            is_full_authentication? : Boolean
         },
         public transaction: TransactionDTO,
         public unread_messages?: number
