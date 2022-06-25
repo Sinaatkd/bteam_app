@@ -2,7 +2,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { CopyTradeService } from 'src/app/services/copy-trade.service';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { CopyTradeApiComponent } from 'src/app/components/copy-trade-api/copy-trade-api.component';
 
 @Component({
@@ -25,7 +25,9 @@ export class CopyTradePage implements OnInit {
   constructor(
     private userService: UserService,
     private copyTradeService: CopyTradeService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController
   ) { }
 
   ionViewDidEnter() {
@@ -56,5 +58,32 @@ export class CopyTradePage implements OnInit {
     this.modalCtrl.create({
       component: CopyTradeApiComponent,
     }).then(modalEl => modalEl.present());
+  }
+
+  joinToBasket(basketId) {
+    this.loadingCtrl.create({
+      message: 'لطفا صبر کنید',
+      mode: 'ios'
+    }).then(loadingEl => {
+      loadingEl.present();
+      this.copyTradeService.joinToBasket(basketId).subscribe(res => {
+        loadingEl.dismiss();
+        this.toastCtrl.create({
+          message: res.message,
+          mode: 'ios',
+          color: 'success',
+          duration: 2000,
+        }).then(toastEl => toastEl.present());
+      }, err => {
+        loadingEl.dismiss();
+        this.toastCtrl.create({
+          message: err.error.message,
+          mode: 'ios',
+          color: 'danger',
+          duration: 2000,
+        }).then(toastEl => toastEl.present());
+      })
+    })
+
   }
 }

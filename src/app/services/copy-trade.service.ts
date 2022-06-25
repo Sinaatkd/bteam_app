@@ -23,4 +23,8 @@ export class CopyTradeService {
     }
     return this.http.post(BASE_API_URL + 'copy-trade/check-user-apis/', data)
   }
+
+  joinToBasket(basketId): Observable<any> {
+    return this.http.get(BASE_API_URL + `copy-trade/join/${basketId}/` )
+  }
 }
