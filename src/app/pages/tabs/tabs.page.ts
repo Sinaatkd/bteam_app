@@ -22,28 +22,17 @@ export class TabsPage implements OnInit {
 
   openActionSheetRoyalItems() {
     this.onClick();
-    this.userService.getUser().subscribe(user => {
-      if (user.transaction && user.transaction.is_confirmation) {
-        this.modalCtrl.create({
-          initialBreakpoint: 1,
-          handle: false,
-          breakpoints: [1, 0],
-          component: RoyalButtonComponent,
-          cssClass: 'royal-button',
-          mode: 'ios',
-          swipeToClose: true,
-          backdropDismiss: true,
-          showBackdrop: false
-        }).then(modalEl => modalEl.present());
-
-      } else {
-        this.alertCtrl.create({
-          mode: 'ios',
-          header: 'توجه',
-          message: 'شما هیچ اشتراکی فعالی ندارید، برای دسترسی به این بخش باید اول اشتراک تهیه کنید.'
-        }).then(alertEl => alertEl.present());
-      }
-    });
+    this.modalCtrl.create({
+      initialBreakpoint: 1,
+      handle: false,
+      breakpoints: [1, 0],
+      component: RoyalButtonComponent,
+      cssClass: 'royal-button',
+      mode: 'ios',
+      swipeToClose: true,
+      backdropDismiss: true,
+      showBackdrop: false
+    }).then(modalEl => modalEl.present());
   }
 
   onClick() {

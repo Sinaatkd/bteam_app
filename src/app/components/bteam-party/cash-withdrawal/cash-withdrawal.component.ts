@@ -44,10 +44,6 @@ export class CashWithdrawalComponent implements OnInit {
   }
 
   onCashWithdrawalClick() {
-    if (this.userCardBankNumber.toString().length < 16 || this.userCardBankNumber.toString().length > 16) {
-      this.toastCtrl.create({ message: 'شماره کارت نامعتبر است', mode: 'ios', duration: 1500, color: 'danger' }).then(toastEl => toastEl.present());
-      return;
-    }
     if (this.walletAmount < 10000) {
       this.toastCtrl.create({ message: 'حداقل موجودی شما برای برداشت وجه باید 10,000 هزار تومن باشد', mode: 'ios', duration: 1500, color: 'danger' }).then(toastEl => toastEl.present());
       return;
