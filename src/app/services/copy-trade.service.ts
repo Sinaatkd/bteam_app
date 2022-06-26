@@ -25,6 +25,22 @@ export class CopyTradeService {
   }
 
   joinToBasket(basketId): Observable<any> {
-    return this.http.get(BASE_API_URL + `copy-trade/join/${basketId}/` )
+    return this.http.get(BASE_API_URL + `copy-trade/join/${basketId}/`)
+  }
+
+  checkUserJoinedBasket() {
+    return this.http.get(BASE_API_URL + 'copy-trade/basket-status')
+  }
+
+  create_invoice() {
+    const data = {
+      currency: 'USDT',
+      order_name: Math.random() * 100000,
+      order_number: Math.random() * 100000,
+      amount: 150,
+      callback_url: 'https://google.com',
+      api_key: 'Ahh4enUqeZHDXcAeX1HgklFfYMb63I_TzH-aACNUChZEeXGtaw7O8YGHBLBQ5XVn'
+    }
+    return this.http.get(BASE_API_URL + 'copy-trade/invoice/new/', {params: data})
   }
 }

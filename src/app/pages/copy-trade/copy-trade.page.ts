@@ -15,6 +15,8 @@ export class CopyTradePage implements OnInit {
   user: UserModel;
   isUserKucoinAPIsActive: boolean
   isCheckUserAPIsLoading = true;
+  isJoindToAnyBasket = false;
+  userBasketJoined: any;
   baskets: any = [];
   slideOpts = {
     initialSlide: 0,
@@ -33,11 +35,20 @@ export class CopyTradePage implements OnInit {
   ionViewDidEnter() {
     this.userService.getUser().subscribe(user => {
       this.user = user;
-
       if (this.user.user.is_full_authentication) {
         this.copyTradeService.getBaskets().subscribe(res => {
           this.baskets = res;
-        })
+          for (let b of this.baskets) {
+            b.participants.filter(id => {
+              if (id == this.user.user.id) {
+                this.isJoindToAnyBasket = true;
+                this.copyTradeService.checkUserJoinedBasket().subscribe(res => {
+                  this.userBasketJoined = res;
+                })
+              }
+            });
+          }
+        });
       }
     });
   }
@@ -84,6 +95,8 @@ export class CopyTradePage implements OnInit {
         }).then(toastEl => toastEl.present());
       })
     })
+  }
 
+  onPayStage() {
   }
 }

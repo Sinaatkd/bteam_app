@@ -1,4 +1,4 @@
-<ion-header *ngIf="user && user.user.is_full_authentication">
+<ion-header *ngIf="user && user.user.is_full_authentication && !isJoindToAnyBasket">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/home"></ion-back-button>
@@ -6,8 +6,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <app-full-authentication *ngIf="user && !user.user.is_full_authentication"></app-full-authentication>
+<ion-content *ngIf="!isJoindToAnyBasket">
+  <app-full-authentication *ngIf="user && !user.user.is_full_authentication && isJoindToAnyBasket">
+  </app-full-authentication>
 
   <ion-grid *ngIf="user && user.user.is_full_authentication">
     <ion-row>
@@ -90,7 +91,7 @@
 
                     <ion-col size="6">
                       <ion-item mode="md" class="ion-text-center">
-                        <ion-label>تریدر: <ion-text color="primary">{{ basket.trader_name}}</ion-text>
+                        <ion-label>تریدر: <ion-text color="primary">{{ basket.trader}}</ion-text>
                         </ion-label>
                       </ion-item>
                     </ion-col>
@@ -118,11 +119,110 @@
   </ion-grid>
 </ion-content>
 
-<ion-footer *ngIf="user && user.user.is_full_authentication">
+<ion-content *ngIf="isJoindToAnyBasket && userBasketJoined">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11" offset="0.5">
+        <ion-card class="border-radius20">
+          <ion-card-header>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="8">
+                  <ion-text>موجودی حساب شما:‌</ion-text>
+                </ion-col>
+                <ion-col size="4" class="ion-text-left">
+                  <ion-text color="primary" class="text-medium-size">{{ userBasketJoined.balance | number }}$</ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center ion-margin-top ion-margin-bottom">
+        <ion-text color="primary">
+          از خارج کردن اصل سرمایه تا پایان دوره خودداری نمایید
+        </ion-text>
+      </ion-col>
+
+      <ion-col size="6" class="ion-text-center">
+        <ion-card class="border-radius20 ion-padding">
+          <ion-card-header>
+            <ion-card-title color="primary" class="text-medium-size" *ngIf="userBasketJoined.is_active">درحال اجرا
+            </ion-card-title>
+            <ion-card-title color="primary" class="text-medium-size" *ngIf="!userBasketJoined.is_active">بسته شد
+            </ion-card-title>
+            <ion-card-subtitle class="ion-margin-top">وضعیت سبد</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" class="ion-text-center">
+        <ion-card class="border-radius20 ion-padding">
+          <ion-card-header>
+            <ion-card-title color="primary" class="text-medium-size">{{ userBasketJoined.orders_count }}
+            </ion-card-title>
+            <ion-card-subtitle class="ion-margin-top">معاملات باز شده</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" class="ion-text-center">
+        <ion-card class="border-radius20 ion-padding">
+          <ion-card-header>
+            <ion-card-title color="danger" class="text-medium-size">{{userBasketJoined.loss}}%</ion-card-title>
+            <ion-card-subtitle class="ion-margin-top">ضرر تا به این لحظه</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" class="ion-text-center">
+        <ion-card class="border-radius20 ion-padding">
+          <ion-card-header>
+            <ion-card-title color="success" class="text-medium-size"> {{userBasketJoined.profit}}% </ion-card-title>
+            <ion-card-subtitle class="ion-margin-top">سود تا به این لحظه</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item-divider>
+          <ion-label>صورت حساب</ion-label>
+        </ion-item-divider>
+      </ion-col>
+      <ion-col size="11" offset="0.5" *ngFor="let stage of userBasketJoined.stages">
+        <div class="ion-text-center border-white" (click)="onPayStage()">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4">
+                <ion-label>استیج 1</ion-label>
+              </ion-col>
+              <ion-col size="4">
+                <ion-label color="medium">100$</ion-label>
+              </ion-col>
+              <ion-col size="4">
+                <ion-badge color="primary" mode="ios" class="text-small-size">پرداخت نشده</ion-badge>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+
+<ion-footer *ngIf="user && user.user.is_full_authentication && !isJoindToAnyBasket">
   <hr style="height:0.5px;border-width:0;color:white;background-color:white" class="ion-margin-horizontal">
   <ion-toolbar class="ion-padding toolbar-padding">
-    <ion-title *ngIf="!isCheckUserAPIsLoading" class="text-medium-size" [color]="isUserKucoinAPIsActive? 'success' : 'danger'">API شما متصل {{isUserKucoinAPIsActive? 'می': 'نمی'}} باشد</ion-title>
-    <ion-buttons slot="end" *ngIf="!isCheckUserAPIsLoading" >
+    <ion-title *ngIf="!isCheckUserAPIsLoading" class="text-medium-size"
+      [color]="isUserKucoinAPIsActive? 'success' : 'danger'">API شما متصل {{isUserKucoinAPIsActive? 'می': 'نمی'}} باشد
+    </ion-title>
+    <ion-buttons slot="end" *ngIf="!isCheckUserAPIsLoading">
       <ion-button (click)="enterAPIKeys()">
         تنظیمات
       </ion-button>
@@ -139,3 +239,17 @@
     </ion-grid>
   </ion-toolbar>
 </ion-footer>
+
+
+<ion-footer *ngIf="userBasketJoined">
+  <ion-toolbar class="ion-padding">
+    <ion-button (click)="onClick()" disabled class="ion-margin-bottom" color="danger" mode="ios" expand="block">
+      خروج از سبد
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
+
+
+<ion-content *ngIf="!userBasketJoined && isJoindToAnyBasket">
+  <app-loadnig></app-loadnig>
+</ion-content>
