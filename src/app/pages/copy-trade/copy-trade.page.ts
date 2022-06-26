@@ -98,5 +98,8 @@ export class CopyTradePage implements OnInit {
   }
 
   onPayStage() {
+    // this.copyTradeService.createInvoice().subscribe(res => {
+    //   window.open(res)
+    // })
   }
 }

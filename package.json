@@ -33,7 +33,7 @@
     "@ionic/angular": "^6.0.0",
     "animate.css": "^4.1.1",
     "axios": "^0.26.1",
-    "firebase-tools": "^10.2.2",
+    "firebase-tools": "^10.9.2",
     "moment-jalaali": "^0.9.6",
     "ng-persian-datepicker": "^5.1.1",
     "rxjs": "~6.6.0",

@@ -121,7 +121,8 @@ export class SpotSignalComponent implements OnInit, AfterViewInit, OnDestroy {
         this.signal.is_active = false;
         this.signalsService.deactiveSpotSignal(this.signal.id, this.signal.status).subscribe();
       }
-    } else if (this.currentPrice > this.signal.entry && !this.signal.is_touched_entry) {
+    } else if (this.currentPrice == this.signal.entry && !this.signal.is_touched_entry) {
+      this.signal.is_touched_entry = true;
       this.signalsService.touchEntrySpot(this.signal.id).subscribe();
     }
     for (let target of this.signal.targets.filter(target => !target.is_touched)) {

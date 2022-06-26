@@ -123,7 +123,7 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
         this.signal.is_active = false;
         this.signalsService.deactiveFuturesSignal(this.signal.id, this.signal.status).subscribe();
       }
-    } else if (this.currentPrice > this.signal.entry && !this.signal.is_touched_entry) {
+    } else if (this.currentPrice == this.signal.entry && !this.signal.is_touched_entry) {
       this.signal.is_touched_entry = true;
       this.signalsService.touchEntryFutures(this.signal.id).subscribe();
     }
@@ -160,7 +160,7 @@ export class FuturesSignalComponent implements OnInit, OnDestroy {
         this.signal.is_active = false;
         this.signalsService.deactiveFuturesSignal(this.signal.id, this.signal.status).subscribe();
       }
-    } else if (this.currentPrice < this.signal.entry && !this.signal.is_touched_entry) {
+    } else if (this.currentPrice == this.signal.entry && !this.signal.is_touched_entry) {
       this.signal.is_touched_entry = true;
       this.signalsService.touchEntryFutures(this.signal.id).subscribe();
     }

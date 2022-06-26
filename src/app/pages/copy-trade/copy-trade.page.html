@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content *ngIf="!isJoindToAnyBasket">
-  <app-full-authentication *ngIf="user && !user.user.is_full_authentication && isJoindToAnyBasket">
+  <app-full-authentication *ngIf="user && !user.user.is_full_authentication && !isJoindToAnyBasket">
   </app-full-authentication>
 
   <ion-grid *ngIf="user && user.user.is_full_authentication">
@@ -22,7 +22,7 @@
           <ion-slide *ngFor="let basket of baskets">
             <ion-card mode="ios">
               <ion-card-header>
-                <ion-card-subtitle>02:02 تا شروع دوره باقی مانده است</ion-card-subtitle>
+                <!-- <ion-card-subtitle>{{ getTimer(basket.id) }} تا شروع دوره باقی مانده است</ion-card-subtitle> -->
               </ion-card-header>
               <ion-card-content>
                 <ion-grid>

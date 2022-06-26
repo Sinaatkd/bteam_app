@@ -32,15 +32,15 @@ export class CopyTradeService {
     return this.http.get(BASE_API_URL + 'copy-trade/basket-status')
   }
 
-  create_invoice() {
+  createInvoice(): Observable<any> {
     const data = {
-      currency: 'USDT',
-      order_name: Math.random() * 100000,
-      order_number: Math.random() * 100000,
+      api_key: 'Ahh4enUqeZHDXcAeX1HgklFfYMb63I_TzH-aACNUChZEeXGtaw7O8YGHBLBQ5XVn',
+      currency  : 'USDT',
+      order_name: 'fs',
+      callback_url: BASE_API_URL + 'copy-trade/stage/check-payment/15',
+      order_number: Math.random() * 10000,
       amount: 150,
-      callback_url: 'https://google.com',
-      api_key: 'Ahh4enUqeZHDXcAeX1HgklFfYMb63I_TzH-aACNUChZEeXGtaw7O8YGHBLBQ5XVn'
     }
-    return this.http.get(BASE_API_URL + 'copy-trade/invoice/new/', {params: data})
+    return this.http.get('https://plisio.net/api/v1/invoices/new', {params: data})
   }
 }
