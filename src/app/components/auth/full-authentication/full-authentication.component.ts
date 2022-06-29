@@ -20,6 +20,7 @@ export class FullAuthenticationComponent implements AfterViewInit {
   selectedIDCardPicture = null;
   selectedFacePicture = null;
   BASE_URL = BASE_URL;
+  currentSlide = 0;
 
   slideOpts = {
     initialSlide: 0,
@@ -56,9 +57,11 @@ export class FullAuthenticationComponent implements AfterViewInit {
             this.slides.length().then((value) => {
               this.slides.lockSwipes(false).then();
               this.slides.slideTo(value + 1).then();
+              this.currentSlide = 6;
               this.slides.lockSwipes(true).then();
             })
           }
+          this.slides.lockSwipes(true).then();
           loadingEl.dismiss();
         }, 1000);
       });
@@ -66,6 +69,7 @@ export class FullAuthenticationComponent implements AfterViewInit {
   }
 
   moveToNextSlide() {
+    this.currentSlide += 1;
     this.slides.lockSwipes(false).then();
     this.slides.slideNext().then();
     this.slides.lockSwipes(true).then();

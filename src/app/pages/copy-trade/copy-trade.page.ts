@@ -2,7 +2,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { CopyTradeService } from 'src/app/services/copy-trade.service';
-import { LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, NavController, ToastController } from '@ionic/angular';
 import { CopyTradeApiComponent } from 'src/app/components/copy-trade-api/copy-trade-api.component';
 
 @Component({
@@ -29,7 +29,9 @@ export class CopyTradePage implements OnInit {
     private copyTradeService: CopyTradeService,
     private modalCtrl: ModalController,
     private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
+    private navCtrl: NavController
   ) { }
 
   ionViewDidEnter() {
@@ -66,9 +68,30 @@ export class CopyTradePage implements OnInit {
   }
 
   enterAPIKeys() {
-    this.modalCtrl.create({
-      component: CopyTradeApiComponent,
-    }).then(modalEl => modalEl.present());
+    if (this.isUserKucoinAPIsActive) {
+      this.alertCtrl.create({
+        message: 'آیا می خواهید api ها ار قطع کنید؟',
+        mode: 'ios',
+        buttons: [
+          {
+            text: 'خیر'
+          },
+          {
+            text: 'بله',
+            handler: () => {
+              this.copyTradeService.disconnectApiKey().subscribe(res => {
+                this.navCtrl.navigateBack('/tabs/home')
+              });
+            }
+          }
+        ]
+      }).then(alertEl => alertEl.present())
+    } else {
+
+      this.modalCtrl.create({
+        component: CopyTradeApiComponent,
+      }).then(modalEl => modalEl.present());
+    }
   }
 
   joinToBasket(basketId) {
@@ -85,6 +108,7 @@ export class CopyTradePage implements OnInit {
           color: 'success',
           duration: 2000,
         }).then(toastEl => toastEl.present());
+        this.navCtrl.navigateBack('/tabs/home')
       }, err => {
         loadingEl.dismiss();
         this.toastCtrl.create({
@@ -101,5 +125,10 @@ export class CopyTradePage implements OnInit {
     // this.copyTradeService.createInvoice().subscribe(res => {
     //   window.open(res)
     // })
+  }
+
+  isPayThisStage(stageId) {
+    const selectedStage = this.userBasketJoined.stages.filter(s => s.id === stageId)[0];
+    return selectedStage.payers.filter(p => p == this.user.user.id).length > 0
   }
 }

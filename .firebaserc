@@ -1,7 +1,5 @@
 {
   "projects": {
-    "y": "bteam-9097a",
     "default": "bteam-9097a"
-  },
-  "targets": {}
+  }
 }

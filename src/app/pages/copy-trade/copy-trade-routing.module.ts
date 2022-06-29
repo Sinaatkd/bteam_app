@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: CopyTradePage
+  },
+  {
+    path: 'education',
+    loadChildren: () => import('./education/education.module').then( m => m.EducationPageModule)
   }
 ];
 

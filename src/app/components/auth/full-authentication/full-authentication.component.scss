@@ -12,6 +12,7 @@ ion-item {
   
   ion-slides {
     height: 100% !important;
+    overflow-y: auto;
   }
   
   .center-content {
@@ -37,13 +38,13 @@ ion-item {
   
   .bottom-position-5 {
     position: absolute;
-    bottom: 5%;
+    bottom: 10px;
     left: 0;
     right: 0;
   }
   
   .top-position-5 {
-    position: absolute;
+    position: fixed;
     top: 5%;
     left: 0;
     right: 0;

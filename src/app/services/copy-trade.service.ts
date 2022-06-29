@@ -43,4 +43,8 @@ export class CopyTradeService {
     }
     return this.http.get('https://plisio.net/api/v1/invoices/new', {params: data})
   }
+
+  disconnectApiKey() {
+    return this.http.delete(BASE_API_URL + 'copy-trade/disconnect-apis/')
+  }
 }

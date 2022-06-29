@@ -9,6 +9,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RoyalButtonComponent implements OnInit {
 
+  isUserHasSpecialAccount = false;
+
   constructor(
     private navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -16,21 +18,27 @@ export class RoyalButtonComponent implements OnInit {
     private alertCtrl: AlertController,
   ) { }
 
-  ngOnInit() { }
-
-  nagication(path, alwaysMove) {
+  ngOnInit() {
     this.userService.getUser().subscribe(user => {
-      if (alwaysMove || (user.transaction && user.transaction.is_confirmation)) {
-        this.modalCtrl.dismiss();
-        this.navCtrl.navigateForward(path);
+      if ((user.transaction && user.transaction.is_confirmation)) {
+        this.isUserHasSpecialAccount = true;
       } else {
-        this.alertCtrl.create({
-          mode: 'ios',
-          header: 'توجه',
-          message: 'شما هیچ اشتراکی فعالی ندارید، برای دسترسی به این بخش باید اول اشتراک تهیه کنید.'
-        }).then(alertEl => alertEl.present());
+        this.isUserHasSpecialAccount = false;
       }
     });
+  }
+
+  nagication(path, alwaysMove?) {
+    if (alwaysMove || this.isUserHasSpecialAccount) {
+      this.modalCtrl.dismiss();
+      this.navCtrl.navigateForward(path);
+    } else {
+      this.alertCtrl.create({
+        mode: 'ios',
+        header: 'توجه',
+        message: 'شما هیچ اشتراکی فعالی ندارید، برای دسترسی به این بخش باید اول اشتراک تهیه کنید.'
+      }).then(alertEl => alertEl.present());
+    }
   }
 
   onDismissModal() {

@@ -1,11 +1,13 @@
 <ion-content>
   <ion-list class="content">
-    <ion-item (click)="nagication('/copy-trade')" lines='none' class="mb-20" detail>
+    <ion-item (click)="nagication('/copy-trade', false)" lines='none' class="mb-20" [detail]="isUserHasSpecialAccount">
       <ion-icon slot="start" name="rocket-outline"></ion-icon>
+      <ion-icon slot='end' style="width: 20px" name="lock-closed" *ngIf="!isUserHasSpecialAccount"></ion-icon>
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-no-padding">
           <ion-col class="ion-no-padding" size="12">
             <ion-label>کپی ترید</ion-label>
+            
           </ion-col>
           <ion-col class="ion-no-padding" size="12">
             <ion-label class="description">ربات هوشمند معامله گر</ion-label>
@@ -26,7 +28,7 @@
         </ion-row>
       </ion-grid>
     </ion-item>
-    <ion-item (click)="nagication('/news')" lines='none' class="mb-20" detail>
+    <ion-item (click)="nagication('/news', true)" lines='none' class="mb-20" detail>
       <ion-icon slot="start" name="newspaper-outline"></ion-icon>
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-no-padding">
@@ -39,8 +41,9 @@
         </ion-row>
       </ion-grid>
     </ion-item>
-    <ion-item (click)="nagication('/education')" lines='none' detail>
+    <ion-item (click)="nagication('/education', false)" lines='none' [detail]="isUserHasSpecialAccount">
       <ion-icon slot="start" name="school-outline"></ion-icon>
+      <ion-icon slot='end' style="width: 20px" name="lock-closed" *ngIf="!isUserHasSpecialAccount"></ion-icon>
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-no-padding">
           <ion-col class="ion-no-padding" size="12">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, NavController, ToastController } from '@ionic/angular';
 import { CopyTradeService } from 'src/app/services/copy-trade.service';
 
 @Component({
@@ -17,6 +17,7 @@ export class CopyTradeApiComponent implements OnInit {
     private copyTradeService: CopyTradeService,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
+    private navCtrl: NavController,
   ) { }
 
   ngOnInit() {
@@ -50,6 +51,8 @@ export class CopyTradeApiComponent implements OnInit {
         loadingEl.dismiss()
         if (res.futures == 200 && res.spot == 200) {
           this.toastCtrl.create({ message: 'API Key های با موفقیت ذخیره شدند', color: 'success', duration: 2000, mode: 'ios' }).then(toastEl => toastEl.present())
+          this.modalCtrl.dismiss();
+          this.navCtrl.navigateBack('/tabs/home');
         } else if (res.futures == 200 && res.spot != 200) {
           this.toastCtrl.create({ message: 'API Key اسپات شما مورد تایید نیست', color: 'danger', duration: 2000, mode: 'ios' }).then(toastEl => toastEl.present())
         }
