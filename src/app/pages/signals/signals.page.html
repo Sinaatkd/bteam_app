@@ -30,6 +30,9 @@
   </div>
 
   <div *ngIf="selectedBtn === 'active'">
+    <div class="ion-text-end ion-padding-horizontal ion-padding-top">
+      <ion-icon [routerLink]="['user-manula']" name="alert-circle-outline" slot="end" style="width: 30px; height: 30px;" color="primary"></ion-icon>
+    </div>
     <div *ngFor="let signal of signals">
       <app-spot-signal *ngIf="signal.type === 'spot'" [signal]='signal'></app-spot-signal>
       <app-futures-signal *ngIf="signal.type === 'futures'" [signal]='signal'></app-futures-signal>

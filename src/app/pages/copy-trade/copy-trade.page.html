@@ -197,7 +197,7 @@
         </ion-item-divider>
       </ion-col>
       <ion-col size="11" offset="0.5" *ngFor="let stage of userBasketJoined.stages">
-        <div class="ion-text-center border-white" (click)="onPayStage()">
+        <div class="ion-text-center border-white" (click)="onPayStage(stage.id)">
           <ion-grid>
             <ion-row>
               <ion-col size="4">
@@ -247,7 +247,7 @@
 
 <ion-footer *ngIf="userBasketJoined">
   <ion-toolbar class="ion-padding">
-    <ion-button disabled class="ion-margin-bottom" color="danger" mode="ios" expand="block">
+    <ion-button [disabled]="isUserCanLeftFromBasket()" (click)="leftFromBasket()" class="ion-margin-bottom" color="danger" mode="ios" expand="block">
       خروج از سبد
     </ion-button>
   </ion-toolbar>

@@ -149,7 +149,7 @@ export class BuySpecialAccountComponent implements OnInit {
       this.modalCtrl.dismiss()
       if (this.paymentMode == 'online') {
         const url = 'https://zarinp.al/bteam';
-        window.open(url, '_blank')
+        window.location.href  = url;
       }
       this.navCtrl.navigateBack('/tabs/account');
     }, err => {

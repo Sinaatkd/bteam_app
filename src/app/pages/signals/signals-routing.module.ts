@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: SignalsPage
+  },
+  {
+    path: 'user-manula',
+    loadChildren: () => import('./user-manula/user-manula.module').then( m => m.UserManulaPageModule)
   }
 ];
 

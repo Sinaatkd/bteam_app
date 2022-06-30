@@ -61,9 +61,14 @@ const routes: Routes = [
   {
     path: 'chart-coin/:symbol',
     loadChildren: () => import('./pages/chart-coin/chart-coin.module').then( m => m.ChartCoinPageModule)
-  },  {
+  },
+  {
     path: 'copy-trade',
     loadChildren: () => import('./pages/copy-trade/copy-trade.module').then( m => m.CopyTradePageModule)
+  },
+  {
+    path: 'access-denied/:stageId',
+    loadChildren: () => import('./pages/access-denied/access-denied.module').then( m => m.AccessDeniedPageModule)
   },
 
 

@@ -94,6 +94,13 @@ export class CopyTradePage implements OnInit {
     }
   }
 
+  isUserCanLeftFromBasket() {
+    const stage = this.userBasketJoined.stages.filter(s => s.is_pay_time == true)
+    const lastStage = stage[stage.length - 1]
+
+    return !(lastStage.payers.filter(p => p == this.user.user.id).length > 0);
+  }
+
   joinToBasket(basketId) {
     this.loadingCtrl.create({
       message: 'لطفا صبر کنید',
@@ -121,14 +128,34 @@ export class CopyTradePage implements OnInit {
     })
   }
 
-  onPayStage() {
-    // this.copyTradeService.createInvoice().subscribe(res => {
-    //   window.open(res)
-    // })
+  onPayStage(stageId) {
+    const selectedStage = this.userBasketJoined.stages.filter(s => s.id === stageId)[0];
+    if (!this.isPayThisStage(stageId) && selectedStage.is_pay_time) {
+      this.loadingCtrl.create({ mode: 'ios', message: 'لطفا صبر کنید' }).then(loadingEl => {
+        loadingEl.present()
+        this.copyTradeService.createInvoice(stageId).subscribe(res => {
+          loadingEl.dismiss();
+          window.location.href = res.invoice_url;
+        });
+      })
+    }
   }
 
   isPayThisStage(stageId) {
     const selectedStage = this.userBasketJoined.stages.filter(s => s.id === stageId)[0];
     return selectedStage.payers.filter(p => p == this.user.user.id).length > 0
+  }
+
+  leftFromBasket() {
+    this.loadingCtrl.create({
+      message: 'لطفا صبر کنید',
+      mode: 'ios'
+    }).then(loadingEl => {
+      loadingEl.present();
+      this.copyTradeService.leftFromBasket().subscribe(res => {
+        this.navCtrl.navigateBack('/tabs/home');
+        loadingEl.dismiss();
+      })
+    });
   }
 }

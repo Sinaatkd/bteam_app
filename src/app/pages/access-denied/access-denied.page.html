@@ -1,0 +1,19 @@
+<ion-content>
+  <div class="center-item">
+    <ion-icon name="ban-outline" color="primary" style="width: 50px; height: 50px;"></ion-icon>
+    <br>
+    <ion-text color="primary" *ngIf="stageId">
+      دسترسی شما به اپلیکیشن به دلیل داشتن بدهی قطع شده است
+    </ion-text>
+    <ion-text color="primary" *ngIf="!stageId">
+      برقراری ارتباط با سرور با مشکل مواجه شد لطفا دقایقی دیگر مجدد امتحان
+    </ion-text>
+    <br>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-padding" *ngIf="stageId">
+  <ion-button (click)="onPay()" expand="block" mode="ios" fill="outline">
+    پرداخت بدهی
+  </ion-button>
+</ion-footer>
