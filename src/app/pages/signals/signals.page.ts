@@ -7,34 +7,29 @@ import { SignalsService } from 'src/app/services/signals.service';
   styleUrls: ['./signals.page.scss'],
 })
 export class SignalsPage implements OnInit {
-
   isLoading = true;
-  signals = []
-  deactiveSignals: any = []
+  signals = [];
+  deactiveSignals: any = [];
   selectedBtn: 'active' | 'efficiency' = 'active';
 
-  constructor(
-    private signalService: SignalsService,
-  ) { }
+  constructor(private signalService: SignalsService) {}
 
-  ngOnInit() { }
-
-  ionViewDidEnter() {
-    this.signalService.getEfficiencyStats('daily').subscribe(res => {
+  ngOnInit() {
+    this.signalService.getEfficiencyStats('daily').subscribe((res) => {
       this.deactiveSignals = res;
     });
-    this.signalService.getAllFuturesSignals().subscribe(res => {
+    this.signalService.getAllFuturesSignals().subscribe((res) => {
       if (res.length > 0) {
         for (let signal of res) {
-          signal['type'] = 'futures'
-          this.signals.push(signal)
+          signal['type'] = 'futures';
+          this.signals.push(signal);
         }
       }
-      this.signalService.getAllSpotSignals().subscribe(res => {
+      this.signalService.getAllSpotSignals().subscribe((res) => {
         if (res.length > 0) {
           for (let signal of res) {
-            signal['type'] = 'spot'
-            this.signals.push(signal)
+            signal['type'] = 'spot';
+            this.signals.push(signal);
             this.isLoading = false;
           }
         } else {
@@ -49,8 +44,10 @@ export class SignalsPage implements OnInit {
   }
 
   segmentChanged(event) {
-    this.signalService.getEfficiencyStats(event.detail.value).subscribe(res => {
-      this.deactiveSignals = res;
-    });    
+    this.signalService
+      .getEfficiencyStats(event.detail.value)
+      .subscribe((res) => {
+        this.deactiveSignals = res;
+      });
   }
 }
