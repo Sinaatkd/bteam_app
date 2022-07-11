@@ -22,7 +22,9 @@ export class AppComponent implements AfterViewInit {
     this.userService.getUserInfo().subscribe(user => {
       this.userService.setUser(user);
     }, err => {
-      this.router.navigateByUrl(`/access-denied/${err.error .stage_id}`);
+      if (err.error.stage_id) {
+        this.router.navigateByUrl(`/access-denied/${err.error.stage_id}`);
+      }
     });
   }
 }

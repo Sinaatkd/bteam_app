@@ -38,18 +38,13 @@ export class CopyTradePage implements OnInit {
     this.userService.getUser().subscribe(user => {
       this.user = user;
       if (this.user.user.is_full_authentication) {
-        this.copyTradeService.getBaskets().subscribe(res => {
-          this.baskets = res;
-          for (let b of this.baskets) {
-            b.participants.filter(id => {
-              if (id == this.user.user.id) {
-                this.isJoindToAnyBasket = true;
-                this.copyTradeService.checkUserJoinedBasket().subscribe(res => {
-                  this.userBasketJoined = res;
-                })
-              }
-            });
-          }
+        this.copyTradeService.checkUserJoinedBasket().subscribe(res => {
+          this.isJoindToAnyBasket = true;
+          this.userBasketJoined = res;
+        }, err => {
+          this.copyTradeService.getBaskets().subscribe(res => {
+            this.baskets = res;
+          });
         });
       }
     });
