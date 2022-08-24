@@ -28,7 +28,7 @@ export class RoyalButtonComponent implements OnInit {
     });
   }
 
-  nagication(path, alwaysMove?) {
+  navigation(path, alwaysMove?) {
     if (alwaysMove || this.isUserHasSpecialAccount) {
       this.modalCtrl.dismiss();
       this.navCtrl.navigateForward(path);

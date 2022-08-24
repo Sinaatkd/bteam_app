@@ -1,6 +1,6 @@
 <ion-content>
   <ion-list class="content">
-    <ion-item (click)="nagication('/copy-trade', false)" lines='none' class="mb-20" [detail]="isUserHasSpecialAccount">
+    <ion-item (click)="navigation('/copy-trade', true)" lines='none' class="mb-20" [detail]="isUserHasSpecialAccount">
       <ion-icon slot="start" name="rocket-outline"></ion-icon>
       <ion-icon slot='end' style="width: 20px" name="lock-closed" *ngIf="!isUserHasSpecialAccount"></ion-icon>
       <ion-grid class="ion-no-padding">
@@ -15,7 +15,7 @@
         </ion-row>
       </ion-grid>
     </ion-item>
-    <ion-item (click)="nagication('/signals', true)" lines='none' class="mb-20" detail>
+    <ion-item (click)="navigation('/signals', true)" lines='none' class="mb-20" detail>
       <ion-icon slot="start" name="analytics"></ion-icon>
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-no-padding">
@@ -28,7 +28,7 @@
         </ion-row>
       </ion-grid>
     </ion-item>
-    <ion-item (click)="nagication('/news', true)" lines='none' class="mb-20" detail>
+    <ion-item (click)="navigation('/news', true)" lines='none' class="mb-20" detail>
       <ion-icon slot="start" name="newspaper-outline"></ion-icon>
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-no-padding">
@@ -41,7 +41,7 @@
         </ion-row>
       </ion-grid>
     </ion-item>
-    <ion-item (click)="nagication('/education', false)" lines='none' [detail]="isUserHasSpecialAccount">
+    <ion-item (click)="navigation('/education', true)" lines='none' [detail]="isUserHasSpecialAccount">
       <ion-icon slot="start" name="school-outline"></ion-icon>
       <ion-icon slot='end' style="width: 20px" name="lock-closed" *ngIf="!isUserHasSpecialAccount"></ion-icon>
       <ion-grid class="ion-no-padding">
