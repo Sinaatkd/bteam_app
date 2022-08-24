@@ -2,29 +2,32 @@
   <ion-grid>
     <form [formGroup]="registerForm">
       <ion-row class="ion-margin-top">
-        <ion-col size="12" class="ion-margin-top ion-margin-start">
-          <ion-text class="text-bold">
-            باز کردن حساب در بی تیم
+        <ion-col size="12">
+          <img src="/assets/logo.png" class="logo ion-text-center">
+        </ion-col>
+        <ion-col size="12" class="ion-text-center ion-margin-top">
+          <ion-text class="text-bold text-medium" color="primary">
+            مشخصات خود را وارد نمایید
           </ion-text>
         </ion-col>
-        <ion-col size="12" class=" ion-margin-start">
-          <ion-text color="medium" class="text-small">
-            تکمیل مراحل زیر، فقط 2 دقیقه زمان نیاز دارد
+        <ion-col size="12" class="ion-text-center">
+          <ion-text color="medium" class="text-small text-bold">
+            تمامی اطلاعات شما نزد ما محفوظ خواهد ماند
           </ion-text>
         </ion-col>
         <ion-col size="10" offset="1" class="ion-margin-top">
-          <ion-item>
+          <ion-item lines="none">
             <ion-input formControlName="fullName" placeholder="نام و نام خانوادگی"></ion-input>
           </ion-item>
-          <div *ngIf="registerForm.controls.fullName.touched" lines="none">
+          <div *ngIf="registerForm.controls.fullName.touched">
             <ion-text class="error" color="danger" *ngIf="registerForm.controls.fullName.errors?.required">این فیلد لازم است</ion-text>
           </div>
         </ion-col>
         <ion-col size="10" offset="1">
-          <ion-item>
+          <ion-item lines="none">
             <ion-input formControlName="phoneNumber" placeholder="شماره همراه"></ion-input>
           </ion-item>
-          <div *ngIf="registerForm.controls.phoneNumber.touched" lines="none">
+          <div *ngIf="registerForm.controls.phoneNumber.touched">
             <ion-text class="error" color="danger" *ngIf="registerForm.controls.phoneNumber.errors?.required">این فیلد لازم است</ion-text>
             <br *ngIf="registerForm.controls.phoneNumber.errors?.required">
             <ion-text class="error" color="danger" *ngIf="registerForm.controls.phoneNumber.errors?.minlength">این فیلد باید 11 کاراکتر باشد</ion-text>
@@ -35,10 +38,10 @@
           </div>
         </ion-col>
         <ion-col size="10" offset="1">
-          <ion-item>
+          <ion-item lines="none">
             <ion-input formControlName="nationalCode" placeholder="کد ملی"></ion-input>
           </ion-item>
-          <div *ngIf="registerForm.controls.nationalCode.touched" lines="none">
+          <div *ngIf="registerForm.controls.nationalCode.touched">
             <ion-text class="error" color="danger" *ngIf="registerForm.controls.nationalCode.errors?.required">این فیلد لازم است</ion-text>
             <br *ngIf="registerForm.controls.nationalCode.errors?.required">
             <ion-text class="error" color="danger" *ngIf="registerForm.controls.nationalCode.errors?.minlength">این فیلد باید 10 کاراکتر باشد</ion-text>
@@ -49,35 +52,26 @@
           </div>
         </ion-col>
         <ion-col size="10" offset="1">
-          <ion-item>
-            <ion-input formControlName="fromCity" placeholder="شهر"></ion-input>
-          </ion-item>
-          <div *ngIf="registerForm.controls.fromCity.touched" lines="none">
-            <ion-text class="error" color="danger" *ngIf="registerForm.controls.fromCity.errors?.required">این فیلد لازم است</ion-text>
-          </div>
-        </ion-col>
-        <ion-col size="10" offset="1">
-          <ion-item>
+          <ion-item lines="none">
             <ion-input formControlName="password" placeholder="رمزعبور"></ion-input>
           </ion-item>
-          <div *ngIf="registerForm.controls.password.touched" lines="none">
+          <div *ngIf="registerForm.controls.password.touched">
             <ion-text class="error" color="danger" *ngIf="registerForm.controls.password.errors?.required">این فیلد لازم است</ion-text>
           </div>
         </ion-col>
         <ion-col size="10" offset="1">
-          <ion-item>
+          <ion-item lines="none">
             <ion-input formControlName="invaterIdentifierCode" placeholder="کد معرف ( اختیاری )" type="number"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="10" offset="1" class="ion-margin-top">
-          <ion-item lines="none" class="ion-text-start">
+          <ion-item class="ion-text-start no-border" lines="none">
             <ion-label>اتباع خارجی</ion-label>
             <ion-checkbox slot="start" formControlName="isForeigner" (ionChange)="isForeignerChanged($event)"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col size="8" offset="2" class="ion-margin-top">
-          <ion-button [disabled]="registerForm.invalid" mode="ios" (click)="onCreateAccount()" expand="block"
-            fill="outline">
+        <ion-col size="10" offset="1" class="ion-margin-top">
+          <ion-button [disabled]="registerForm.invalid" mode="ios" (click)="onCreateAccount()" expand="block">
             ساخت حساب کاربری
           </ion-button>
         </ion-col>

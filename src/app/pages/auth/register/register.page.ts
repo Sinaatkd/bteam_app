@@ -27,7 +27,6 @@ export class RegisterPage implements OnInit {
       fullName: new FormControl(null, { validators: [Validators.required, Validators.pattern('^[\u0622\u0627\u0628\u067E\u062A-\u062C\u0686\u062D-\u0632\u0698\u0633-\u063A\u0641\u0642\u06A9\u06AF\u0644-\u0648\u06CC, \s-]+$')], updateOn: "change" }),
       phoneNumber: new FormControl(null, { validators: [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('^[0-9]+$')], updateOn: "change" }),
       nationalCode: new FormControl(null, { validators: [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]+$')], updateOn: "change" }),
-      fromCity: new FormControl(null, { validators: [Validators.required], updateOn: "change" }),
       password: new FormControl(null, { validators: [Validators.required], updateOn: "change" }),
       isForeigner: new FormControl(false, { updateOn: "change" }),
       invaterIdentifierCode: new FormControl(null, { updateOn: "change" }),
@@ -40,7 +39,6 @@ export class RegisterPage implements OnInit {
     const fullName = data.fullName.value;
     const password = data.password.value;
     const phoneNumber = data.phoneNumber.value;
-    const fromCity = data.fromCity.value;
     const nationalCode = data.nationalCode.value
     const isForeigner = data.isForeigner.value
     const invaterIdentifierCode = data.invaterIdentifierCode.value
@@ -49,9 +47,9 @@ export class RegisterPage implements OnInit {
       device_uuid = uuid.uuid.toString();
       Device.getInfo().then(info => {
         const device = new DeviceModel(device_uuid, info.platform, info.model, info.operatingSystem, info.osVersion)
-        const registerDTO = new RegisterDTO(password, fullName, phoneNumber, nationalCode, fromCity, device, invaterIdentifierCode, isForeigner);
+        const registerDTO = new RegisterDTO(password, fullName, phoneNumber, nationalCode, device, invaterIdentifierCode, isForeigner);
         this.registerService.registerUser(registerDTO).subscribe(res => {
-          this.dismisLoading();
+          this.dismissLoading();
           this.navCtrl.navigateBack('/login');
         }, err => {
           if (err.status === 400) {
@@ -76,7 +74,7 @@ export class RegisterPage implements OnInit {
     this.loadingCtrl.create({ message, mode }).then(loadingEl => loadingEl.present());
   }
 
-  dismisLoading() {
+  dismissLoading() {
     setTimeout(() => {
       this.loadingCtrl.dismiss().then().then();
     }, 200);

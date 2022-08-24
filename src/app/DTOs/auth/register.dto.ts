@@ -5,7 +5,6 @@ export class RegisterDTO {
         public full_name: string,
         public phone_number: number,
         public national_code: number,
-        public from_city: string,
         public device: DeviceModel,
         public pk: number, // invater identifier code
         public is_foreigner: boolean | false,
