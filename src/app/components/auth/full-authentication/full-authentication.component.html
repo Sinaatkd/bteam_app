@@ -97,9 +97,9 @@
                 <ion-input formControlName="national_code" placeholder="کد ملی"></ion-input>
               </ion-item>
             </ion-col>
-            <ion-col size="10" offset="1" class="ion-no-padding">
-              <ion-item class="ion-no-padding">
-                  <ion-input type="text" formControlName="date_of_birth" placeholder="تاریخ تولد ( yyyy-mm-dd )" class="datePicker"></ion-input>
+            <ion-col size="10" offset="1">
+              <ion-item>
+                  <ion-input (ionChange)="ionInputCalled($event)" (ionInput)="ionInputCalled($event)" maxLength="10" formControlName="date_of_birth" placeholder="تاریخ تولد ( روز-ماه-سال )"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col size="10" offset="1">
