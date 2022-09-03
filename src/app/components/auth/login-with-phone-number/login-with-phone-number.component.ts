@@ -33,11 +33,15 @@ export class LoginWithPhoneNumberComponent implements OnInit {
 
   sendVerification() {
     this.setTime();
+    this.setLoading('لطفا منتظر بمانید', 'ios');
     const phoneNumber = this.loginForm.controls.phoneNumber.value;
     this.loginService.sendVerificationCode(phoneNumber).subscribe(res => {
       this.setToast('کد ارسال شد.', 'ios', 2000, 'success');
       this.loginModeEmitter.emit('verifyPhoneNumber');
+    }, err => {
+      this.setToast('شماره تلفن وارد شده اشتباه است', 'ios', 2000, 'danger');
     });
+    this.dismissLoading();
   }
 
   setLoading(message: string, mode: 'ios' | 'md') {
@@ -59,40 +63,6 @@ export class LoginWithPhoneNumberComponent implements OnInit {
   moveToRegisterPage() {
     this.navCtrl.navigateForward('/register');
   }
-
-  // onLoginUser() {
-    // this.setLoading('لطفا صبر کنید', 'ios');
-    // const phoneNumber = this.loginForm.controls.phoneNumber.value;
-    // Device.getId().then(uuid => {
-    //   const device_uuid = uuid.uuid;
-
-    //   this.loginService.loginWithVerification(new VerificationLoginDTO(phoneNumber, verificationCode, device_uuid)).subscribe(res => {
-    //     Storage.set({ key: 'token', value: res.token }).then();
-    //     this.userService.getUserInfo().subscribe(user => {
-    //       this.userService.setUser(user);
-    //       this.setToast('خوش آمدید.', 'ios', 2000, 'success');
-    //       this.navCtrl.navigateForward('tabs/home');
-    //     });
-
-    //     this.dismissLoading()
-    //   }, err => {
-    //     this.dismissLoading();
-    //     if (err.error.non_field_errors && err.error.non_field_errors[0] === 'This UUID does not match the user UUID.') {
-    //       this.setToast('تنها با دستگاهی می‌توانید وارد حساب کاربری خود شوید که با آن حساب را ایجاد کرده باشید', 'ios', 2000, 'danger');
-    //     } else if (err.error.phone_number && err.error.phone_number[0] === 'This phone number has not yet been verified.') {
-    //       this.setToast('شماره تلفن وارد شده تایید نشده است لطفا از طریق تلفن همراه وارد حساب خود شوید', 'ios', 2000, 'danger');
-    //     } else if (err.error.phone_number && err.error.phone_number[0] === "This phone number dose not exists.") {
-    //       this.setToast('شماره تلفن وارد شده اشتباه است', 'ios', 2000, 'danger');
-    //     } else if (err.error.device_uuid && err.error.device_uuid[0] === 'This UUID dose not exists.') {
-    //       this.setToast('دستگاه شما مورد تایید نمی‌باشد', 'ios', 2000, 'danger');
-    //     } else if (err.error.non_field_errors && err.error.non_field_errors[0] === 'This code is invalid.') {
-    //       this.setToast('کد ارسال شده درست نیست', 'ios', 2000, 'danger');
-    //     } else if (err.error.non_field_errors && err.error.non_field_errors[0] === 'This code is expired.') {
-    //       this.setToast('کد ارسال شده منقضی شده است', 'ios', 2000, 'danger');
-    //     }
-    //   });
-    // });
-  // }
 
   setTime() {
     var sec = 59;
