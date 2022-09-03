@@ -36,7 +36,7 @@ export class LoginWithPhoneNumberComponent implements OnInit {
     const phoneNumber = this.loginForm.controls.phoneNumber.value;
     this.loginService.sendVerificationCode(phoneNumber).subscribe(res => {
       this.setToast('کد ارسال شد.', 'ios', 2000, 'success');
-      this.navCtrl.navigateForward('/verification');
+      this.loginModeEmitter.emit('verifyPhoneNumber');
     });
   }
 

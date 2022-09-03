@@ -8,13 +8,19 @@
         ></ion-img>
       </ion-col>
       <ion-col size="12" class="top-position-60">
+
         <app-login-with-password
           *ngIf="loginMode === 'password'"
         ></app-login-with-password>
+        
         <app-login-with-phone-number
           *ngIf="loginMode === 'phoneNumber'"
           (loginModeEmitter)="changeLoginMode($event)"
         ></app-login-with-phone-number>
+        
+        <app-verify-phone-number 
+        *ngIf="loginMode === 'verifyPhoneNumber'">
+        </app-verify-phone-number>
       </ion-col>
     </ion-row>
   </ion-grid>
