@@ -19,7 +19,8 @@
         ></app-login-with-phone-number>
         
         <app-verify-phone-number 
-        *ngIf="loginMode === 'verifyPhoneNumber'">
+          (loginModeEmitter)="changeLoginMode($event)"
+          *ngIf="loginMode === 'verifyPhoneNumber'">
         </app-verify-phone-number>
       </ion-col>
     </ion-row>

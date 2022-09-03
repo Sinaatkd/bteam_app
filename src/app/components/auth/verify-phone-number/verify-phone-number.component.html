@@ -1,0 +1,20 @@
+<ion-grid class="ion-text-center">
+  <ion-row>
+    <ion-col size="12">
+      <ion-label color="primary">کد تایید ارسالی به شماره زیر را وارد نمایید</ion-label>
+    </ion-col>
+    <ion-col size="12" class="ion-margin-top">
+      <ion-label class="text-small" color="medium">شماره وارد شده :‌ {{ phoneNumber }}
+        <ion-label color="secondary" (click)="editPhoneNumber()">تغییر</ion-label>
+      </ion-label>
+    </ion-col>
+    <ion-col size="12" class="ion-margin-top ion-text-center">
+      <div class="grid ion-text-center">
+        <ion-input #input4 maxLength="1" class="ion-no-padding" (ionInput)="inputChange($event, 'input4')" (ionChange)="inputChange($event, 'input4')"></ion-input>
+        <ion-input #input3 maxLength="1" class="ion-no-padding" (ionInput)="inputChange($event, 'input3')" (ionChange)="inputChange($event, 'input3')"></ion-input>
+        <ion-input #input2 maxLength="1" class="ion-no-padding" (ionInput)="inputChange($event, 'input2')" (ionChange)="inputChange($event, 'input2')"></ion-input>
+        <ion-input #input1 maxLength="1" class="ion-no-padding" (ionInput)="inputChange($event, 'input1')" (ionChange)="inputChange($event, 'input1')"></ion-input>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

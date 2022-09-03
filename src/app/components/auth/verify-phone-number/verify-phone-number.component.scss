@@ -1,0 +1,20 @@
+.text-small {
+    font-size: 13px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    justify-content: center;
+}
+
+ion-input {
+    background: var(--ion-color-primary);
+    border-radius: 10px;
+    width: 45px;
+    height: 45px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: var(--ion-color-dark);
+    font-weight: bold;
+}
