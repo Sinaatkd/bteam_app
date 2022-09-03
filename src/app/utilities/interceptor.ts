@@ -36,7 +36,7 @@ export class HeaderInterceptor implements HttpInterceptor {
                         if (err.status !== 401) {
                             return;
                         }
-                        this.router.navigate(['login']);
+                        this.router.navigate(['login-or-register']);
                     }
                 }));;
         }));
