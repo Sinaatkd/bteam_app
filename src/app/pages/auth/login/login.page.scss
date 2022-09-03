@@ -1,9 +1,23 @@
-.top-position {
+.top-position-20 {
     position: absolute;
-    top: 50px;
+    top: 15%;
+    width: 100%
+}
+
+.top-position-60 {
+    position: absolute;
+    top: 40%;
     width: 100%
 }
 
 .margin-top {
     margin-top: 10px;
+}
+
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75px;
+    height: 75px;
 }

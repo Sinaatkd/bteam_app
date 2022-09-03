@@ -27,4 +27,8 @@ export class LoginPage implements OnInit {
       this.loginWithPasswordColor = 'light';
     }
   }
+
+  changeLoginMode(event) {
+    this.loginMode = event;
+  }
 }
