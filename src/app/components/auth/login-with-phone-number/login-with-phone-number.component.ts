@@ -39,10 +39,11 @@ export class LoginWithPhoneNumberComponent implements OnInit {
     this.loginService.sendVerificationCode(phoneNumber).subscribe(res => {
       this.setToast('کد ارسال شد.', 'ios', 2000, 'success');
       this.loginModeEmitter.emit('verifyPhoneNumber');
+      this.dismissLoading();
     }, err => {
       this.setToast('شماره تلفن وارد شده اشتباه است', 'ios', 2000, 'danger');
+      this.dismissLoading();
     });
-    this.dismissLoading();
   }
 
   setLoading(message: string, mode: 'ios' | 'md') {
