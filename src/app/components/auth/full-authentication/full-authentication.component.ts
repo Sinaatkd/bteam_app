@@ -17,7 +17,6 @@ export class FullAuthenticationComponent implements AfterViewInit {
   user: UserModel;
   userInformationForm: FormGroup;
   isAcceptRules = false;
-  selectedIDCardPicture = null;
   selectedFacePicture = null;
   BASE_URL = BASE_URL;
   currentSlide = 0;
@@ -42,9 +41,6 @@ export class FullAuthenticationComponent implements AfterViewInit {
         loadingEl.present();
         this.userService.getUser().subscribe((user) => {
           this.user = user;
-          if (user.user.id_card) {
-            this.selectedIDCardPicture = BASE_URL + user.user.id_card;
-          }
           this.userInformationForm = new FormGroup({
             full_name: new FormControl(this.user.user.full_name, {
               validators: [Validators.required],
@@ -66,7 +62,7 @@ export class FullAuthenticationComponent implements AfterViewInit {
             }),
           });
           setTimeout(() => {
-            if (user.user.id_card && user.user.face) {
+            if (user.user.face) {
               this.slides.length().then((value) => {
                 this.slides.lockSwipes(false).then();
                 this.slides.slideTo(value + 1).then();
@@ -104,7 +100,6 @@ export class FullAuthenticationComponent implements AfterViewInit {
         this.user.user.date_of_birth = inputs.date_of_birth.value;
         this.user.user.father_name = inputs.father_name.value;
         this.user.user.place_of_issue = inputs.place_of_issue.value;
-        this.user.user.id_card = this.selectedIDCardPicture;
         this.user.user.face = this.selectedFacePicture;
         this.userService.editUserInfo(this.user).subscribe(
           (res) => {
@@ -119,20 +114,6 @@ export class FullAuthenticationComponent implements AfterViewInit {
       });
   }
 
-  IDCardPictureChanged(event) {
-    const file = event.target.files[0];
-    this.getBase64IDCardPicture(file);
-  }
-
-  getBase64IDCardPicture(file) {
-    let me = this;
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      me.selectedIDCardPicture = reader.result;
-    };
-    reader.onerror = function (error) {};
-  }
   getBase64Face(file) {
     let me = this;
     let reader = new FileReader();

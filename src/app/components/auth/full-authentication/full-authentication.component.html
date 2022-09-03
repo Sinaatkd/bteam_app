@@ -38,16 +38,6 @@
 
               <ion-item lines="none" class="padding-5 steps-item ion-margin-top ion-margin-horizontal">
                 <ion-thumbnail slot="start">
-                  <img src="/assets/pages/tabs/copy-trade/IDCard.png" />
-                </ion-thumbnail>
-                <ion-label>
-                  <h4 class="text-size-big-18 color-primary">مدارک شناسایی</h4>
-                  <h6 class="text-size-small-10 color-medium">اسکن مدارک شناسایی (کارت ملی یا شناسنامه)</h6>
-                </ion-label>
-              </ion-item>
-
-              <ion-item lines="none" class="padding-5 steps-item ion-margin-top ion-margin-horizontal">
-                <ion-thumbnail slot="start">
                   <img src="/assets/pages/tabs/copy-trade/auth.png" />
                 </ion-thumbnail>
                 <ion-label>
@@ -122,44 +112,6 @@
       <ion-grid class="ion-no-padding">
         <ion-row>
           <ion-col size="12">
-            <img src="/assets/pages/tabs/copy-trade/IDCardWithHand.png" class="side-left">
-          </ion-col>
-          <ion-col size="12">
-            <ion-list>
-              <ion-item lines="none" class="ion-text-start">
-                <ion-icon name="checkmark-circle" slot="start" class="ion-no-margin" color="success"></ion-icon>
-                <ion-label class="text-size-small-12">فقط کارت ملی، گذرنامه، شناسنامه مورد قبول می باشد</ion-label>
-              </ion-item>
-              <ion-item lines="none" class="ion-text-start">
-                <ion-icon name="checkmark-circle" slot="start" class="ion-no-margin" color="success"></ion-icon>
-                <ion-label class="text-size-small-12">عکس باید کامل خوانا و واضح باشد</ion-label>
-              </ion-item>
-              <ion-item lines="none" class="ion-text-start">
-                <ion-icon name="checkmark-circle" slot="start" class="ion-no-margin" color="success"></ion-icon>
-                <ion-label class="text-size-small-12">کارت شناسایی باید متعلق به صاحب حساب باشد</ion-label>
-              </ion-item>
-            </ion-list>
-          </ion-col>
-
-          <ion-col size="12" class="ion-padding">
-            <input type="file" #IDCard class="ion-hide" (change)="IDCardPictureChanged($event)"
-              accept="image/png, image/jpg">
-            <ion-img *ngIf="selectedIDCardPicture" [src]="selectedIDCardPicture" class="big-height full-width"
-              (click)="IDCard.click()"></ion-img>
-            <ion-button *ngIf="!selectedIDCardPicture" (click)="IDCard.click()" color="medium" class="big-height"
-              expand="block" mode="ios">
-              آپلود
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-slide>
-    <!-- End Step 4 -->
-    <!-- Start Step 5 -->
-    <ion-slide>
-      <ion-grid class="ion-no-padding">
-        <ion-row>
-          <ion-col size="12">
             <img src="/assets/pages/tabs/copy-trade/face.png" class="size-70">
           </ion-col>
           <br>
@@ -197,9 +149,9 @@
         </ion-row>
       </ion-grid>
     </ion-slide>
-    <!-- End Step 5 -->
+    <!-- End Step 4 -->
 
-    <!-- Start Step 6 -->
+    <!-- Start Step 5 -->
     <ion-slide>
       <ion-grid class="center-content ion-text-center">
         <ion-row>
@@ -216,7 +168,7 @@
         </ion-row>
       </ion-grid>
     </ion-slide>
-    <!-- End Step 6 -->
+    <!-- End Step 5 -->
   </ion-slides>
 </ion-content>
 
@@ -235,14 +187,9 @@
     </ion-button>
   </div>
 
-  <ion-button *ngIf="currentSlide == 3" (click)="moveToNextSlide()"
-    [disabled]="!selectedIDCardPicture" mode="ios" expand="block">
-    ادامه
-  </ion-button>
-
   <input type="file" #face class="ion-hide" (change)="facePictureChanged($event)"
     accept="image/png, image/jpg">
-  <ion-button *ngIf="currentSlide == 4" (click)="face.click()" mode="ios" expand="block">
+  <ion-button *ngIf="currentSlide == 3" (click)="face.click()" mode="ios" expand="block">
     آپلود و ذخیره اطلاعات
   </ion-button>
 </ion-footer>
