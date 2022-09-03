@@ -9,7 +9,7 @@ export class LoginPage implements OnInit {
 
   loginWithPhoneNumberColor: 'light' | 'primary' = 'primary';
   loginWithPasswordColor: 'light' | 'primary' = 'light';
-  loginMode: 'password'| 'phoneNumber' | 'verifyPhoneNumber' = 'verifyPhoneNumber';
+  loginMode: 'password'| 'phoneNumber' | 'verifyPhoneNumber' = 'phoneNumber';
   
   constructor() { }
 
