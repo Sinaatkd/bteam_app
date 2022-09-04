@@ -10,5 +10,5 @@
   <div class="ion-margin" *ngIf="!isLoading">
     <app-news-component *ngFor="let item of news" [clickable]='true' [news]='item'></app-news-component>
   </div>
-  <app-loadnig *ngIf="isLoading"></app-loadnig>
+  <app-loading *ngIf="isLoading"></app-loading>
 </ion-content>

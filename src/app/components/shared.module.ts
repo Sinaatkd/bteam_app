@@ -6,7 +6,7 @@ import { ShowResultComponent } from './bteam-party/show-result/show-result.compo
 import { UseRedCardComponent } from './bteam-party/use-red-card/use-red-card.component';
 import { FearAndGreedComponent } from './modals/fear-and-greed/fear-and-greed.component';
 import { SignalNewsComponent } from './signal-news/signal-news.component';
-import { LoadnigComponent } from './loadnig/loadnig.component';
+import { LoadingComponent } from './loading/loading.component';
 import { EfficiencyComponent } from './efficiency/efficiency.component';
 import { NewsDetailComponent } from './../pages/news/news-detail/news-detail.component';
 import { SpotSignalComponent } from './spot-signal/spot-signal.component';
@@ -54,7 +54,7 @@ import { CopyTradeApiComponent } from './copy-trade-api/copy-trade-api.component
         NewsDetailComponent,
         EfficiencyComponent,
         RoyalButtonComponent,
-        LoadnigComponent,
+        LoadingComponent,
         SignalNewsComponent,
         FearAndGreedComponent,
         UseRedCardComponent,
@@ -80,7 +80,7 @@ import { CopyTradeApiComponent } from './copy-trade-api/copy-trade-api.component
         CashWithdrawalComponent,
         EfficiencyComponent,
         RoyalButtonComponent,
-        LoadnigComponent,
+        LoadingComponent,
         SignalNewsComponent,
         FearAndGreedComponent,
         UseRedCardComponent,
