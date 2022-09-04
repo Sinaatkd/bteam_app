@@ -1,3 +1,64 @@
 ion-toolbar {
     --background: var(--ion-background-color);
 }
+
+
+.segment-button-checked {
+    color: var(--ion-color-light);
+    font-weight: bold;
+}
+
+.container {
+    position: relative;
+    color: var(--ion-color-light);
+    width: 100%;
+    height: 180px;
+}
+
+.news-image {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 10px;
+    filter: brightness(15%)
+}
+
+.bottom {
+    width: 100%;
+    position: absolute;
+    bottom: 15px;
+    padding-right: 16px;
+    padding-left: 16px;
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+}
+
+.title {
+    font-size: 15px;
+}
+
+.time {
+    font-size: 10px;
+    color: var(--ion-color-primary);
+}
+
+
+.pager {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    margin: 0 4px;
+    background-color: var(--ion-color-light);
+}
+
+.pager-container {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.pager-active {
+    background-color: var(--ion-color-primary);
+}
