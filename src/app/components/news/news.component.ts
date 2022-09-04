@@ -27,13 +27,10 @@ export class NewsComponent implements OnInit {
   moveToDetailNew() {
     if (this.clickable) {
       this.modalCtrl.create({
-        component: NewsDetailComponent,
-        initialBreakpoint: 0.5,
-        breakpoints: [0, 0.3, 0.5, 0.8, 1],
+        component: NewsDetailComponent, 
         componentProps: {
           newsItem: this.news,
         },
-        mode: 'ios',
         swipeToClose: true,
         backdropDismiss: true,
       }).then(modalEl => modalEl.present());
