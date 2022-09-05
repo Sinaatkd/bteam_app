@@ -37,9 +37,9 @@
 
 <ion-content>
   <div class="ion-margin" *ngIf="!isLoading">
-    <ion-slides #slides [options]="slideOpts" (ionSlideWillChange)="ionSlideDrag($event)" [scrollbar]="null" class="ion-margin-horizontal">
+    <ion-slides #slides [options]="slideOpts" [scrollbar]="null" class="ion-margin-horizontal">
       <!-- Three last news -->
-      <ion-slide *ngFor="let item of threeLastNews" class="ion-padding">
+      <ion-slide *ngFor="let item of threeLastNews" class="ion-padding" (click)="moveToDetailNew(item.title)">
         <div class="container">
           <img class="news-image" [src]="BASE_URL + item.img" />
           <div class="bottom">

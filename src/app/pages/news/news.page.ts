@@ -1,4 +1,5 @@
-import { IonSlides } from '@ionic/angular';
+import { NewsDetailComponent } from './news-detail/news-detail.component';
+import { IonSlides, ModalController } from '@ionic/angular';
 import { BASE_URL } from 'src/app/utilities/variables';
 import { NewsService } from '../../services/news.service';
 import { NewsModel } from './../../models/news.model';
@@ -22,7 +23,10 @@ export class NewsPage implements OnInit {
     slidesPerView: 1,
   };
 
-  constructor(private newsService: NewsService) {}
+  constructor(
+    private newsService: NewsService,
+    private modalCtrl: ModalController,
+  ) {}
 
   ngOnInit() {}
 
@@ -37,7 +41,6 @@ export class NewsPage implements OnInit {
   ionViewWillEnter() {
     setTimeout(() => {
       this.threeLastNews = this.news.slice(0, 3);
-      console.log('i am here');
     }, 500);
 
     setTimeout(() => {
@@ -54,7 +57,15 @@ export class NewsPage implements OnInit {
     }, 3000);
   }
 
-  ionSlideDrag(event) {
-    console.log(event);
+  moveToDetailNew(newsTitle) {
+    const selectedNews = this.threeLastNews.find(news => news.title === newsTitle)
+    this.modalCtrl.create({
+      component: NewsDetailComponent, 
+      componentProps: {
+        newsItem: selectedNews,
+      },
+      swipeToClose: true,
+      backdropDismiss: true,
+    }).then(modalEl => modalEl.present());
   }
 }
