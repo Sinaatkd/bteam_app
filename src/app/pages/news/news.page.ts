@@ -15,7 +15,9 @@ export class NewsPage implements OnInit {
 
   news: NewsModel[] = [];
   threeLastNews: NewsModel[] = [];
+  newsCategories: any[] = [];
   isLoading = true;
+  isLoadingCategories = true;
   BASE_URL = BASE_URL;
   activeSliderIndex = 0;
 
@@ -36,6 +38,15 @@ export class NewsPage implements OnInit {
       this.news = news;
       this.isLoading = false;
     });
+    this.getCategories()
+  }
+
+  getCategories() {
+    this.isLoadingCategories = true;
+    this.newsService.getAllNewsCategories().subscribe(categories => {
+      this.newsCategories = categories;
+      this.isLoadingCategories = false;
+    })
   }
 
   ionViewWillEnter() {

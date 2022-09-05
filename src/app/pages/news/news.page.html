@@ -4,33 +4,15 @@
       <ion-back-button defaultHref="/tabs/home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <!-- TODO: dynamic categories -->
-  <ion-segment
-    class="ion-padding"
-    value="pizza"
-    (ionChange)="segmentChanged($event)"
-    scrollable
-  >
-    <ion-segment-button value="pizza">
-      <ion-label>صرافی ایرانی</ion-label>
+  <div class="ion-text-center" *ngIf="isLoadingCategories">
+    <ion-spinner name="lines" color="primary"></ion-spinner>
+  </div>
+  <ion-segment class="ion-padding" value="all" (ionChange)="segmentChanged($event)" *ngIf="!isLoadingCategories">
+    <ion-segment-button value="all">
+      <ion-label>همه اخبار</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="pizza1">
-      <ion-label>بایننس</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="pizza532">
-      <ion-label>بیت پین</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="pizz523a">
-      <ion-label>کوکوین</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="pizz632a">
-      <ion-label>ارزدیجیتال</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="pizz61a">
-      <ion-label>بیت کوین</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="past7561a">
-      <ion-label>سلام</ion-label>
+    <ion-segment-button *ngFor="let category of newsCategories" [value]="category.slug">
+      <ion-label>{{ category.title }}</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
