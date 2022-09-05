@@ -1,4 +1,3 @@
-import { BASE_API_URL, BASE_URL } from './../../../utilities/variables';
 import { NewsModel } from './../../../models/news.model';
 import { NavParams, ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsDetailComponent implements OnInit {
 
-  baseApiUrl = BASE_URL;
   detail: NewsModel;
 
   constructor(

@@ -8,7 +8,7 @@ import { BehaviorSubject, EMPTY, Subject, Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class NewsService {
-    private _news: BehaviorSubject<NewsModel[]> = new BehaviorSubject(null);
+    // private _news: BehaviorSubject<NewsModel[]> = new BehaviorSubject(null);
     private _threeLastNews: BehaviorSubject<NewsModel[]> = new BehaviorSubject(null);
     ws: WebSocket;
 
@@ -32,7 +32,7 @@ export class NewsService {
         this.ws.onopen = (event) => this.connected(event)
         this.ws.onmessage = (event) => {
             const data = JSON.parse(event['data'])['data']
-            this.setAllNews(data);
+            // this.setAllNews(data);
         }
         this.ws.onclose = (event) => this.reConnect(event)
     }
@@ -47,22 +47,16 @@ export class NewsService {
         this.ws.onclose = (event) => { this.reConnect(event) }
     }
 
-    getAllNews(): Observable<NewsModel[]> {
-        return this._news.asObservable();
-    }
-
     getThreeLastNews(): Observable<NewsModel[]> {
         return this._threeLastNews.asObservable();
     }
 
     getAllNewsCategories(): Observable<any[]> {
-        console.log(`${BASE_API_URL}news-categories`);
-        
         return this.http.get<any[]>(`${BASE_API_URL}news-categories`);
     }
 
-    private setAllNews(news) {
-        this._news.next(news);
+    getAllNews(categorySlug) {
+        return this.http.get<any[]>(`${BASE_API_URL}news/${categorySlug}`);
     }
 
     private setThreeLastNews(news) {

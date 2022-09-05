@@ -1,6 +1,5 @@
 import { NewsDetailComponent } from './news-detail/news-detail.component';
 import { IonSlides, ModalController } from '@ionic/angular';
-import { BASE_URL } from 'src/app/utilities/variables';
 import { NewsService } from '../../services/news.service';
 import { NewsModel } from './../../models/news.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -18,12 +17,7 @@ export class NewsPage implements OnInit {
   newsCategories: any[] = [];
   isLoading = true;
   isLoadingCategories = true;
-  BASE_URL = BASE_URL;
   activeSliderIndex = 0;
-
-  slideOpts = {
-    slidesPerView: 1,
-  };
 
   constructor(
     private newsService: NewsService,
@@ -33,12 +27,17 @@ export class NewsPage implements OnInit {
   ngOnInit() {}
 
   ionViewDidEnter() {
+    this.getNews('all')
+    this.getCategories()
+  }
+
+  getNews(categorySlug) {
+    this.isLoading = true;
     this.newsService.allNewsConnection();
-    this.newsService.getAllNews().subscribe((news) => {
+    this.newsService.getAllNews(categorySlug).subscribe((news) => {
       this.news = news;
       this.isLoading = false;
     });
-    this.getCategories()
   }
 
   getCategories() {
@@ -53,10 +52,6 @@ export class NewsPage implements OnInit {
     setTimeout(() => {
       this.threeLastNews = this.news.slice(0, 3);
     }, 500);
-
-    setTimeout(() => {
-      this.slideOpts.slidesPerView = 2;
-    }, 3000);
 
     setInterval(() => {
       if (this.activeSliderIndex >= 2) {
@@ -78,5 +73,10 @@ export class NewsPage implements OnInit {
       swipeToClose: true,
       backdropDismiss: true,
     }).then(modalEl => modalEl.present());
+  }
+
+  segmentChanged(event) {
+    const categorySlug = event.detail.value;
+    this.getNews(categorySlug);
   }
 }

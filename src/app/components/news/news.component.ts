@@ -14,8 +14,6 @@ export class NewsComponent implements OnInit {
   @Input('clickable') clickable: boolean | false;
   @Input('news') news: NewsModel;
 
-  BASE_URL = BASE_URL;
-
   constructor(
     private modalCtrl: ModalController
   ) { }

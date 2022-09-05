@@ -18,12 +18,12 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-margin" *ngIf="!isLoading">
-    <ion-slides #slides [options]="slideOpts" [scrollbar]="null" class="ion-margin-horizontal">
+  <div *ngIf="threeLastNews">
+    <ion-slides #slides [scrollbar]="null" class="ion-margin-horizontal">
       <!-- Three last news -->
       <ion-slide *ngFor="let item of threeLastNews" class="ion-padding" (click)="moveToDetailNew(item.title)">
         <div class="container">
-          <img class="news-image" [src]="BASE_URL + item.img" />
+          <img class="news-image" [src]="item.img" />
           <div class="bottom">
             <ion-label class="title">{{ item.title }}</ion-label>
             <ion-label class="time">{{ item.updated_time }}</ion-label>
@@ -31,19 +31,19 @@
         </div>
       </ion-slide>      
     </ion-slides>
-
-
+  
+  
     <ion-grid class="ion-no-padding">
       <ion-row>
         <ion-col size="6" offset="3" class="pager-container">
           <div class="pager" [ngClass]="{'pager-active': activeSliderIndex === 0, '': activeSliderIndex !== 0}"></div>
           <div class="pager" [ngClass]="{'pager-active': activeSliderIndex === 1, '': activeSliderIndex !== 1}"></div>
           <div class="pager" [ngClass]="{'pager-active': activeSliderIndex === 2, '': activeSliderIndex !== 2}"></div>
-          
         </ion-col>
       </ion-row>
     </ion-grid>
-    
+  </div>
+  <div class="ion-margin" *ngIf="!isLoading">
     <ion-list-header class="ion-margin-top">
       <ion-text>
         <h5>آخرین اخبار</h5>
