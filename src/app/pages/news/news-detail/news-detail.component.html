@@ -15,13 +15,8 @@
         <img [src]="detail.img" />
       </ion-col>
 
-      <!-- TODO: dynamic category section -->
       <ion-col size="11" offset="0.5" class="ion-margin-top">
-        <ion-badge color="medium" class="category-tag">صرافی ایرانی</ion-badge>
-        <ion-badge color="medium" class="category-tag">صرافی ایرانی</ion-badge>
-        <ion-badge color="medium" class="category-tag">صرافی ایرانی</ion-badge>
-        <ion-badge color="medium" class="category-tag">صرافی ایرانی</ion-badge>
-        <ion-badge color="medium" class="category-tag">صرافی ایرانی</ion-badge>
+        <ion-badge *ngFor="let category of detail.categories" color="medium" class="category-tag">{{ category }}</ion-badge>
       </ion-col>
 
       <ion-col size="11" offset="0.5" class="border-right ion-margin-top">
