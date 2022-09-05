@@ -13,3 +13,33 @@ ion-item {
 ion-col {
     padding: 1px 5px;
 }
+
+.main{
+    padding-top: 20px;
+    display: flex;
+}
+
+.img{
+    width: 70px;
+    height: 70px;
+    margin-right:30px; 
+    border-end-end-radius:20%;
+    border-radius: 20%;
+}
+
+.news{
+    display: block;
+    margin-right: 20px;
+    padding-top: 10px;
+}
+
+.titles{
+    color: var(--ion-color-light);
+    font-size: 14px;
+}
+
+.subTitle{
+    padding-top: 10px;
+    color: var(--ion-color-primary);
+    font-size: 13px;
+}

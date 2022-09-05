@@ -1,3 +1,4 @@
+import { BASE_URL } from 'src/app/utilities/variables';
 import { NewsDetailComponent } from './../../pages/news/news-detail/news-detail.component';
 import { NewsModel } from './../../models/news.model';
 import { NavController, ModalController } from '@ionic/angular';
@@ -12,6 +13,8 @@ export class NewsComponent implements OnInit {
 
   @Input('clickable') clickable: boolean | false;
   @Input('news') news: NewsModel;
+
+  BASE_URL = BASE_URL;
 
   constructor(
     private modalCtrl: ModalController
