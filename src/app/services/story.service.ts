@@ -15,4 +15,12 @@ export class StoryService {
   getStories(): Observable<any> {
     return this.http.get(`${BASE_API_URL}stories`);
   }
+
+  getUserStoriesDetail(userId): Observable<any> {
+    return this.http.get(`${BASE_API_URL}stories/${userId}`);
+  }
+
+  setStoryVisitors(storyId): Observable<any> {
+    return this.http.get(`${BASE_API_URL}stories/${storyId}/set-visit`)
+  }
 }

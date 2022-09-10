@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -9,8 +10,13 @@ export class StoryComponent implements OnInit {
 
   @Input('story') story;
   
-  constructor() { }
+  constructor(
+    private navCtrl: NavController
+  ) { }
 
   ngOnInit() {}
 
+  showStoryDetail() {
+    this.navCtrl.navigateForward(['/story-detail', this.story.id]).then()
+  }
 }

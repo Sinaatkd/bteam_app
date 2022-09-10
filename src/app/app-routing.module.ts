@@ -70,6 +70,11 @@ const routes: Routes = [
     path: 'access-denied/:stageId',
     loadChildren: () => import('./pages/access-denied/access-denied.module').then( m => m.AccessDeniedPageModule)
   },
+  {
+    path: 'story-detail/:userId',
+    loadChildren: () => import('./pages/story-detail/story-detail.module').then( m => m.StoryDetailPageModule)
+  },
+
 
 
 ];
