@@ -14,7 +14,7 @@ export class RoyalAccountComponent implements OnInit, AfterViewInit {
 
   @Input('item') item: SpecialAccountModel
   userTransaction: UserModel['transaction'];
-  buttonText = 'خرید اشتراک'
+  detailText = 'جهت فعالسازی اشتراک خود لمس نمایید';
 
   constructor(
     private modalCtrl: ModalController,
@@ -24,10 +24,10 @@ export class RoyalAccountComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.userService.getUser().subscribe( user => {
       this.userTransaction = user.transaction;
-      if (this.userTransaction.is_confirmation) {
-        this.buttonText = 'اشتراک شما فعال است';
-      }else {
-        this.buttonText = 'در انتظار فعالسازی';
+      if (this.userTransaction && this.userTransaction.is_confirmation) {
+        this.detailText = 'اشتراک شما فعال است';
+      }else if (this.userTransaction && !this.userTransaction.is_confirmation){
+        this.detailText = 'در انتظار فعالسازی';
       }
     })
   }
@@ -37,17 +37,19 @@ export class RoyalAccountComponent implements OnInit, AfterViewInit {
   }
 
   buySpecialAccount() {
-    this.modalCtrl.create({
-      initialBreakpoint: 1,
-      breakpoints: [1],
-      component: BuySpecialAccountComponent,
-      componentProps: {
-        specialItem: this.item,
-      },
-      cssClass: 'modal',
-      mode: 'ios',
-      swipeToClose: true,
-      backdropDismiss: true,
-    }).then(modalEl => modalEl.present());
+    if (!this.userTransaction) {
+      this.modalCtrl.create({
+        initialBreakpoint: 1,
+        breakpoints: [1],
+        component: BuySpecialAccountComponent,
+        componentProps: {
+          specialItem: this.item,
+        },
+        cssClass: 'modal',
+        mode: 'ios',
+        swipeToClose: true,
+        backdropDismiss: true,
+      }).then(modalEl => modalEl.present());
+    }
   }
 }

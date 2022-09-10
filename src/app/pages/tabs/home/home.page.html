@@ -1,121 +1,167 @@
+<ion-header class="ion-no-border ion-padding" *ngIf="user">
+  <ion-toolbar *ngIf="isSearchBarActive">
+    <ion-searchbar
+      class="ion-margin-top"
+      placeholder="نماد ارز مورد نظر"
+      mode="ios"
+      inputmode="decimal"
+      type="decimal"
+      [(ngModel)]="coinSymbol"
+      (ionCancel)="activeSearchBar()"
+      (keyup.enter)="onSearchCoinForShowChart()"
+      [debounce]="250"
+      showCancelButton="always"
+    ></ion-searchbar>
+  </ion-toolbar>
+
+  <ion-toolbar *ngIf="!isSearchBarActive">
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/tabs', 'account']">
+        <ion-icon slot="end" color="primary" name="person-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title color="medium" class="text-small"
+      >{{ getUserFirstName() }} جان خوش آمدی</ion-title
+    >
+
+    <ion-buttons slot="start">
+      <ion-button (click)="activeSearchBar()">
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content *ngIf="!isLoading">
-  <ion-slides mode="ios" [pager]="false" [options]="slideOpts" [scrollbar]="false">
-    <ion-slide class="ion-padding-top" *ngFor="let item of specialAccountItems">
-      <app-royal-account [item]='item'></app-royal-account>
+
+
+  <!-- STORIES -->
+  <ion-slides [options]="storySlideOpts" class="ion-padding-horizontal">
+    <ion-slide *ngFor="let story of stories">
+      <app-story [story]="story"></app-story>
     </ion-slide>
   </ion-slides>
+  <!-- STORIES -->
+  
+  
+  <!-- SPECIAL ACCOUNT ITEMS -->
+  <ion-slides
+    class="ion-no-margin"
+    mode="ios"
+    [pager]="false"
+    [options]="slideOpts"
+    [scrollbar]="false"
+  >
+    <ion-slide class="ion-padding-top" *ngFor="let item of specialAccountItems">
+      <app-royal-account [item]="item"></app-royal-account>
+    </ion-slide>
+  </ion-slides>
+  <!-- SPECIAL ACCOUNT ITEMS -->
 
+
+  <!-- TOOLS -->
   <ion-grid>
     <ion-row>
-      <ion-col size="12" class="padding-10-px">
-        <div>
-          <a [href]="banners[0].link" target="_blank">
-            <ion-img [src]='BASE_URL+banners[0].img'></ion-img>
-          </a>
+      <div class="box-container ion-margin-top">
+        <a href="https://coinmarketcap.com" target="_blank">
+          <div class="box">
+            <img
+              src="/assets/pages/tabs/home/coinmarketcap.png"
+              class="box-img"
+              alt="coinmarketcap"
+            />
+            <p class="box-text">CoinMarketCap</p>
+          </div>
+        </a>
+        <div class="box" [routerLink]="['/market-view']">
+          <img
+            src="/assets/pages/tabs/home/market-view.png"
+            class="box-img"
+            alt="coinmarketcap"
+          />
+          <p class="box-text">نمای بازار</p>
         </div>
-      </ion-col>
-      <ion-col size="6" class="padding-10-px">
-        <ion-button mode='ios' style="width: 100%;" (click)="openFearAndGreedModal()" fill="outline" color="light">
-          <ion-icon slot="start" name="speedometer-outline" color="primary"></ion-icon>
-          ترس و طمع
-        </ion-button>
-      </ion-col>
-      <ion-col size="6" class="padding-10-px">
-        <ion-button mode='ios' style="width: 100%;" [routerLink]="['/market-view']" fill="outline" color="light">
-          <ion-icon slot="start" name="grid-outline" color="primary"></ion-icon>
-          نمای بازار
-        </ion-button>
-      </ion-col>
-      <ion-col size="12" class="padding-horizontal-10-px">
-        <ion-button class="height-50" mode='ios' style="width: 100%;" href="https://coinmarketcap.com" target="_blank" color="secondary">
-          <ion-thumbnail slot="end">
-            <img src="../../../../assets/coinMarketCapLogo.png"/>
-          </ion-thumbnail>
-          CoinMarketCap
-        </ion-button>
-      </ion-col>
+        <div class="box" (click)="openFearAndGreedModal()">
+          <img
+            src="/assets/pages/tabs/home/fear-and-greed.png"
+            class="box-img"
+            alt="coinmarketcap"
+          />
+          <p class="box-text">ترس و طمع</p>
+        </div>
+      </div>
     </ion-row>
   </ion-grid>
-  <ion-list-header>
-    <ion-label>آخرین اخبار
-      <div class="live-wink"></div>
-    </ion-label>
-  </ion-list-header>
-  <app-news-component *ngFor="let item of news" [news]='item' [clickable]='true'></app-news-component>
-  <div class="ion-margin">
-    <a [href]="banners[1].link" target="_blank">
-      <ion-img [src]='BASE_URL+banners[1].img'></ion-img>
-    </a>
-  </div>
+  <!-- TOOLS -->
 
-  <div class="ion-text-center">
-    <ion-label>رمز ارز مورد نظرت رو به راحتی بررسی کن</ion-label>
-  </div>
-  <ion-grid class="ion-margin-top">
-    <ion-row>
-      <ion-col size="7">
-        <ion-item class="center-vh">
-          <ion-button (click)="onSearchCoinForShowChart()" fill="clear">
-            <ion-icon name="search"></ion-icon>
-          </ion-button>
-          <ion-input [(ngModel)]="coinSymbol" (keyup.enter)="onSearchCoinForShowChart()" maxlength="5"
-            placeholder="نماد ارز مورد نظر"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size="5">
-        <div class="padding-end">
-          <img src="../../../../assets/pages/tabs/home/line-chart.png" alt="">
-        </div>
-      </ion-col>
-      <ion-col size="12" class="padding-10-px">
-        <div>
-          <a [href]="banners[2].link" target="_blank">
-            <ion-img [src]='BASE_URL+banners[2].img'></ion-img>
-          </a>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <!-- SERVICES -->
+    <!-- TODO: fill later -->
+  <!-- SERVICES -->
 
-  <ion-list-header>
-    <ion-label>پیشنهادات خرید</ion-label>
-  </ion-list-header>
+  <!-- NEWS -->
   <ion-grid>
-    <ion-row class="ion-margin text-medium-size ion-text-start">
-      <ion-col size="6" class="ion-text-center">
-        <ion-text color="primary">
-          فعال: <ion-text color="light">{{ generalStats.active_signal_count }} سیگنال</ion-text>
-        </ion-text>
+    <ion-row>
+      <ion-col size="12" class="ion-margin-start">
+        <ion-text>آخرین اخبار</ion-text>
       </ion-col>
-      <ion-col size="6" class="ion-text-center">
-        <ion-grid class="ion-no-padding">
-          <ion-row>
-            <ion-col size="6">
-              <ion-text color="primary">
-                ماهانه: <ion-text color="success">%{{ generalStats.profit_of_signal_amount | number:'1.0-0' }}</ion-text>
-              </ion-text>
-            </ion-col>
-            <ion-col size="6">
-              <ion-text color="primary">
-                هفتگی: <ion-text color="success">%{{ generalStats.profit_of_signal_amount_weekly | number:'1.0-0' }}</ion-text>
-              </ion-text>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-col>
-      <ion-col size="6" class="ion-margin-top ion-text-center">
-        <ion-text color="primary">
-          همه: <ion-text color="light">{{ generalStats.deactive_signal_count + generalStats.active_signal_count}} سیگنال
-          </ion-text>
-        </ion-text>
-      </ion-col>
-      <ion-col size="6" class="ion-margin-top ion-text-center">
-        <ion-text color="primary">
-          بسته شده: <ion-text color="light">{{ generalStats.deactive_signal_count }} سیگنال</ion-text>
-        </ion-text>
+      <ion-col size="12">
+        <ion-slides [options]="slideOpts">
+          <ion-slide *ngFor="let item of news">
+            <app-news-component
+            class="ion-text-start"
+              class="full-width"
+              [news]="item"
+            ></app-news-component>
+          </ion-slide>
+        </ion-slides>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <!-- NEWS -->
+  
+  <!-- BANNERS -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" class="ion-padding-horizontal">
+        <ion-slides class="ion-margin-top" [options]="slideOpts">
+          <ion-slide *ngFor="let banner of banners">
+            <a [href]="banner.link" target="_blank">
+              <ion-img [src]="banner.img"></ion-img>
+            </a>
+          </ion-slide>
+        </ion-slides>      
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- BANNERS -->
+  
+  <!-- SIGNAL -->
+  <ion-grid>
+    <ion-row class="ion-margin">
+      <ion-col size="12" class="ion-margin-bottom">
+        <ion-label>پیشنهادات خرید</ion-label>
+      </ion-col>
+      <ion-col size="6" class="text-medium-size">
+        <div class="profit-box">
+          <ion-label>سود ماهانه</ion-label>
+          <ion-label color="success"
+            >{{ generalStats.profit_of_signal_amount | number:'1.0-0'}}%</ion-label
+          >
+        </div>
+      </ion-col>
+      <ion-col size="6" class="text-medium-size">
+        <div class="profit-box">
+          <ion-label>سود هفتگی</ion-label>
+          <ion-label color="success"
+            >{{ generalStats.profit_of_signal_amount_weekly | number:'1.0-0'}}%</ion-label
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- SIGNAL -->
+
 </ion-content>
 
 <ion-content *ngIf="isLoading">

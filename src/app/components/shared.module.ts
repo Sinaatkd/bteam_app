@@ -1,3 +1,4 @@
+import { StoryComponent } from './story/story.component';
 import { VerifyPhoneNumberComponent } from './auth/verify-phone-number/verify-phone-number.component';
 import { CashWithdrawalComponent } from './bteam-party/cash-withdrawal/cash-withdrawal.component';
 import { UseBlueCardComponent } from './bteam-party/use-blue-card/use-blue-card.component';
@@ -64,7 +65,8 @@ import { CopyTradeApiComponent } from './copy-trade-api/copy-trade-api.component
         CashWithdrawalComponent,
         FullAuthenticationComponent,
         CopyTradeApiComponent,
-        VerifyPhoneNumberComponent
+        VerifyPhoneNumberComponent,
+        StoryComponent,
     ],
     exports: [
         LoginWithPasswordComponent,
@@ -89,7 +91,8 @@ import { CopyTradeApiComponent } from './copy-trade-api/copy-trade-api.component
         ShowResultComponent,
         FullAuthenticationComponent,
         CopyTradeApiComponent,
-        VerifyPhoneNumberComponent
+        VerifyPhoneNumberComponent,
+        StoryComponent,
     ],
     providers: [
         LoginService,

@@ -1,0 +1,18 @@
+.story-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    border: 3px solid var(--ion-color-medium);
+}
+
+.text-small {
+    font-size: 14px;
+}
+
+.un-visited {
+    border: 3px solid var(--ion-color-primary);
+}
+
+.visited {
+    border: 3px solid var(--ion-color-medium);
+}

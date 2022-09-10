@@ -1,44 +1,11 @@
-<ion-card>
+<ion-card class="ion-text-start ion-padding" (click)="buySpecialAccount()">
   <ion-card-header>
     <ion-card-title>
-      <ion-grid class="ion-no-padding">
-        <ion-row>
-          <ion-col class="ion-no-padding ion-text-right" size="10">
-            <ion-label>اشتراک {{item.expire_day}} روزه</ion-label>
-            <ion-label color="primary"> {{item.title }}</ion-label>
-          </ion-col>
-          <ion-col size="2">
-              <ion-img src="../../../assets/pages/tabs/home/slider/support.png"></ion-img>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-label>اشتراک {{item.expire_day}} روزه</ion-label>
+      <ion-label color="primary"> {{item.title }}</ion-label>
     </ion-card-title>
   </ion-card-header>
-  <ion-card-content class="ion-no-padding">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="4">
-          <ion-label color="light" class="text-small center-verticaly">
-            <ion-icon slot="start" color="primary" name="ellipse-sharp"></ion-icon>
-            آموزش صفر تا صد
-          </ion-label>
-        </ion-col>
-        <ion-col size="4">
-          <ion-label color="light" class="text-small center-verticaly">
-            <ion-icon slot="start" color="primary" name="ellipse-sharp"></ion-icon>
-            دوره ترندرشو
-          </ion-label>
-        </ion-col>
-        <ion-col size="4">
-          <ion-label color="light" class="text-small center-verticaly">
-            <ion-icon slot="start" color="primary" name="ellipse-sharp"></ion-icon>
-            کپی ترید  
-          </ion-label>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <ion-card-content class="text-small ion-margin-bottom">
+    {{ detailText }}
   </ion-card-content>
-  <ion-button mode='ios' [disabled]='userTransaction' class="ion-margin" expand="block" size="small" (click)="buySpecialAccount()">
-    {{buttonText }}
-  </ion-button>
 </ion-card>

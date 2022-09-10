@@ -10,31 +10,26 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./news.component.scss'],
 })
 export class NewsComponent implements OnInit {
-
-  @Input('clickable') clickable: boolean | false;
   @Input('news') news: NewsModel;
 
-  constructor(
-    private modalCtrl: ModalController
-  ) { }
+  constructor(private modalCtrl: ModalController) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   getDate() {
     return this.news.updated_time;
   }
 
   moveToDetailNew() {
-    if (this.clickable) {
-      this.modalCtrl.create({
-        component: NewsDetailComponent, 
+    this.modalCtrl
+      .create({
+        component: NewsDetailComponent,
         componentProps: {
           newsItem: this.news,
         },
         swipeToClose: true,
         backdropDismiss: true,
-      }).then(modalEl => modalEl.present());
-    }
+      })
+      .then((modalEl) => modalEl.present());
   }
 }
