@@ -1,4 +1,4 @@
-<ion-content>
+<ion-header>
   <div class="flex">
     <div
       *ngFor="let item of stories"
@@ -6,15 +6,20 @@
       [ngClass]="{'active': item.id <= currentStoryId}"
     ></div>
   </div>
+</ion-header>
 
+<ion-content on-hold="holded()">
   <ion-img
     class="center-item"
     (ionImgDidLoad)="ionImgDidLoad($event)"
-    (ionImgWillLoad)="ionImgWillLoad($event)"
-    *ngIf="stories.length > 0"
+    *ngIf="stories.length > 0 && (fileFormat === 'png' || fileFormat === 'jpg')"
     [src]="getStoryContent()"
     style="width: 100%"
   ></ion-img>
+
+  <video *ngIf="fileFormat == 'mp4'" autoplay style="width: 100%; height: 100%;" id='video'>
+    <source [src]="getStoryContent()">
+  </video>
 
   <div class="ion-text-center center-item" *ngIf="!contentLoaded">
     <ion-spinner name="lines" color="primary"></ion-spinner>

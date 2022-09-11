@@ -1,6 +1,6 @@
 import { StoryService } from './../../services/story.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IonImg } from '@ionic/angular';
 
 @Component({
@@ -10,11 +10,13 @@ import { IonImg } from '@ionic/angular';
 })
 export class StoryDetailPage implements OnInit {
   @ViewChild('storyFile') storyFile: IonImg;
+  @ViewChild('video') video: ElementRef;
 
   userId;
   stories = [];
   currentStoryId = 0;
   contentLoaded = false;
+  fileFormat;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -43,6 +45,8 @@ export class StoryDetailPage implements OnInit {
     );
     if (previousStories.length > 0) {
       this.currentStoryId = previousStories[previousStories.length - 1].id;
+      this.fileFormat = this.getUrlExtension(this.getStoryContent());
+      this.contentLoaded = false;
     }
   }
 
@@ -52,12 +56,17 @@ export class StoryDetailPage implements OnInit {
     );
     if (nextStories.length > 0) {
       this.currentStoryId = nextStories[0].id;
+      this.fileFormat = this.getUrlExtension(this.getStoryContent());
+      this.contentLoaded = false;
     }
   }
 
   getStoryContent() {
-    return this.stories.find((story) => story.id === this.currentStoryId)
-      .story_file;
+    const storyFile = this.stories.find(
+      (story) => story.id === this.currentStoryId
+    ).story_file;
+    this.checkVideo();
+    return storyFile;
   }
 
   setVisit() {
@@ -66,10 +75,24 @@ export class StoryDetailPage implements OnInit {
 
   ionImgDidLoad(event) {
     this.contentLoaded = true;
-    // this.setVisit()
+    this.setVisit();
   }
 
-  ionImgWillLoad(event) {
-    this.contentLoaded = false;
+  getUrlExtension(url) {
+    return url.split(/[#?]/)[0].split('.').pop().trim();
+  }
+
+  ionViewDidEnter() {
+    this.fileFormat = this.getUrlExtension(this.getStoryContent());
+  }
+
+  checkVideo() {
+    const video = document.getElementById('video');
+    if (video) {
+      video.onloadeddata = (event) => {
+        this.setVisit();
+        this.contentLoaded = true;
+      };
+    }
   }
 }
