@@ -43,8 +43,8 @@
     </ion-slide>
   </ion-slides>
   <!-- STORIES -->
-  
-  
+
+
   <!-- SPECIAL ACCOUNT ITEMS -->
   <ion-slides
     class="ion-no-margin"
@@ -96,7 +96,16 @@
   <!-- TOOLS -->
 
   <!-- SERVICES -->
-    <!-- TODO: fill later -->
+  <ion-grid>
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="12">
+        <ion-text>سرویس ها</ion-text>
+      </ion-col>
+      <ion-col *ngFor="let service of services" [size]="service.col" [routerLink]="service.route">
+        <ion-img [src]="service.src"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <!-- SERVICES -->
 
   <!-- NEWS -->
@@ -119,7 +128,7 @@
     </ion-row>
   </ion-grid>
   <!-- NEWS -->
-  
+
   <!-- BANNERS -->
   <ion-grid>
     <ion-row>
@@ -130,12 +139,12 @@
               <ion-img [src]="banner.img"></ion-img>
             </a>
           </ion-slide>
-        </ion-slides>      
+        </ion-slides>
       </ion-col>
     </ion-row>
   </ion-grid>
   <!-- BANNERS -->
-  
+
   <!-- SIGNAL -->
   <ion-grid>
     <ion-row class="ion-margin">

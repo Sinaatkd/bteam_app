@@ -33,7 +33,6 @@ export class NewsPage implements OnInit {
 
   getNews(categorySlug) {
     this.isLoading = true;
-    this.newsService.allNewsConnection();
     this.newsService.getAllNews(categorySlug).subscribe((news) => {
       this.news = news;
       this.isLoading = false;
@@ -66,7 +65,7 @@ export class NewsPage implements OnInit {
   moveToDetailNew(newsTitle) {
     const selectedNews = this.threeLastNews.find(news => news.title === newsTitle)
     this.modalCtrl.create({
-      component: NewsDetailComponent, 
+      component: NewsDetailComponent,
       componentProps: {
         newsItem: selectedNews,
       },

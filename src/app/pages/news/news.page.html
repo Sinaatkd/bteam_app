@@ -29,10 +29,10 @@
             <ion-label class="time">{{ item.updated_time }}</ion-label>
           </div>
         </div>
-      </ion-slide>      
+      </ion-slide>
     </ion-slides>
-  
-  
+
+
     <ion-grid class="ion-no-padding">
       <ion-row>
         <ion-col size="6" offset="3" class="pager-container">
@@ -52,7 +52,6 @@
 
     <app-news-component
       *ngFor="let item of news"
-      [clickable]="true"
       [news]="item"
     ></app-news-component>
   </div>
