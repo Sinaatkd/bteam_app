@@ -73,7 +73,11 @@ const routes: Routes = [
   {
     path: 'story-detail/:userId',
     loadChildren: () => import('./pages/story-detail/story-detail.module').then( m => m.StoryDetailPageModule)
+  },  {
+    path: 'nft-bot',
+    loadChildren: () => import('./pages/nft-bot/nft-bot.module').then( m => m.NftBotPageModule)
   },
+
 
 
 
