@@ -27,13 +27,13 @@ export class NewsPage implements OnInit {
   ngOnInit() {}
 
   ionViewDidEnter() {
-    this.getNews('all')
+    this.getNews('all', 10)
     this.getCategories()
   }
 
-  getNews(categorySlug) {
+  getNews(categorySlug, count) {
     this.isLoading = true;
-    this.newsService.getAllNews(categorySlug).subscribe((news) => {
+    this.newsService.getAllNews(categorySlug, count).subscribe((news) => {
       this.news = news;
       this.isLoading = false;
     });
@@ -76,6 +76,6 @@ export class NewsPage implements OnInit {
 
   segmentChanged(event) {
     const categorySlug = event.detail.value;
-    this.getNews(categorySlug);
+    this.getNews(categorySlug, 10);
   }
 }

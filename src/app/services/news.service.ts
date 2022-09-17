@@ -19,7 +19,7 @@ export class NewsService {
     return this.http.get<any[]>(`${BASE_API_URL}news-categories`);
   }
 
-  getAllNews(categorySlug) {
-    return this.http.get<any[]>(`${BASE_API_URL}news/${categorySlug}`);
+  getAllNews(categorySlug, count=4) {
+    return this.http.get<any[]>(`${BASE_API_URL}news/${categorySlug}/${count}`);
   }
 }
