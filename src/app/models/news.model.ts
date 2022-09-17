@@ -5,7 +5,8 @@ export class NewsModel {
         public description: string,
         public updated_time: string,
         public img: string,
+        public categories: any[],
     ) {
-        
+
     }
-} 
+}

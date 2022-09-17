@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { NftBotPageRoutingModule } from './nft-bot-routing.module';
 
 import { NftBotPage } from './nft-bot.page';
+import {SharedModule} from "../../components/shared.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    NftBotPageRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        NftBotPageRoutingModule,
+        SharedModule
+    ],
   declarations: [NftBotPage]
 })
 export class NftBotPageModule {}

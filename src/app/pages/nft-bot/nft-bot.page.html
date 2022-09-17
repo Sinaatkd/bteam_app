@@ -1,9 +1,53 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>nft-bot</ion-title>
-  </ion-toolbar>
+<ion-header class="ion-padding">
+  <ion-segment mode="ios" value="24h" (ionChange)="filterModeChanged($event)">
+    <ion-segment-button value="24h">روزانه</ion-segment-button>
+    <ion-segment-button value="7d">هفتگی</ion-segment-button>
+    <ion-segment-button value="30d">ماهانه</ion-segment-button>
+    <ion-segment-button value="all">همه</ion-segment-button>
+  </ion-segment>
 </ion-header>
 
 <ion-content>
+  <app-loading *ngIf="isLoading"></app-loading>
 
+  <ion-grid *ngIf="!isLoading">
+    <ion-row>
+      <ion-col *ngFor="let alarm of alarms">
+        <div class="card">
+          <div class="card-header">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12">
+                  <ion-text color="success">پیشنهاد</ion-text>
+                </ion-col>
+                <ion-col size="12">
+                  <ion-text class="text-size-big" color="primary">{{ alarm.nft_price }}</ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12">
+                  <ion-text>کف قیمتی</ion-text>
+                </ion-col>
+                <ion-col size="12">
+                  <ion-text class="text-size-big">{{ alarm.floor_price }}</ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+          <div class="line ion-margin-top"></div>
+          <div class="card-body ion-margin-bottom" (click)="copyNFTName(alarm.nft_name)">
+            <ion-label>نام: {{ alarm.nft_name}}</ion-label>
+            <ion-label color="medium">{{ alarm.created_time }}</ion-label>
+          </div>
+          <div class="ion-margin-top">
+            <ion-button color="secondary" expand="block" class="ion-no-margin" size="large" (click)="openNFTAddress()">
+              دریافت لینک مستقیم
+            </ion-button>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

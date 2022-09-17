@@ -1,0 +1,35 @@
+ion-grid {
+  text-align: center;
+}
+
+ion-button {
+  --border-radius: 0 0 20px 20px;
+}
+
+.card-body {
+  display: flex;
+  padding: 30px 10px 20px 10px;
+  justify-content: space-around;
+}
+
+.card {
+  background: #2c2b2b;
+  border-radius: 20px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 30px 10px 0 10px;
+}
+
+.text-size-big {
+  font-size: 24px;
+}
+
+.line {
+  width: 90%;
+  height: 1.4px;
+  margin: auto;
+  background: var(--ion-color-light);
+}
