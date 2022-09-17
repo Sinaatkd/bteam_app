@@ -22,7 +22,8 @@
     </ion-buttons>
 
     <ion-title color="medium" class="text-small"
-      >{{ getUserFirstName() }} جان خوش آمدی</ion-title
+    >{{ getUserFirstName() }} جان خوش آمدی
+    </ion-title
     >
 
     <ion-buttons slot="start">
@@ -64,16 +65,16 @@
   <ion-grid>
     <ion-row>
       <div class="box-container ion-margin-top">
-        <a href="https://coinmarketcap.com" target="_blank">
-          <div class="box">
+        <div class="box">
+          <a href="https://coinmarketcap.com" target="_blank">
             <img
               src="/assets/pages/tabs/home/coinmarketcap.png"
               class="box-img"
               alt="coinmarketcap"
             />
             <p class="box-text">CoinMarketCap</p>
-          </div>
-        </a>
+          </a>
+        </div>
         <div class="box" [routerLink]="['/market-view']">
           <img
             src="/assets/pages/tabs/home/market-view.png"
@@ -118,8 +119,7 @@
         <ion-slides [options]="slideOpts">
           <ion-slide *ngFor="let item of news">
             <app-news-component
-            class="ion-text-start"
-              class="full-width"
+              class="ion-text-start full-width"
               [news]="item"
             ></app-news-component>
           </ion-slide>
@@ -155,7 +155,8 @@
         <div class="profit-box">
           <ion-label>سود ماهانه</ion-label>
           <ion-label color="success"
-            >{{ generalStats.profit_of_signal_amount | number:'1.0-0'}}%</ion-label
+          >{{ generalStats.profit_of_signal_amount | number:'1.0-0'}}%
+          </ion-label
           >
         </div>
       </ion-col>
@@ -163,7 +164,8 @@
         <div class="profit-box">
           <ion-label>سود هفتگی</ion-label>
           <ion-label color="success"
-            >{{ generalStats.profit_of_signal_amount_weekly | number:'1.0-0'}}%</ion-label
+          >{{ generalStats.profit_of_signal_amount_weekly | number:'1.0-0'}}%
+          </ion-label
           >
         </div>
       </ion-col>
