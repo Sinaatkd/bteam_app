@@ -1,6 +1,6 @@
 import { UserService } from './../../../services/user.service';
 import { LoginService } from './../../../services/auth/login.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { LoginDTO } from 'src/app/DTOs/auth/login.dto';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -15,6 +15,7 @@ import { Device } from '@capacitor/device';
 export class LoginWithPasswordComponent implements OnInit {
 
   loginForm: FormGroup;
+  @Output('loginModeEmitter') loginModeEmitter = new EventEmitter()
 
   constructor(
     private navCtrl: NavController,
@@ -83,5 +84,9 @@ export class LoginWithPasswordComponent implements OnInit {
 
   moveToForgotPassPage() {
     this.navCtrl.navigateForward('/forgot-pass');
+  }
+
+  setLoginWithPhoneNumberMode() {
+    this.loginModeEmitter.emit('phoneNumber');
   }
 }

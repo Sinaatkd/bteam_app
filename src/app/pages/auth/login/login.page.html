@@ -11,6 +11,7 @@
 
         <app-login-with-password
           *ngIf="loginMode === 'password'"
+          (loginModeEmitter)="changeLoginMode($event)"
         ></app-login-with-password>
         
         <app-login-with-phone-number
