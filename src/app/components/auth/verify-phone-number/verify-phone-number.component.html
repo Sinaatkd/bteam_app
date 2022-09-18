@@ -8,6 +8,10 @@
         <ion-label color="secondary" (click)="editPhoneNumber()">تغییر</ion-label>
       </ion-label>
     </ion-col>
+    <ion-col size="9" offset="1.5" class="ion-margin-top">
+      <ion-label *ngIf="timer > 0" class="text-small" color="medium">تا ارسال مجدد کد: {{timer}} ثانیه</ion-label>
+      <ion-label *ngIf="timer <= 0" class="text-small" color="primary" (click)="sendVerificationCodeAgain()">ارسال مجدد کد</ion-label>
+    </ion-col>
     <ion-col size="12" class="ion-margin-top ion-text-center">
       <div class="grid ion-text-center ion-margin-top">
         <ion-input #input4 maxLength="1" class="ion-no-padding" (ionInput)="inputChange($event, 'input4')" (ionChange)="inputChange($event, 'input4')"></ion-input>

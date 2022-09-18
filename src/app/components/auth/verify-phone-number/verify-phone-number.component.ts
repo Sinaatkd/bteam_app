@@ -30,20 +30,25 @@ export class VerifyPhoneNumberComponent implements OnInit {
 
   code = '';
   phoneNumber;
+  timer = 60
 
   constructor(
-    
+
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private loginService: LoginService,
     private userService: UserService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    Storage.get({key: 'phoneNumber'}).then(({value}) => {
+    Storage.get({ key: 'phoneNumber' }).then(({ value }) => {
       this.phoneNumber = value;
     })
+
+    setInterval(() => {
+      this.timer -= 1;
+    }, 1000)
   }
 
   editPhoneNumber() {
@@ -72,7 +77,7 @@ export class VerifyPhoneNumberComponent implements OnInit {
       }
     }
   }
-  
+
   loginUser() {
     this.setLoading('لطفا صبر کنید', 'ios');
     const phoneNumber = parseInt(this.phoneNumber, 0);
@@ -84,7 +89,7 @@ export class VerifyPhoneNumberComponent implements OnInit {
         this.userService.getUserInfo().subscribe(user => {
           this.userService.setUser(user);
           this.setToast('خوش آمدید.', 'ios', 2000, 'success');
-          Storage.remove({key: 'phoneNumber'}).then();
+          Storage.remove({ key: 'phoneNumber' }).then();
           this.navCtrl.navigateBack('tabs/home');
         });
 
@@ -108,7 +113,7 @@ export class VerifyPhoneNumberComponent implements OnInit {
     });
   }
 
-  
+
   setLoading(message: string, mode: 'ios' | 'md') {
     this.loadingCtrl.create({ message, mode }).then(loadingEl => loadingEl.present());
   }
@@ -123,5 +128,13 @@ export class VerifyPhoneNumberComponent implements OnInit {
     this.toastCtrl.create(
       { message, mode, duration, color }
     ).then(toastEl => toastEl.present());
+  }
+
+  sendVerificationCodeAgain() {
+    const phoneNumber = parseInt(this.phoneNumber, 0);
+    this.loginService.sendVerificationCode(phoneNumber).subscribe(res => {
+      this.setToast('کد تایید مجدد ارسال شد', 'ios', 2000, 'success');
+      this.timer = 60;
+    })
   }
 }
