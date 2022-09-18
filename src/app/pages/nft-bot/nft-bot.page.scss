@@ -1,3 +1,7 @@
+ion-toolbar {
+  --background: var(--ion-background-color);
+}
+
 ion-grid {
   text-align: center;
 }
@@ -8,23 +12,24 @@ ion-button {
 
 .card-body {
   display: flex;
-  padding: 30px 10px 20px 10px;
+  padding: 15px 5px 10px 5px;
   justify-content: space-around;
 }
 
 .card {
   background: #2c2b2b;
   border-radius: 20px;
+  margin: 5px 10px;
 }
 
 .card-header {
   display: flex;
   justify-content: space-evenly;
-  padding: 30px 10px 0 10px;
+  padding: 15px 5px 0 5px;
 }
 
 .text-size-big {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .line {

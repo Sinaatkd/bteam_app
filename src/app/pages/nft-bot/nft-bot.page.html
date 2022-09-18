@@ -1,16 +1,21 @@
 <ion-header class="ion-padding">
-  <ion-segment mode="ios" value="24h" (ionChange)="filterModeChanged($event)">
-    <ion-segment-button value="24h">روزانه</ion-segment-button>
-    <ion-segment-button value="7d">هفتگی</ion-segment-button>
-    <ion-segment-button value="30d">ماهانه</ion-segment-button>
-    <ion-segment-button value="all">همه</ion-segment-button>
-  </ion-segment>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+      <ion-segment mode="ios" value="24h" (ionChange)="filterModeChanged($event)">
+        <ion-segment-button value="24h">روزانه</ion-segment-button>
+        <ion-segment-button value="7d">هفتگی</ion-segment-button>
+        <ion-segment-button value="30d">ماهانه</ion-segment-button>
+        <ion-segment-button value="all">همه</ion-segment-button>
+      </ion-segment>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <app-loading *ngIf="isLoading"></app-loading>
 
-  <ion-grid *ngIf="!isLoading">
+  <ion-grid *ngIf="!isLoading" class="ion-margin">
     <ion-row>
       <ion-col *ngFor="let alarm of alarms">
         <div class="card">
@@ -42,7 +47,7 @@
             <ion-label color="medium">{{ alarm.created_time }}</ion-label>
           </div>
           <div class="ion-margin-top">
-            <ion-button color="secondary" expand="block" class="ion-no-margin" size="large" (click)="openNFTAddress(alarm.nft_link)">
+            <ion-button color="secondary" expand="block" class="ion-no-margin" (click)="openNFTAddress(alarm.nft_link)">
               دریافت لینک مستقیم
             </ion-button>
           </div>
