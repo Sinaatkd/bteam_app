@@ -64,7 +64,7 @@ export class NftBotPage implements OnInit {
     });
   }
 
-  openNFTAddress() {
-
+  openNFTAddress(nftLink) {
+    window.location.href = nftLink;
   }
 }

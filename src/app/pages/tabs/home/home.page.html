@@ -103,7 +103,7 @@
         <ion-text>سرویس ها</ion-text>
       </ion-col>
       <ion-col *ngFor="let service of services" [size]="service.col" [routerLink]="service.route">
-        <ion-img [src]="service.src"></ion-img>
+        <img [src]="service.src" style="border-radius: 10px"/>
       </ion-col>
     </ion-row>
   </ion-grid>
