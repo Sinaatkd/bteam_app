@@ -35,6 +35,7 @@ export class NewsPage implements OnInit {
     this.isLoading = true;
     this.newsService.getAllNews(categorySlug, count).subscribe((news) => {
       this.news = news;
+      this.threeLastNews = this.news.slice(0, 3);
       this.isLoading = false;
     });
   }
@@ -48,10 +49,6 @@ export class NewsPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    setTimeout(() => {
-      this.threeLastNews = this.news.slice(0, 3);
-    }, 500);
-
     setInterval(() => {
       if (this.activeSliderIndex >= 2) {
         this.activeSliderIndex = 0;
