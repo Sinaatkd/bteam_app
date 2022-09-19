@@ -85,23 +85,23 @@ export class HomePage implements OnInit {
     if (this.isLoading) {
       this.storyService.getStories().subscribe((stories) => {
         this.stories = stories;
-        this.bannerService.getBanners().subscribe((banners) => {
-          this.banners = banners;
-          this.newsService.getAllNews('all').subscribe((news) => {
-            this.news = news;
-            this.specialAccountService
-              .getAllSpecialAccountItems()
-              .subscribe((items) => {
-                this.specialAccountItems = items;
-                this.signalsService
-                  .getSignalsGeneralStats()
-                  .subscribe((generalStats) => {
-                    this.generalStats = generalStats;
-                    this.isLoading = false;
-                  });
-              });
-          });
-        });
+      });
+      this.bannerService.getBanners().subscribe((banners) => {
+        this.banners = banners;
+      });
+      this.newsService.getAllNews('all').subscribe((news) => {
+        this.news = news;
+      });
+      this.specialAccountService
+      .getAllSpecialAccountItems()
+      .subscribe((items) => {
+        this.specialAccountItems = items;
+      });
+      this.signalsService
+      .getSignalsGeneralStats()
+      .subscribe((generalStats) => {
+        this.generalStats = generalStats;
+        this.isLoading = false;
       });
     }
   }
