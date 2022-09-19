@@ -136,7 +136,7 @@
         <ion-slides class="ion-margin-top" [options]="slideOpts">
           <ion-slide *ngFor="let banner of banners">
             <a [href]="banner.link" target="_blank">
-              <ion-img [src]="banner.img"></ion-img>
+              <img [src]="banner.img" style="border-radius: 10px;"/>
             </a>
           </ion-slide>
         </ion-slides>
