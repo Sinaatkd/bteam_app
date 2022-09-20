@@ -7,7 +7,7 @@
   <div class="ion-text-center" *ngIf="isLoadingCategories">
     <ion-spinner name="lines" color="primary"></ion-spinner>
   </div>
-  <ion-segment class="ion-padding" value="all" (ionChange)="segmentChanged($event)" *ngIf="!isLoadingCategories">
+  <ion-segment scrollable class="ion-padding" value="all" (ionChange)="segmentChanged($event)" *ngIf="!isLoadingCategories">
     <ion-segment-button value="all">
       <ion-label>همه اخبار</ion-label>
     </ion-segment-button>
